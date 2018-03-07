@@ -4,7 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 body {
-  background-color: #f8f8f8;
+  background-color: #D3D3D3 !important;
 }
 #wrapper {
   width: 100%;
@@ -23,7 +23,7 @@ body {
   }
 }
 .pad-page {
-    padding-top: 50px;
+    padding-top: 55px;
 }
 .pad-sidebar {
     padding-top: 40px;
