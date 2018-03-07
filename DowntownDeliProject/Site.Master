@@ -9,6 +9,7 @@
     <title><%: Page.Title %></title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/sb-admin-2.css" rel="stylesheet" />
+    <link href="/Content/metisMenu.min.css" rel="stylesheet" />
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/fontawesome.css" rel="stylesheet" />
 
@@ -22,15 +23,35 @@
     <form runat="server">
         <div>
             <div id="wrapper">
-                <!--Top Navbar-->
-                <div class="navbar navbar-default navbar-fixed-top" style="background-color: #D3D3D3;" role="navigation" aria-expanded="false">
-                    <img src="/Content/Images/Downtown_LOGO.png" height="75px" width="150px" alt="Downtown Deli" />
-                </div>
-                <!--Side Navbar-->
-                <div class="sidebar navbar-left pad-sidebar" style="background-color: #D3D3D3;" role="navigation">
-                    <div class="row">
+                <nav class="navbar navbar-default navbar-static-top" style="background-color: #D3D3D3;" role="navigation" style="margin-bottom: 0;">
+                    <!--Header/Logo-->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <img src="/Content/Images/Downtown_LOGO.png" height="75px" width="150px" alt="Downtown Deli" />
                     </div>
-                </div>
+                    <!--Top Navbar-->
+                    <div class="navbar-default navbar-collapse collapse" style="background-color: #D3D3D3;" role="navigation" aria-expanded="false">
+                        <ul class="nav navbar-nav">
+                            <asp:PlaceHolder ID="topNav" runat="server"></asp:PlaceHolder>
+                        </ul>
+                        <ul class="nav navbar-top-links navbar-nav navbar-right">
+                        </ul>
+                    </div>
+                    <!-- Side Navbar -->
+                    <div class="navbar-default sidebar" role="navigation">
+                        <div class="sidebar-nav" style="background-color: #D3D3D3;">
+                            <ul class="nav" id="side-menu" style="background-color: #D3D3D3;">
+                                <asp:PlaceHolder ID="sideNav" runat="server"></asp:PlaceHolder>
+                            </ul>
+                        </div>
+                        
+                    </div>
+                </nav>
                 <!-- Page Content -->
                 <div id="page-wrapper" style="background-color: white;">
                     <div class="container-fluid">
