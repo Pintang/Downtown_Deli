@@ -23,7 +23,10 @@ body {
   }
 }
 .pad-page {
-    padding: 70px;
+    padding-top: 50px;
+}
+.pad-sidebar {
+    padding-top: 40px;
 }
 .navbar-top-links {
   margin-right: 0;
