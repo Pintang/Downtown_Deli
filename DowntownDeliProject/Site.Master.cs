@@ -76,6 +76,31 @@ namespace DowntownDeliProject
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
+
+        protected void btnOrder_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pages/Order.aspx", false);
+        }
+
+        protected void btnReports_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pages/Reports.aspx", false);
+        }
+
+        protected void btnTimeKeeping_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pages/TimeKeeping.aspx", false);
+        }
+
+        protected void btnAdmin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pages/Admin.aspx", false);
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Pages/Login.aspx", false);
+        }
     }
 
 }
