@@ -13,5 +13,10 @@ namespace DowntownDeliProject.Pages
         {
 
         }
+
+        protected void txtCustomer_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

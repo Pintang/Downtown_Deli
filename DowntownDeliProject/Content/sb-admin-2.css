@@ -534,24 +534,24 @@ table.dataTable thead .sorting_desc_disabled {
             border-right-width: 14px;
             border-left-width: 0;
         }
+}
 
-    .pad {
-        padding: 5px !important;
-    }
+.pad {
+    padding: 5px !important;
+}
 
-    .pad-top {
-        padding-top: 5px !important;
-    }
+.pad-top {
+    padding-top: 5px !important;
+}
 
-    .pad-bottom {
-        padding-bottom: 5px !important;
-    }
+.pad-bottom {
+    padding-bottom: 5px !important;
+}
 
-    .pad-left {
-        padding-left: 5px !important;
-    }
+.pad-left {
+    padding-left: 5px !important;
+}
 
-    .pad-right {
-        padding-right: 5px !important;
-    }
+.pad-right {
+    padding-right: 5px !important;
 }
