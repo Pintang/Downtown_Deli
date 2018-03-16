@@ -42,6 +42,11 @@
                             </asp:ListView>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Submit Order" ID="btnSubmitOrder" />
+                        </div>
+                    </div>
                 </div>
             </div>
 
