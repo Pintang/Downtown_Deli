@@ -82,6 +82,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -200,12 +202,29 @@
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sb-admin-2.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DowntownDeliEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
+      <LastGenOutput>DowntownDeliEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DowntownDeliEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
+      <LastGenOutput>DowntownDeliEntity.cs</LastGenOutput>
+    </Content>
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="DowntownDeliEntity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DowntownDeliEntity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DowntownDeliEntity.edmx.diagram">
+      <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pages\Admin.aspx" />
@@ -337,6 +356,30 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DowntownDeliEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DowntownDeliEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DowntownDeliEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DowntownDeliEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empworktime.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -347,7 +390,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory_Order.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Job.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Order.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Admin.aspx.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -376,7 +431,16 @@
     <Compile Include="Pages\TimeKeeping.aspx.designer.cs">
       <DependentUpon>TimeKeeping.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Promotion.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Schedule.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -385,6 +449,9 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Vendor.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -395,6 +462,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
