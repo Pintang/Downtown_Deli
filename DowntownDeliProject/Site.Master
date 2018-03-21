@@ -23,54 +23,58 @@
     <form runat="server">
         <div>
             <div id="wrapper">
-                <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #D3D3D3; margin-bottom: 0;" role="navigation">
-                    <!--Header/Logo-->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" runat="server" Text="<img src='/Content/Images/Downtown_LOGO.png' height='75px' width='150px' alt='Downtown Deli' />"></asp:LinkButton>
-                        
-                    </div>
-                    <!--Top Navbar-->
-                    <div class="navbar-default navbar-collapse collapse pad-top" style="background-color: #D3D3D3;" role="navigation" aria-expanded="false">
-                        <div class="row pad-top" style="padding-left: 240px; padding-top: 20px;">
-                            <div class="col-md-12">
-                                <div class="row pad-top">
-                                    <div class="col-md-2">
-                                        <label id="lblTime" class="timeClock text-center" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:Button runat="server" ID="btnOrder" OnClick="btnOrder_Click" Width="100%" Text="Order" CssClass="btn btn-success" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:Button runat="server" ID="btnReports" OnClick="btnReports_Click" Width="100%" Text="Reports" CssClass="btn btn-warning" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:Button runat="server" ID="btnTimeKeeping" OnClick="btnTimeKeeping_Click" Width="100%" Text="Time Keeping" CssClass="btn btn-info" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:Button runat="server" ID="btnAdmin" Width="100%" OnClick="btnAdmin_Click" Text="Admin" CssClass="btn btn-primary" />
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:Button runat="server" ID="btnLogout" Width="100%" Text="Logout" CssClass="btn btn-danger" />
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <LoggedInTemplate>
+                        <nav class="navbar navbar-default navbar-fixed-top" style="background-color: #D3D3D3; margin-bottom: 0;" role="navigation">
+                            <!--Header/Logo-->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" runat="server" Text="<img src='/Content/Images/Downtown_LOGO.png' height='75px' width='150px' alt='Downtown Deli' />"></asp:LinkButton>
+
+                            </div>
+                            <!--Top Navbar-->
+                            <div class="navbar-default navbar-collapse collapse pad-top" style="background-color: #D3D3D3;" role="navigation" aria-expanded="false">
+                                <div class="row pad-top" style="padding-left: 240px; padding-top: 20px;">
+                                    <div class="col-md-12">
+                                        <div class="row pad-top">
+                                            <div class="col-md-2">
+                                                <label id="lblTime" class="timeClock text-center" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:Button runat="server" ID="btnOrder" OnClick="btnOrder_Click" Width="100%" Text="Order" CssClass="btn btn-success" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:Button runat="server" ID="btnReports" OnClick="btnReports_Click" Width="100%" Text="Reports" CssClass="btn btn-warning" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:Button runat="server" ID="btnTimeKeeping" OnClick="btnTimeKeeping_Click" Width="100%" Text="Time Keeping" CssClass="btn btn-info" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:Button runat="server" ID="btnAdmin" Width="100%" OnClick="btnAdmin_Click" Text="Admin" CssClass="btn btn-primary" />
+                                            </div>
+                                            <div class="col-md-2">
+                                                <asp:Button runat="server" ID="btnLogout" Width="100%" Text="Logout" OnClick="btnLogout_Click" CssClass="btn btn-danger" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Side Navbar -->
-                    <div class="navbar-default sidebar" role="navigation">
-                        <div class="sidebar-nav" style="background-color: #D3D3D3;">
-                            <ul class="nav" id="side-menu" style="background-color: #D3D3D3;">
-                                <asp:PlaceHolder ID="sideNav" runat="server"></asp:PlaceHolder>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+                            <!-- Side Navbar -->
+                            <div class="navbar-default sidebar" role="navigation">
+                                <div class="sidebar-nav" style="background-color: #D3D3D3;">
+                                    <ul class="nav" id="side-menu" style="background-color: #D3D3D3;">
+                                        <asp:PlaceHolder ID="sideNav" runat="server"></asp:PlaceHolder>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </LoggedInTemplate>
+                </asp:LoginView>
                 <!-- Page Content -->
                 <div id="page-wrapper" style="background-color: white;">
                     <div class="container-fluid pad-page">
@@ -93,6 +97,7 @@
                 </div>
 
             </div>
+
         </div>
     </form>
 </body>

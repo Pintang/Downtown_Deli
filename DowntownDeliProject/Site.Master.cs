@@ -69,7 +69,17 @@ namespace DowntownDeliProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                if (System.Web.HttpContext.Current.User != null && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                }
+                else
+                {
+                    FormsAuthentication.SignOut();
+                }
 
+            }
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -99,7 +109,9 @@ namespace DowntownDeliProject
 
         protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Login.aspx", false);
+            Response.Clear();
+            FormsAuthentication.SignOut();
+            Response.Redirect("~/Login.aspx");
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
