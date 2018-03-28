@@ -370,6 +370,9 @@
     <Compile Include="Product.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Product_Order.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Promotion.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
     </Compile>

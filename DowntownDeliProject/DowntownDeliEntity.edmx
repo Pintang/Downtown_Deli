@@ -83,23 +83,27 @@
           <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Or_Date" Type="date" Nullable="false" />
         </EntityType>
-        <EntityType Name="Product">
+        <EntityType Name="Product_Order">
           <Key>
+            <PropertyRef Name="Product_Order_ID" />
             <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Order_ID" />
+            <PropertyRef Name="Promo_ID" />
+            <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Product_ID" Type="int" Nullable="false" />
-          <Property Name="Product_Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Product_Order_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Product_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Order_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Promo_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="Product_Inventory">
+        <EntityType Name="Products">
           <Key>
-            <PropertyRef Name="Item_ID" />
             <PropertyRef Name="Product_ID" />
           </Key>
-          <Property Name="Item_ID" Type="int" Nullable="false" />
-          <Property Name="Product_ID" Type="int" Nullable="false" />
+          <Property Name="Product_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="20" />
+          <Property Name="Price" Type="money" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -172,18 +176,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Item_ID_Prod">
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
-          <End Role="Product_Inventory" Type="Self.Product_Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Principal>
-            <Dependent Role="Product_Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Job_ID">
           <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
@@ -205,18 +197,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             </Principal>
             <Dependent Role="Empworktime">
               <PropertyRef Name="Job_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Product_ID">
-          <End Role="Product" Type="Self.Product" Multiplicity="1" />
-          <End Role="Product_Inventory" Type="Self.Product_Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="Product_ID" />
-            </Principal>
-            <Dependent Role="Product_Inventory">
-              <PropertyRef Name="Product_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -256,6 +236,66 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="R_16">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Product_Order" Type="Self.Product_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Order">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_21">
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Jobs">
+              <PropertyRef Name="Job_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Job_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_23">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Customer_ID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Customer_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_28">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
+          <End Role="Inventory_Order" Type="Self.Inventory_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Order">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="R_32">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="Schedule_ID" />
+            </Principal>
+            <Dependent Role="Employees">
+              <PropertyRef Name="Schedule_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DowntownDeliStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
@@ -264,16 +304,11 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <EntitySet Name="Inventory_Order" EntityType="Self.Inventory_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Order" EntityType="Self.Product_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Product_Inventory" EntityType="Self.Product_Inventory" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Product_Inventory].[Item_ID] AS [Item_ID], 
-    [Product_Inventory].[Product_ID] AS [Product_ID]
-    FROM [dbo].[Product_Inventory] AS [Product_Inventory]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="fk_Customer_ID" Association="Self.fk_Customer_ID">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
@@ -286,10 +321,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             <End Role="Inventory" EntitySet="Inventory" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
           </AssociationSet>
-          <AssociationSet Name="fk_Item_ID_Prod" Association="Self.fk_Item_ID_Prod">
-            <End Role="Inventory" EntitySet="Inventory" />
-            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
-          </AssociationSet>
           <AssociationSet Name="fk_Job_ID" Association="Self.fk_Job_ID">
             <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Employees" EntitySet="Employees" />
@@ -297,10 +328,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <AssociationSet Name="fk_Job_ID_worktime" Association="Self.fk_Job_ID_worktime">
             <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Empworktime" EntitySet="Empworktime" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Product_ID" Association="Self.fk_Product_ID">
-            <End Role="Product" EntitySet="Product" />
-            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
           </AssociationSet>
           <AssociationSet Name="fk_Promo_ID" Association="Self.fk_Promo_ID">
             <End Role="Promotion" EntitySet="Promotion" />
@@ -313,6 +340,26 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <AssociationSet Name="fk_Vendor_ID" Association="Self.fk_Vendor_ID">
             <End Role="Vendor" EntitySet="Vendor" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
+          </AssociationSet>
+          <AssociationSet Name="R_16" Association="Self.R_16">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Order" EntitySet="Product_Order" />
+          </AssociationSet>
+          <AssociationSet Name="R_21" Association="Self.R_21">
+            <End Role="Jobs" EntitySet="Jobs" />
+            <End Role="Employees" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="R_23" Association="Self.R_23">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="R_28" Association="Self.R_28">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
+          </AssociationSet>
+          <AssociationSet Name="R_32" Association="Self.R_32">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -327,7 +374,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <EntitySet Name="Inventory_Order" EntityType="DowntownDeli.Inventory_Order" />
           <EntitySet Name="Jobs" EntityType="DowntownDeli.Job" />
           <EntitySet Name="Orders" EntityType="DowntownDeli.Order" />
-          <EntitySet Name="Products" EntityType="DowntownDeli.Product" />
           <EntitySet Name="Promotions" EntityType="DowntownDeli.Promotion" />
           <EntitySet Name="Schedules" EntityType="DowntownDeli.Schedule" />
           <EntitySet Name="Vendors" EntityType="DowntownDeli.Vendor" />
@@ -363,9 +409,11 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             <End Role="Promotion" EntitySet="Promotions" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <AssociationSet Name="Product_Inventory" Association="DowntownDeli.Product_Inventory">
-            <End Role="Inventory" EntitySet="Inventories" />
+          <EntitySet Name="Product_Order" EntityType="DowntownDeli.Product_Order" />
+          <EntitySet Name="Products" EntityType="DowntownDeli.Product" />
+          <AssociationSet Name="R_16" Association="DowntownDeli.R_16">
             <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Order" EntitySet="Product_Order" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
@@ -422,7 +470,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
           <Property Name="Experation_Date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory" ToRole="Inventory_Order" />
-          <NavigationProperty Name="Products" Relationship="DowntownDeli.Product_Inventory" FromRole="Inventory" ToRole="Product" />
         </EntityType>
         <EntityType Name="Inventory_Order">
           <Key>
@@ -459,15 +506,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
           <Property Name="Or_Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Customer" Relationship="DowntownDeli.fk_Customer_ID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Promotion" Relationship="DowntownDeli.fk_Promo_ID" FromRole="Order" ToRole="Promotion" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Product_ID" />
-          </Key>
-          <Property Name="Product_ID" Type="Int32" Nullable="false" />
-          <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <NavigationProperty Name="Inventories" Relationship="DowntownDeli.Product_Inventory" FromRole="Product" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
@@ -603,9 +641,41 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="Product_Inventory">
-          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="*" />
-          <End Type="DowntownDeli.Product" Role="Product" Multiplicity="*" />
+        <EntityType Name="Product_Order">
+          <Key>
+            <PropertyRef Name="Product_Order_ID" />
+            <PropertyRef Name="Product_ID" />
+            <PropertyRef Name="Order_ID" />
+            <PropertyRef Name="Promo_ID" />
+            <PropertyRef Name="Customer_ID" />
+          </Key>
+          <Property Name="Product_Order_ID" Type="Guid" Nullable="false" />
+          <Property Name="Product_ID" Type="Guid" Nullable="false" />
+          <Property Name="Order_ID" Type="Guid" Nullable="false" />
+          <Property Name="Promo_ID" Type="Guid" Nullable="false" />
+          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="DowntownDeli.R_16" FromRole="Product_Order" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Guid" Nullable="false" />
+          <Property Name="Product_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.R_16" FromRole="Product" ToRole="Product_Order" />
+        </EntityType>
+        <Association Name="R_16">
+          <End Type="DowntownDeli.Product" Role="Product" Multiplicity="1" />
+          <End Type="DowntownDeli.Product_Order" Role="Product_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Order">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -698,15 +768,6 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DowntownDeli.Product">
-              <MappingFragment StoreEntitySet="Product">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
-                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
             <EntityTypeMapping TypeName="DowntownDeli.Promotion">
               <MappingFragment StoreEntitySet="Promotion">
@@ -745,14 +806,26 @@ warning 6002: The table/view 'brandonc0376.dbo.Product_Inventory' does not have 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Product_Inventory" TypeName="DowntownDeli.Product_Inventory" StoreEntitySet="Product_Inventory">
-            <EndProperty Name="Product">
-              <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-            </EndProperty>
-            <EndProperty Name="Inventory">
-              <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
-            </EndProperty>
-          </AssociationSetMapping>
+          <EntitySetMapping Name="Product_Order">
+            <EntityTypeMapping TypeName="DowntownDeli.Product_Order">
+              <MappingFragment StoreEntitySet="Product_Order">
+                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
+                <ScalarProperty Name="Promo_ID" ColumnName="Promo_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Product_Order_ID" ColumnName="Product_Order_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DowntownDeli.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

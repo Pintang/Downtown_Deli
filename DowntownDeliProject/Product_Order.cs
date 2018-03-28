@@ -12,19 +12,14 @@ namespace DowntownDeliProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Product_Order
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
-        {
-            this.Product_Order = new HashSet<Product_Order>();
-        }
-    
+        public System.Guid Product_Order_ID { get; set; }
         public System.Guid Product_ID { get; set; }
-        public string Product_Name { get; set; }
-        public Nullable<decimal> Price { get; set; }
+        public System.Guid Order_ID { get; set; }
+        public System.Guid Promo_ID { get; set; }
+        public System.Guid Customer_ID { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product_Order> Product_Order { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

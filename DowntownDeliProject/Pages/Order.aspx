@@ -18,33 +18,60 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-3">
-                            <asp:Label runat="server" Font-Bold="true" Text="Customer ID" />
+                        <div class="col-md-4">
+                            <asp:Label runat="server" Font-Bold="true" Text="Customer ID / Phone Number" />
                         </div>
-                        <div class="col-md-9">
-                            <asp:TextBox runat="server" CssClass="form-control" OnTextChanged="txtCustomer_TextChanged" Width="100%" ID="txtCustomer" />
+                        <div class="col-md-8">
+                            <asp:TextBox runat="server" CssClass="form-control" OnTextChanged="txtCustomer_TextChanged" AutoPostBack="true" Width="100%" ID="txtCustomer" />
+                            <asp:ListView runat="server" ID="lvIDs">
+                                <ItemTemplate>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" CssClass="label" ID="lbl34" Text='<%# Eval("Customer_ID") %>' />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" ID="Label2" CssClass="label" Text='<%# Eval("Customer_Name") %>' />
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                            </asp:ListView>
                         </div>
                     </div>
                     <div class="row pad-top">
                         <div class="col-md-4">
-                            <asp:Label runat="server" Font-Bold="true"  Text="Product Search:" />
+                            <asp:Label runat="server" Font-Bold="true" Text="Product Search:" />
                         </div>
                         <div class="col-md-8">
-                            <asp:TextBox runat="server" CssClass="form-control" ID="txtSearchProduct" Width="100%" />
+                            <asp:DropDownList runat="server" ToolTip="Select a Product From the list" DataTextField="Product_Name" CssClass="form-control" Width="100%" DataValueField="Product_ID" ID="ddlProducts" />
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="row">
+                        <asp:Label ID="CustomerName" runat="server" Visible="false" CssClass="label label-info btn-lg" />
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
-                            <asp:ListView runat="server" ID="lvOrderItems">
-                                
+                            <asp:ListView runat="server" ID="lvOrderItems" OnItemDataBound="lvOrderItems_ItemDataBound">
+                                <ItemTemplate>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" CssClass="label" ID="lbl34" Text='<%# Eval("Product_Name") %>' />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" ID="Label1" CssClass="label" Text='<%# "$" + (decimal.Parse(Eval("Price").ToString()) * int.Parse(Eval("Quantity").ToString()) )%>' />
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" ID="Label2" CssClass="label" Text='<%# Eval("Quantity") %>' />
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
                             </asp:ListView>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Submit Order" ID="btnSubmitOrder" />
+                            <asp:Button runat="server" CssClass="btn btn-success" OnClick="btnSubmitOrder_Click" Text="Submit Order" ID="btnSubmitOrder" />
                         </div>
                     </div>
                 </div>

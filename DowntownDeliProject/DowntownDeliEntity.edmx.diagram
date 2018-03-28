@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="DowntownDeli.Inventory_Order" Width="1.5" PointX="10" PointY="3.5" />
         <EntityTypeShape EntityType="DowntownDeli.Job" Width="1.5" PointX="0.75" PointY="2.875" />
         <EntityTypeShape EntityType="DowntownDeli.Order" Width="1.5" PointX="5" PointY="7.25" />
-        <EntityTypeShape EntityType="DowntownDeli.Product" Width="1.5" PointX="10" PointY="7.5" />
         <EntityTypeShape EntityType="DowntownDeli.Promotion" Width="1.5" PointX="2.75" PointY="11.375" />
         <EntityTypeShape EntityType="DowntownDeli.Schedule" Width="1.5" PointX="0.75" PointY="6.25" />
         <EntityTypeShape EntityType="DowntownDeli.Vendor" Width="1.5" PointX="7.75" PointY="0.75" />
@@ -24,7 +23,9 @@
         <AssociationConnector Association="DowntownDeli.fk_Item_ID" />
         <AssociationConnector Association="DowntownDeli.fk_Vendor_ID" />
         <AssociationConnector Association="DowntownDeli.fk_Promo_ID" />
-        <AssociationConnector Association="DowntownDeli.Product_Inventory" />
+        <EntityTypeShape EntityType="DowntownDeli.Product_Order" Width="1.5" PointX="7.625" PointY="10.875" />
+        <EntityTypeShape EntityType="DowntownDeli.Product" Width="1.5" PointX="5.375" PointY="11.125" />
+        <AssociationConnector Association="DowntownDeli.R_16" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

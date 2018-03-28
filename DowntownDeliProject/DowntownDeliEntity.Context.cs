@@ -32,9 +32,10 @@ namespace DowntownDeliProject
         public virtual DbSet<Inventory_Order> Inventory_Order { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Product_Order> Product_Order { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace DowntownDeliProject
         public Inventory()
         {
             this.Inventory_Order = new HashSet<Inventory_Order>();
-            this.Products = new HashSet<Product>();
         }
     
         public int Item_ID { get; set; }
@@ -28,7 +27,5 @@ namespace DowntownDeliProject
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_Order> Inventory_Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
     }
 }
