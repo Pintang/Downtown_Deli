@@ -14,19 +14,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <asp:Label runat="server" Font-Bold="true" Text="Please select a report option from the dropdown menu" />
-                        </div>
-                        <div class="col-md-8">               
-                                    <div class="row">
-                                        <div class="col-md-4">
-
-                                            <asp:Label runat="server" CssClass="label" ID="lbl34" Text='<%# Eval("Customer_ID") %>' />
-
-                                        </div>
-                                        <div class="col-md-4">
-                                            <asp:Label runat="server" ID="Label2" CssClass="label" Text='<%# Eval("Customer_Name") %>' />
-                                        </div>
-                                    </div>                          
-                        </div>
+                        </div>           
                     </div>
                     <div class="row pad-top">
                       
