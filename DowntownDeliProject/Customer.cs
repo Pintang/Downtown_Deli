@@ -20,14 +20,13 @@ namespace DowntownDeliProject
             this.Orders = new HashSet<Order>();
         }
     
-        public int Customer_ID { get; set; }
+        public long Customer_ID { get; set; }
         public string F_Name { get; set; }
         public string L_Name { get; set; }
         public string Email { get; set; }
-        public string Cust_Address { get; set; }
-        public string Cust_State { get; set; }
+        public int TotalPoints { get; set; }
         public string Zip { get; set; }
-        public Nullable<decimal> Phone { get; set; }
+        public string Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

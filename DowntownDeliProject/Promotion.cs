@@ -20,11 +20,11 @@ namespace DowntownDeliProject
             this.Orders = new HashSet<Order>();
         }
     
-        public int Promo_ID { get; set; }
+        public long Promo_ID { get; set; }
         public string Discount_Type { get; set; }
         public Nullable<decimal> Discount { get; set; }
-        public Nullable<System.DateTime> Promo_Start { get; set; }
-        public Nullable<System.DateTime> Prom_End { get; set; }
+        public Nullable<System.DateTime> Begin_Date { get; set; }
+        public Nullable<System.DateTime> End_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

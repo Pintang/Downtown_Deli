@@ -14,13 +14,22 @@ namespace DowntownDeliProject
     
     public partial class Order
     {
-        public int Order_ID { get; set; }
-        public int Customer_ID { get; set; }
-        public int Promo_ID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Order()
+        {
+            this.Product_Order = new HashSet<Product_Order>();
+        }
+    
+        public long Order_ID { get; set; }
+        public Nullable<long> Customer_ID { get; set; }
+        public Nullable<long> Promo_ID { get; set; }
         public decimal Price { get; set; }
-        public System.DateTime Or_Date { get; set; }
+        public System.DateTime Ord_Date { get; set; }
+        public int Points { get; set; }
     
         public virtual Customer Customer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Order> Product_Order { get; set; }
         public virtual Promotion Promotion { get; set; }
     }
 }

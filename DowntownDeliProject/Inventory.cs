@@ -18,14 +18,18 @@ namespace DowntownDeliProject
         public Inventory()
         {
             this.Inventory_Order = new HashSet<Inventory_Order>();
+            this.Product_Inventory = new HashSet<Product_Inventory>();
         }
     
-        public int Item_ID { get; set; }
+        public long Item_ID { get; set; }
+        public string Item_Name { get; set; }
         public int Quantity { get; set; }
         public decimal Cost { get; set; }
-        public Nullable<System.DateTime> Experation_Date { get; set; }
+        public System.DateTime Experation_Date { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_Order> Inventory_Order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product_Inventory> Product_Inventory { get; set; }
     }
 }

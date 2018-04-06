@@ -14,12 +14,11 @@ namespace DowntownDeliProject
     
     public partial class Product_Order
     {
-        public System.Guid Product_Order_ID { get; set; }
-        public System.Guid Product_ID { get; set; }
-        public System.Guid Order_ID { get; set; }
-        public System.Guid Promo_ID { get; set; }
-        public System.Guid Customer_ID { get; set; }
+        public long Prod_Ord_ID { get; set; }
+        public Nullable<long> Order_ID { get; set; }
+        public Nullable<long> Product_ID { get; set; }
     
+        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
     }
 }

@@ -281,6 +281,24 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customer.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empworktime.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory_Order.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Job.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,9 +310,6 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Customer.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="DowntownDeliEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -310,12 +325,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Employee.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Empworktime.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -325,15 +334,6 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Inventory_Order.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Job.cs">
-      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Order.cs">
@@ -368,6 +368,9 @@
       <DependentUpon>TimeKeeping.aspx</DependentUpon>
     </Compile>
     <Compile Include="Product.cs">
+      <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Product_Inventory.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Product_Order.cs">

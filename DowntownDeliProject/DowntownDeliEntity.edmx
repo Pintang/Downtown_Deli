@@ -9,58 +9,58 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="int" Nullable="false" />
-          <Property Name="F_Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="L_Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="35" />
-          <Property Name="Cust_Address" Type="varchar" MaxLength="50" />
-          <Property Name="Cust_State" Type="char" MaxLength="2" />
-          <Property Name="Zip" Type="varchar" MaxLength="10" />
-          <Property Name="Phone" Type="numeric" Precision="7" Scale="0" />
+          <Property Name="Customer_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="F_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="L_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" />
+          <Property Name="TotalPoints" Type="int" Nullable="false" />
+          <Property Name="Zip" Type="varchar" MaxLength="15" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
             <PropertyRef Name="Emp_ID" />
           </Key>
-          <Property Name="Emp_ID" Type="int" Nullable="false" />
-          <Property Name="Job_ID" Type="int" Nullable="false" />
-          <Property Name="Schedule_ID" Type="int" Nullable="false" />
-          <Property Name="F_Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="L_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Emp_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Schedule_ID" Type="bigint" />
+          <Property Name="Job_ID" Type="bigint" />
+          <Property Name="F_Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="L_Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Pay_Rate" Type="money" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Emp_Address" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Emp_User_Name" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Emp_Password" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Emp_Address" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Emp_User_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Emp_Password" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="Empworktime">
           <Key>
-            <PropertyRef Name="Work_Time_ID" />
+            <PropertyRef Name="Worktime_ID" />
           </Key>
-          <Property Name="Work_Time_ID" Type="int" Nullable="false" />
-          <Property Name="Emp_ID" Type="int" Nullable="false" />
-          <Property Name="Job_ID" Type="int" Nullable="false" />
-          <Property Name="Clock_In" Type="datetime" Nullable="false" />
-          <Property Name="Clock_Out" Type="datetime" Nullable="false" />
+          <Property Name="Worktime_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Emp_ID" Type="bigint" />
+          <Property Name="Clock_In" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Clock_Out" Type="time" Precision="7" Nullable="false" />
           <Property Name="Work_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
             <PropertyRef Name="Item_ID" />
           </Key>
-          <Property Name="Item_ID" Type="int" Nullable="false" />
+          <Property Name="Item_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_Name" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
-          <Property Name="Cost" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Experation_Date" Type="date" />
+          <Property Name="Cost" Type="money" Nullable="false" />
+          <Property Name="Experation_Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory_Order">
           <Key>
-            <PropertyRef Name="Inventory_Order_ID" />
+            <PropertyRef Name="Inv_Ord_ID" />
           </Key>
-          <Property Name="Inventory_Order_ID" Type="int" Nullable="false" />
-          <Property Name="Vendor_ID" Type="int" Nullable="false" />
-          <Property Name="Item_ID" Type="int" Nullable="false" />
-          <Property Name="Quantity" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Inv_Ord_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_ID" Type="bigint" />
+          <Property Name="Vendor_ID" Type="bigint" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="Total_Cost" Type="money" Nullable="false" />
           <Property Name="Delivery_Date" Type="date" Nullable="false" />
           <Property Name="Purchase_Date" Type="date" Nullable="false" />
@@ -69,57 +69,60 @@
           <Key>
             <PropertyRef Name="Job_ID" />
           </Key>
-          <Property Name="Job_ID" Type="int" Nullable="false" />
+          <Property Name="Job_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Job_Name" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Duties" Type="varchar" MaxLength="50" />
+          <Property Name="Duties" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Orders">
           <Key>
             <PropertyRef Name="Order_ID" />
           </Key>
-          <Property Name="Order_ID" Type="int" Nullable="false" />
-          <Property Name="Customer_ID" Type="int" Nullable="false" />
-          <Property Name="Promo_ID" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Or_Date" Type="date" Nullable="false" />
+          <Property Name="Order_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Customer_ID" Type="bigint" />
+          <Property Name="Promo_ID" Type="bigint" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Ord_Date" Type="date" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product_Inventory">
+          <Key>
+            <PropertyRef Name="Prod_Inv_ID" />
+          </Key>
+          <Property Name="Prod_Inv_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Item_ID" Type="bigint" />
+          <Property Name="Product_ID" Type="bigint" />
         </EntityType>
         <EntityType Name="Product_Order">
           <Key>
-            <PropertyRef Name="Product_Order_ID" />
-            <PropertyRef Name="Product_ID" />
-            <PropertyRef Name="Order_ID" />
-            <PropertyRef Name="Promo_ID" />
-            <PropertyRef Name="Customer_ID" />
+            <PropertyRef Name="Prod_Ord_ID" />
           </Key>
-          <Property Name="Product_Order_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Product_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Order_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Promo_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Customer_ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Prod_Ord_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Order_ID" Type="bigint" />
+          <Property Name="Product_ID" Type="bigint" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Product_ID" />
           </Key>
-          <Property Name="Product_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Product_Name" Type="varchar" MaxLength="20" />
-          <Property Name="Price" Type="money" />
+          <Property Name="Product_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
-        <EntityType Name="Promotion">
+        <EntityType Name="Promotions">
           <Key>
             <PropertyRef Name="Promo_ID" />
           </Key>
-          <Property Name="Promo_ID" Type="int" Nullable="false" />
-          <Property Name="Discount_Type" Type="varchar" MaxLength="15" />
+          <Property Name="Promo_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Discount_Type" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Promo_Start" Type="date" />
-          <Property Name="Prom_End" Type="date" />
+          <Property Name="Begin_Date" Type="date" />
+          <Property Name="End_Date" Type="date" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Schedule_ID" />
           </Key>
-          <Property Name="Schedule_ID" Type="int" Nullable="false" />
+          <Property Name="Schedule_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Shift_Start" Type="time" Precision="7" Nullable="false" />
           <Property Name="Shift_End" Type="time" Precision="7" Nullable="false" />
           <Property Name="Monday" Type="bit" Nullable="false" />
@@ -130,18 +133,17 @@
           <Property Name="Saturday" Type="bit" Nullable="false" />
           <Property Name="Sunday" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="Vendor">
+        <EntityType Name="Vendors">
           <Key>
             <PropertyRef Name="Vendor_ID" />
           </Key>
-          <Property Name="Vendor_ID" Type="int" Nullable="false" />
-          <Property Name="Vendor_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Vendor_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Vendor_Name" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Vend_Address" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="Vend_Phone" Type="numeric" Precision="7" Scale="0" Nullable="false" />
+          <Property Name="Vend_Address" Type="varchar" MaxLength="30" />
         </EntityType>
         <Association Name="fk_Customer_ID">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Customers" Type="Self.Customers" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customers">
@@ -153,7 +155,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Emp_ID">
-          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
           <End Role="Empworktime" Type="Self.Empworktime" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employees">
@@ -164,8 +166,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Item_ID">
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
+        <Association Name="fk_Inv_Ord_Item_ID">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
           <End Role="Inventory_Order" Type="Self.Inventory_Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventory">
@@ -176,8 +178,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Item_ID">
+          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
+          <End Role="Product_Inventory" Type="Self.Product_Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Product_Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Job_ID">
-          <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
+          <End Role="Jobs" Type="Self.Jobs" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Jobs">
@@ -188,23 +202,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Job_ID_worktime">
-          <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
-          <End Role="Empworktime" Type="Self.Empworktime" Multiplicity="*" />
+        <Association Name="fk_Order_ID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="Product_Order" Type="Self.Product_Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Jobs">
-              <PropertyRef Name="Job_ID" />
+            <Principal Role="Orders">
+              <PropertyRef Name="Order_ID" />
             </Principal>
-            <Dependent Role="Empworktime">
-              <PropertyRef Name="Job_ID" />
+            <Dependent Role="Product_Order">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Prod_Inv_Product_ID">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Inventory" Type="Self.Product_Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Inventory">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Product_ID">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="Product_Order" Type="Self.Product_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Order">
+              <PropertyRef Name="Product_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Promo_ID">
-          <End Role="Promotion" Type="Self.Promotion" Multiplicity="1" />
+          <End Role="Promotions" Type="Self.Promotions" Multiplicity="0..1" />
           <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Promotion">
+            <Principal Role="Promotions">
               <PropertyRef Name="Promo_ID" />
             </Principal>
             <Dependent Role="Orders">
@@ -213,7 +251,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Schedule_ID">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
           <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
@@ -225,74 +263,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Vendor_ID">
-          <End Role="Vendor" Type="Self.Vendor" Multiplicity="1" />
+          <End Role="Vendors" Type="Self.Vendors" Multiplicity="0..1" />
           <End Role="Inventory_Order" Type="Self.Inventory_Order" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Vendor">
+            <Principal Role="Vendors">
               <PropertyRef Name="Vendor_ID" />
             </Principal>
             <Dependent Role="Inventory_Order">
               <PropertyRef Name="Vendor_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_16">
-          <End Role="Products" Type="Self.Products" Multiplicity="1" />
-          <End Role="Product_Order" Type="Self.Product_Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Products">
-              <PropertyRef Name="Product_ID" />
-            </Principal>
-            <Dependent Role="Product_Order">
-              <PropertyRef Name="Product_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_21">
-          <End Role="Jobs" Type="Self.Jobs" Multiplicity="1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Jobs">
-              <PropertyRef Name="Job_ID" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="Job_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_23">
-          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
-          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customers">
-              <PropertyRef Name="Customer_ID" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="Customer_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_28">
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="1" />
-          <End Role="Inventory_Order" Type="Self.Inventory_Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Principal>
-            <Dependent Role="Inventory_Order">
-              <PropertyRef Name="Item_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="R_32">
-          <End Role="Schedule" Type="Self.Schedule" Multiplicity="1" />
-          <End Role="Employees" Type="Self.Employees" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Schedule">
-              <PropertyRef Name="Schedule_ID" />
-            </Principal>
-            <Dependent Role="Employees">
-              <PropertyRef Name="Schedule_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -304,11 +282,12 @@
           <EntitySet Name="Inventory_Order" EntityType="Self.Inventory_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Jobs" EntityType="Self.Jobs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_Inventory" EntityType="Self.Product_Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product_Order" EntityType="Self.Product_Order" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Promotion" EntityType="Self.Promotion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Promotions" EntityType="Self.Promotions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vendor" EntityType="Self.Vendor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vendors" EntityType="Self.Vendors" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_Customer_ID" Association="Self.fk_Customer_ID">
             <End Role="Customers" EntitySet="Customers" />
             <End Role="Orders" EntitySet="Orders" />
@@ -317,20 +296,32 @@
             <End Role="Employees" EntitySet="Employees" />
             <End Role="Empworktime" EntitySet="Empworktime" />
           </AssociationSet>
-          <AssociationSet Name="fk_Item_ID" Association="Self.fk_Item_ID">
+          <AssociationSet Name="fk_Inv_Ord_Item_ID" Association="Self.fk_Inv_Ord_Item_ID">
             <End Role="Inventory" EntitySet="Inventory" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Item_ID" Association="Self.fk_Item_ID">
+            <End Role="Inventory" EntitySet="Inventory" />
+            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
           </AssociationSet>
           <AssociationSet Name="fk_Job_ID" Association="Self.fk_Job_ID">
             <End Role="Jobs" EntitySet="Jobs" />
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="fk_Job_ID_worktime" Association="Self.fk_Job_ID_worktime">
-            <End Role="Jobs" EntitySet="Jobs" />
-            <End Role="Empworktime" EntitySet="Empworktime" />
+          <AssociationSet Name="fk_Order_ID" Association="Self.fk_Order_ID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Product_Order" EntitySet="Product_Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Prod_Inv_Product_ID" Association="Self.fk_Prod_Inv_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Product_ID" Association="Self.fk_Product_ID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Product_Order" EntitySet="Product_Order" />
           </AssociationSet>
           <AssociationSet Name="fk_Promo_ID" Association="Self.fk_Promo_ID">
-            <End Role="Promotion" EntitySet="Promotion" />
+            <End Role="Promotions" EntitySet="Promotions" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <AssociationSet Name="fk_Schedule_ID" Association="Self.fk_Schedule_ID">
@@ -338,28 +329,8 @@
             <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
           <AssociationSet Name="fk_Vendor_ID" Association="Self.fk_Vendor_ID">
-            <End Role="Vendor" EntitySet="Vendor" />
+            <End Role="Vendors" EntitySet="Vendors" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
-          </AssociationSet>
-          <AssociationSet Name="R_16" Association="Self.R_16">
-            <End Role="Products" EntitySet="Products" />
-            <End Role="Product_Order" EntitySet="Product_Order" />
-          </AssociationSet>
-          <AssociationSet Name="R_21" Association="Self.R_21">
-            <End Role="Jobs" EntitySet="Jobs" />
-            <End Role="Employees" EntitySet="Employees" />
-          </AssociationSet>
-          <AssociationSet Name="R_23" Association="Self.R_23">
-            <End Role="Customers" EntitySet="Customers" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
-          <AssociationSet Name="R_28" Association="Self.R_28">
-            <End Role="Inventory" EntitySet="Inventory" />
-            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
-          </AssociationSet>
-          <AssociationSet Name="R_32" Association="Self.R_32">
-            <End Role="Schedule" EntitySet="Schedule" />
-            <End Role="Employees" EntitySet="Employees" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -374,6 +345,9 @@
           <EntitySet Name="Inventory_Order" EntityType="DowntownDeli.Inventory_Order" />
           <EntitySet Name="Jobs" EntityType="DowntownDeli.Job" />
           <EntitySet Name="Orders" EntityType="DowntownDeli.Order" />
+          <EntitySet Name="Product_Inventory" EntityType="DowntownDeli.Product_Inventory" />
+          <EntitySet Name="Product_Order" EntityType="DowntownDeli.Product_Order" />
+          <EntitySet Name="Products" EntityType="DowntownDeli.Product" />
           <EntitySet Name="Promotions" EntityType="DowntownDeli.Promotion" />
           <EntitySet Name="Schedules" EntityType="DowntownDeli.Schedule" />
           <EntitySet Name="Vendors" EntityType="DowntownDeli.Vendor" />
@@ -393,25 +367,31 @@
             <End Role="Schedule" EntitySet="Schedules" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="fk_Job_ID_worktime" Association="DowntownDeli.fk_Job_ID_worktime">
-            <End Role="Job" EntitySet="Jobs" />
-            <End Role="Empworktime" EntitySet="Empworktimes" />
+          <AssociationSet Name="fk_Inv_Ord_Item_ID" Association="DowntownDeli.fk_Inv_Ord_Item_ID">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
           </AssociationSet>
           <AssociationSet Name="fk_Item_ID" Association="DowntownDeli.fk_Item_ID">
             <End Role="Inventory" EntitySet="Inventories" />
-            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
+            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
           </AssociationSet>
           <AssociationSet Name="fk_Vendor_ID" Association="DowntownDeli.fk_Vendor_ID">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
           </AssociationSet>
+          <AssociationSet Name="fk_Order_ID" Association="DowntownDeli.fk_Order_ID">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Product_Order" EntitySet="Product_Order" />
+          </AssociationSet>
           <AssociationSet Name="fk_Promo_ID" Association="DowntownDeli.fk_Promo_ID">
             <End Role="Promotion" EntitySet="Promotions" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
-          <EntitySet Name="Product_Order" EntityType="DowntownDeli.Product_Order" />
-          <EntitySet Name="Products" EntityType="DowntownDeli.Product" />
-          <AssociationSet Name="R_16" Association="DowntownDeli.R_16">
+          <AssociationSet Name="fk_Prod_Inv_Product_ID" Association="DowntownDeli.fk_Prod_Inv_Product_ID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Product_ID" Association="DowntownDeli.fk_Product_ID">
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_Order" EntitySet="Product_Order" />
           </AssociationSet>
@@ -420,109 +400,140 @@
           <Key>
             <PropertyRef Name="Customer_ID" />
           </Key>
-          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
-          <Property Name="F_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="L_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
-          <Property Name="Cust_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cust_State" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="Zip" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Phone" Type="Decimal" Precision="7" Scale="0" />
+          <Property Name="Customer_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="F_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="L_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPoints" Type="Int32" Nullable="false" />
+          <Property Name="Zip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="DowntownDeli.fk_Customer_ID" FromRole="Customer" ToRole="Order" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
             <PropertyRef Name="Emp_ID" />
           </Key>
-          <Property Name="Emp_ID" Type="Int32" Nullable="false" />
-          <Property Name="Job_ID" Type="Int32" Nullable="false" />
-          <Property Name="Schedule_ID" Type="Int32" Nullable="false" />
-          <Property Name="F_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="L_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Schedule_ID" Type="Int64" />
+          <Property Name="Job_ID" Type="Int64" />
+          <Property Name="F_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="L_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Pay_Rate" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Emp_Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Emp_User_Name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Emp_Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Address" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_User_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Emp_Password" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Empworktimes" Relationship="DowntownDeli.fk_Emp_ID" FromRole="Employee" ToRole="Empworktime" />
           <NavigationProperty Name="Job" Relationship="DowntownDeli.fk_Job_ID" FromRole="Employee" ToRole="Job" />
           <NavigationProperty Name="Schedule" Relationship="DowntownDeli.fk_Schedule_ID" FromRole="Employee" ToRole="Schedule" />
         </EntityType>
         <EntityType Name="Empworktime">
           <Key>
-            <PropertyRef Name="Work_Time_ID" />
+            <PropertyRef Name="Worktime_ID" />
           </Key>
-          <Property Name="Work_Time_ID" Type="Int32" Nullable="false" />
-          <Property Name="Emp_ID" Type="Int32" Nullable="false" />
-          <Property Name="Job_ID" Type="Int32" Nullable="false" />
-          <Property Name="Clock_In" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Clock_Out" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Worktime_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Emp_ID" Type="Int64" />
+          <Property Name="Clock_In" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Clock_Out" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Work_Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="DowntownDeli.fk_Emp_ID" FromRole="Empworktime" ToRole="Employee" />
-          <NavigationProperty Name="Job" Relationship="DowntownDeli.fk_Job_ID_worktime" FromRole="Empworktime" ToRole="Job" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
             <PropertyRef Name="Item_ID" />
           </Key>
-          <Property Name="Item_ID" Type="Int32" Nullable="false" />
+          <Property Name="Item_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Experation_Date" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory" ToRole="Inventory_Order" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Experation_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory" ToRole="Inventory_Order" />
+          <NavigationProperty Name="Product_Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory" ToRole="Product_Inventory" />
         </EntityType>
         <EntityType Name="Inventory_Order">
           <Key>
-            <PropertyRef Name="Inventory_Order_ID" />
+            <PropertyRef Name="Inv_Ord_ID" />
           </Key>
-          <Property Name="Inventory_Order_ID" Type="Int32" Nullable="false" />
-          <Property Name="Vendor_ID" Type="Int32" Nullable="false" />
-          <Property Name="Item_ID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Inv_Ord_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_ID" Type="Int64" />
+          <Property Name="Vendor_ID" Type="Int64" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Total_Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Delivery_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory_Order" ToRole="Inventory" />
+          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory_Order" ToRole="Inventory" />
           <NavigationProperty Name="Vendor" Relationship="DowntownDeli.fk_Vendor_ID" FromRole="Inventory_Order" ToRole="Vendor" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
             <PropertyRef Name="Job_ID" />
           </Key>
-          <Property Name="Job_ID" Type="Int32" Nullable="false" />
+          <Property Name="Job_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Job_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Duties" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Duties" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Employees" Relationship="DowntownDeli.fk_Job_ID" FromRole="Job" ToRole="Employee" />
-          <NavigationProperty Name="Empworktimes" Relationship="DowntownDeli.fk_Job_ID_worktime" FromRole="Job" ToRole="Empworktime" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
             <PropertyRef Name="Order_ID" />
           </Key>
-          <Property Name="Order_ID" Type="Int32" Nullable="false" />
-          <Property Name="Customer_ID" Type="Int32" Nullable="false" />
-          <Property Name="Promo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="Or_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Order_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer_ID" Type="Int64" />
+          <Property Name="Promo_ID" Type="Int64" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Ord_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Customer" Relationship="DowntownDeli.fk_Customer_ID" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.fk_Order_ID" FromRole="Order" ToRole="Product_Order" />
           <NavigationProperty Name="Promotion" Relationship="DowntownDeli.fk_Promo_ID" FromRole="Order" ToRole="Promotion" />
+        </EntityType>
+        <EntityType Name="Product_Inventory">
+          <Key>
+            <PropertyRef Name="Prod_Inv_ID" />
+          </Key>
+          <Property Name="Prod_Inv_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_ID" Type="Int64" />
+          <Property Name="Product_ID" Type="Int64" />
+          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Product_Inventory" ToRole="Inventory" />
+          <NavigationProperty Name="Product" Relationship="DowntownDeli.fk_Prod_Inv_Product_ID" FromRole="Product_Inventory" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product_Order">
+          <Key>
+            <PropertyRef Name="Prod_Ord_ID" />
+          </Key>
+          <Property Name="Prod_Ord_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Order_ID" Type="Int64" />
+          <Property Name="Product_ID" Type="Int64" />
+          <NavigationProperty Name="Order" Relationship="DowntownDeli.fk_Order_ID" FromRole="Product_Order" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="DowntownDeli.fk_Product_ID" FromRole="Product_Order" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Product_ID" />
+          </Key>
+          <Property Name="Product_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <NavigationProperty Name="Product_Inventory" Relationship="DowntownDeli.fk_Prod_Inv_Product_ID" FromRole="Product" ToRole="Product_Inventory" />
+          <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.fk_Product_ID" FromRole="Product" ToRole="Product_Order" />
         </EntityType>
         <EntityType Name="Promotion">
           <Key>
             <PropertyRef Name="Promo_ID" />
           </Key>
-          <Property Name="Promo_ID" Type="Int32" Nullable="false" />
-          <Property Name="Discount_Type" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Promo_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Discount_Type" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Promo_Start" Type="DateTime" Precision="0" />
-          <Property Name="Prom_End" Type="DateTime" Precision="0" />
+          <Property Name="Begin_Date" Type="DateTime" Precision="0" />
+          <Property Name="End_Date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Orders" Relationship="DowntownDeli.fk_Promo_ID" FromRole="Promotion" ToRole="Order" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
             <PropertyRef Name="Schedule_ID" />
           </Key>
-          <Property Name="Schedule_ID" Type="Int32" Nullable="false" />
+          <Property Name="Schedule_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Shift_Start" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Shift_End" Type="Time" Nullable="false" Precision="7" />
           <Property Name="Monday" Type="Boolean" Nullable="false" />
@@ -538,15 +549,14 @@
           <Key>
             <PropertyRef Name="Vendor_ID" />
           </Key>
-          <Property Name="Vendor_ID" Type="Int32" Nullable="false" />
-          <Property Name="Vendor_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Vendor_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Vendor_Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Vend_Address" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Vend_Phone" Type="Decimal" Nullable="false" Precision="7" Scale="0" />
+          <Property Name="Vend_Address" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Vendor_ID" FromRole="Vendor" ToRole="Inventory_Order" />
         </EntityType>
         <Association Name="fk_Customer_ID">
-          <End Type="DowntownDeli.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="DowntownDeli.Customer" Role="Customer" Multiplicity="0..1" />
           <End Type="DowntownDeli.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Customer">
@@ -558,7 +568,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Emp_ID">
-          <End Type="DowntownDeli.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="DowntownDeli.Employee" Role="Employee" Multiplicity="0..1" />
           <End Type="DowntownDeli.Empworktime" Role="Empworktime" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Employee">
@@ -570,7 +580,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Job_ID">
-          <End Type="DowntownDeli.Job" Role="Job" Multiplicity="1" />
+          <End Type="DowntownDeli.Job" Role="Job" Multiplicity="0..1" />
           <End Type="DowntownDeli.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Job">
@@ -582,7 +592,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_Schedule_ID">
-          <End Type="DowntownDeli.Schedule" Role="Schedule" Multiplicity="1" />
+          <End Type="DowntownDeli.Schedule" Role="Schedule" Multiplicity="0..1" />
           <End Type="DowntownDeli.Employee" Role="Employee" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Schedule">
@@ -593,20 +603,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Job_ID_worktime">
-          <End Type="DowntownDeli.Job" Role="Job" Multiplicity="1" />
-          <End Type="DowntownDeli.Empworktime" Role="Empworktime" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Job">
-              <PropertyRef Name="Job_ID" />
-            </Principal>
-            <Dependent Role="Empworktime">
-              <PropertyRef Name="Job_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Item_ID">
-          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="1" />
+        <Association Name="fk_Inv_Ord_Item_ID">
+          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
           <End Type="DowntownDeli.Inventory_Order" Role="Inventory_Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Inventory">
@@ -617,8 +615,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Item_ID">
+          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <End Type="DowntownDeli.Product_Inventory" Role="Product_Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Product_Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Vendor_ID">
-          <End Type="DowntownDeli.Vendor" Role="Vendor" Multiplicity="1" />
+          <End Type="DowntownDeli.Vendor" Role="Vendor" Multiplicity="0..1" />
           <End Type="DowntownDeli.Inventory_Order" Role="Inventory_Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Vendor">
@@ -629,8 +639,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Order_ID">
+          <End Type="DowntownDeli.Order" Role="Order" Multiplicity="0..1" />
+          <End Type="DowntownDeli.Product_Order" Role="Product_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Order_ID" />
+            </Principal>
+            <Dependent Role="Product_Order">
+              <PropertyRef Name="Order_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_Promo_ID">
-          <End Type="DowntownDeli.Promotion" Role="Promotion" Multiplicity="1" />
+          <End Type="DowntownDeli.Promotion" Role="Promotion" Multiplicity="0..1" />
           <End Type="DowntownDeli.Order" Role="Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Promotion">
@@ -641,32 +663,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Product_Order">
-          <Key>
-            <PropertyRef Name="Product_Order_ID" />
-            <PropertyRef Name="Product_ID" />
-            <PropertyRef Name="Order_ID" />
-            <PropertyRef Name="Promo_ID" />
-            <PropertyRef Name="Customer_ID" />
-          </Key>
-          <Property Name="Product_Order_ID" Type="Guid" Nullable="false" />
-          <Property Name="Product_ID" Type="Guid" Nullable="false" />
-          <Property Name="Order_ID" Type="Guid" Nullable="false" />
-          <Property Name="Promo_ID" Type="Guid" Nullable="false" />
-          <Property Name="Customer_ID" Type="Guid" Nullable="false" />
-          <NavigationProperty Name="Product" Relationship="DowntownDeli.R_16" FromRole="Product_Order" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="Product">
-          <Key>
-            <PropertyRef Name="Product_ID" />
-          </Key>
-          <Property Name="Product_ID" Type="Guid" Nullable="false" />
-          <Property Name="Product_Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
-          <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.R_16" FromRole="Product" ToRole="Product_Order" />
-        </EntityType>
-        <Association Name="R_16">
-          <End Type="DowntownDeli.Product" Role="Product" Multiplicity="1" />
+        <Association Name="fk_Prod_Inv_Product_ID">
+          <End Type="DowntownDeli.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="DowntownDeli.Product_Inventory" Role="Product_Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Product_ID" />
+            </Principal>
+            <Dependent Role="Product_Inventory">
+              <PropertyRef Name="Product_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Product_ID">
+          <End Type="DowntownDeli.Product" Role="Product" Multiplicity="0..1" />
           <End Type="DowntownDeli.Product_Order" Role="Product_Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Product">
@@ -688,8 +698,7 @@
               <MappingFragment StoreEntitySet="Customers">
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Cust_State" ColumnName="Cust_State" />
-                <ScalarProperty Name="Cust_Address" ColumnName="Cust_Address" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="L_Name" ColumnName="L_Name" />
                 <ScalarProperty Name="F_Name" ColumnName="F_Name" />
@@ -704,11 +713,12 @@
                 <ScalarProperty Name="Emp_User_Name" ColumnName="Emp_User_Name" />
                 <ScalarProperty Name="Emp_Address" ColumnName="Emp_Address" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Pay_Rate" ColumnName="Pay_Rate" />
                 <ScalarProperty Name="L_Name" ColumnName="L_Name" />
                 <ScalarProperty Name="F_Name" ColumnName="F_Name" />
-                <ScalarProperty Name="Schedule_ID" ColumnName="Schedule_ID" />
                 <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
+                <ScalarProperty Name="Schedule_ID" ColumnName="Schedule_ID" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -719,9 +729,8 @@
                 <ScalarProperty Name="Work_Date" ColumnName="Work_Date" />
                 <ScalarProperty Name="Clock_Out" ColumnName="Clock_Out" />
                 <ScalarProperty Name="Clock_In" ColumnName="Clock_In" />
-                <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
-                <ScalarProperty Name="Work_Time_ID" ColumnName="Work_Time_ID" />
+                <ScalarProperty Name="Worktime_ID" ColumnName="Worktime_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -731,6 +740,7 @@
                 <ScalarProperty Name="Experation_Date" ColumnName="Experation_Date" />
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
                 <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -742,9 +752,9 @@
                 <ScalarProperty Name="Delivery_Date" ColumnName="Delivery_Date" />
                 <ScalarProperty Name="Total_Cost" ColumnName="Total_Cost" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
                 <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
-                <ScalarProperty Name="Inventory_Order_ID" ColumnName="Inventory_Order_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Inv_Ord_ID" ColumnName="Inv_Ord_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -760,7 +770,8 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DowntownDeli.Order">
               <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="Or_Date" ColumnName="Or_Date" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Ord_Date" ColumnName="Ord_Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="Promo_ID" ColumnName="Promo_ID" />
                 <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
@@ -768,11 +779,38 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Product_Inventory">
+            <EntityTypeMapping TypeName="DowntownDeli.Product_Inventory">
+              <MappingFragment StoreEntitySet="Product_Inventory">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
+                <ScalarProperty Name="Prod_Inv_ID" ColumnName="Prod_Inv_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_Order">
+            <EntityTypeMapping TypeName="DowntownDeli.Product_Order">
+              <MappingFragment StoreEntitySet="Product_Order">
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
+                <ScalarProperty Name="Prod_Ord_ID" ColumnName="Prod_Ord_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DowntownDeli.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
+                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Promotions">
             <EntityTypeMapping TypeName="DowntownDeli.Promotion">
-              <MappingFragment StoreEntitySet="Promotion">
-                <ScalarProperty Name="Prom_End" ColumnName="Prom_End" />
-                <ScalarProperty Name="Promo_Start" ColumnName="Promo_Start" />
+              <MappingFragment StoreEntitySet="Promotions">
+                <ScalarProperty Name="End_Date" ColumnName="End_Date" />
+                <ScalarProperty Name="Begin_Date" ColumnName="Begin_Date" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Discount_Type" ColumnName="Discount_Type" />
                 <ScalarProperty Name="Promo_ID" ColumnName="Promo_ID" />
@@ -797,32 +835,11 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Vendors">
             <EntityTypeMapping TypeName="DowntownDeli.Vendor">
-              <MappingFragment StoreEntitySet="Vendor">
-                <ScalarProperty Name="Vend_Phone" ColumnName="Vend_Phone" />
+              <MappingFragment StoreEntitySet="Vendors">
                 <ScalarProperty Name="Vend_Address" ColumnName="Vend_Address" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
                 <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Product_Order">
-            <EntityTypeMapping TypeName="DowntownDeli.Product_Order">
-              <MappingFragment StoreEntitySet="Product_Order">
-                <ScalarProperty Name="Customer_ID" ColumnName="Customer_ID" />
-                <ScalarProperty Name="Promo_ID" ColumnName="Promo_ID" />
-                <ScalarProperty Name="Order_ID" ColumnName="Order_ID" />
-                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
-                <ScalarProperty Name="Product_Order_ID" ColumnName="Product_Order_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DowntownDeli.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Product_Name" ColumnName="Product_Name" />
-                <ScalarProperty Name="Product_ID" ColumnName="Product_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

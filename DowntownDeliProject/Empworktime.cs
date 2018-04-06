@@ -14,14 +14,12 @@ namespace DowntownDeliProject
     
     public partial class Empworktime
     {
-        public int Work_Time_ID { get; set; }
-        public int Emp_ID { get; set; }
-        public int Job_ID { get; set; }
-        public System.DateTime Clock_In { get; set; }
-        public System.DateTime Clock_Out { get; set; }
+        public long Worktime_ID { get; set; }
+        public Nullable<long> Emp_ID { get; set; }
+        public System.TimeSpan Clock_In { get; set; }
+        public System.TimeSpan Clock_Out { get; set; }
         public System.DateTime Work_Date { get; set; }
     
         public virtual Employee Employee { get; set; }
-        public virtual Job Job { get; set; }
     }
 }

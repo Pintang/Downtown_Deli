@@ -42,7 +42,21 @@
                             <asp:Label runat="server" Font-Bold="true" Text="Product Search:" />
                         </div>
                         <div class="col-md-8">
-                            <asp:DropDownList runat="server" ToolTip="Select a Product From the list" DataTextField="Product_Name" CssClass="form-control" Width="100%" DataValueField="Product_ID" ID="ddlProducts" />
+                            <asp:DropDownList runat="server" ToolTip="Select a Product From the list" DataTextField="Product_Name" CssClass="form-control" Width="100%" DataValueField="Product_ID" ID="ddlProducts">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+                    <div class="row pad-top">
+                        <div class="col-md-4">
+                            <asp:Label runat="server" Font-Bold="true" Text="Quantity:" />
+                        </div>
+                        <div class="col-md-8">
+                            <asp:TextBox ID="tbQuantity" runat="server" CssClass="form-control" Width="100%" />
+                        </div>
+                    </div>
+                    <div class="row pad-top">
+                        <div class="col-md-4">
+                            <asp:Button runat="server" CssClass="btn btn-primary" Text="Add To Order" ID="btnAdd" />
                         </div>
                     </div>
                 </div>

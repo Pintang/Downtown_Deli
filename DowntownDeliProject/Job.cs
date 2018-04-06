@@ -18,16 +18,13 @@ namespace DowntownDeliProject
         public Job()
         {
             this.Employees = new HashSet<Employee>();
-            this.Empworktimes = new HashSet<Empworktime>();
         }
     
-        public int Job_ID { get; set; }
+        public long Job_ID { get; set; }
         public string Job_Name { get; set; }
         public string Duties { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empworktime> Empworktimes { get; set; }
     }
 }

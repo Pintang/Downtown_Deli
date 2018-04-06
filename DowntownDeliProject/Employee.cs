@@ -20,12 +20,13 @@ namespace DowntownDeliProject
             this.Empworktimes = new HashSet<Empworktime>();
         }
     
-        public int Emp_ID { get; set; }
-        public int Job_ID { get; set; }
-        public int Schedule_ID { get; set; }
+        public long Emp_ID { get; set; }
+        public Nullable<long> Schedule_ID { get; set; }
+        public Nullable<long> Job_ID { get; set; }
         public string F_Name { get; set; }
         public string L_Name { get; set; }
         public decimal Pay_Rate { get; set; }
+        public string Phone { get; set; }
         public string Email { get; set; }
         public string Emp_Address { get; set; }
         public string Emp_User_Name { get; set; }

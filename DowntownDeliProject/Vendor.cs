@@ -20,11 +20,10 @@ namespace DowntownDeliProject
             this.Inventory_Order = new HashSet<Inventory_Order>();
         }
     
-        public int Vendor_ID { get; set; }
+        public long Vendor_ID { get; set; }
         public string Vendor_Name { get; set; }
         public Nullable<decimal> Discount { get; set; }
         public string Vend_Address { get; set; }
-        public decimal Vend_Phone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Inventory_Order> Inventory_Order { get; set; }

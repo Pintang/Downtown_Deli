@@ -12,17 +12,13 @@ namespace DowntownDeliProject
     using System;
     using System.Collections.Generic;
     
-    public partial class Inventory_Order
+    public partial class Product_Inventory
     {
-        public long Inv_Ord_ID { get; set; }
+        public long Prod_Inv_ID { get; set; }
         public Nullable<long> Item_ID { get; set; }
-        public Nullable<long> Vendor_ID { get; set; }
-        public int Quantity { get; set; }
-        public decimal Total_Cost { get; set; }
-        public System.DateTime Delivery_Date { get; set; }
-        public System.DateTime Purchase_Date { get; set; }
+        public Nullable<long> Product_ID { get; set; }
     
         public virtual Inventory Inventory { get; set; }
-        public virtual Vendor Vendor { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

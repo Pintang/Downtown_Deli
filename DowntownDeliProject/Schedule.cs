@@ -20,7 +20,7 @@ namespace DowntownDeliProject
             this.Employees = new HashSet<Employee>();
         }
     
-        public int Schedule_ID { get; set; }
+        public long Schedule_ID { get; set; }
         public System.TimeSpan Shift_Start { get; set; }
         public System.TimeSpan Shift_End { get; set; }
         public bool Monday { get; set; }
