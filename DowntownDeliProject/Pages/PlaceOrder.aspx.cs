@@ -53,7 +53,13 @@ namespace DowntownDeliProject.Pages
             {
                 long id = long.Parse(txtCustomer.Text.ToString().Trim());
                 Customer cust = dde.Customers.Find(id);
-                lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
+                if (cust != null)
+                {
+                    lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
+                }else
+                {
+                    lblCustomer.Text = "Customer not Found. Try again.";
+                }
             }
         }
         protected void btnSubmitOrder_Click(object sender, EventArgs e)
