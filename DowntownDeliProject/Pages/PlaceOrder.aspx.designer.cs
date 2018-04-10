@@ -10,7 +10,7 @@
 namespace DowntownDeliProject.Pages {
     
     
-    public partial class Order {
+    public partial class PlaceOrder {
         
         /// <summary>
         /// cbDineIn control.
@@ -40,13 +40,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.TextBox txtCustomer;
         
         /// <summary>
-        /// lvIDs control.
+        /// lblCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvIDs;
+        protected global::System.Web.UI.WebControls.Label lblCustomer;
         
         /// <summary>
         /// ddlProducts control.
@@ -56,6 +56,15 @@ namespace DowntownDeliProject.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProducts;
+        
+        /// <summary>
+        /// cbCombo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbCombo;
         
         /// <summary>
         /// tbQuantity control.
@@ -76,13 +85,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnAdd;
         
         /// <summary>
-        /// CustomerName control.
+        /// ddlPromos control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CustomerName;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPromos;
         
         /// <summary>
         /// lvOrderItems control.
@@ -92,6 +101,24 @@ namespace DowntownDeliProject.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView lvOrderItems;
+        
+        /// <summary>
+        /// lblSubTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubTotal;
+        
+        /// <summary>
+        /// lblTotal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTotal;
         
         /// <summary>
         /// btnSubmitOrder control.

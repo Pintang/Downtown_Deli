@@ -24,10 +24,7 @@
                                <asp:ListItem Text="Inventory"></asp:ListItem>
                                <asp:ListItem Text="Timekeeping"></asp:ListItem>
                                <asp:ListItem Text="Sales"></asp:ListItem>
-                               
                             </asp:DropDownList>
-                              
-                      
                             <asp:Button runat="server" CssClass="btn btn-primary" Text="Generate Report" ID="btnGenRpt" />
 
 

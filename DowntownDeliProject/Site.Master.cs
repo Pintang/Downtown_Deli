@@ -89,7 +89,7 @@ namespace DowntownDeliProject
 
         protected void btnOrder_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Order.aspx", false);
+            Response.Redirect("~/Pages/PlaceOrder.aspx", false);
         }
 
         protected void btnReports_Click(object sender, EventArgs e)

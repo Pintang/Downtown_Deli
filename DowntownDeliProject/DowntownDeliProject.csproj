@@ -220,7 +220,7 @@
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Pages\Admin.aspx" />
-    <Content Include="Pages\Order.aspx" />
+    <Content Include="Pages\PlaceOrder.aspx" />
     <Content Include="Pages\Reports.aspx" />
     <Content Include="Pages\TimeKeeping.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -346,12 +346,12 @@
     <Compile Include="Pages\Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Order.aspx.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
+    <Compile Include="Pages\PlaceOrder.aspx.cs">
+      <DependentUpon>PlaceOrder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pages\Order.aspx.designer.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
+    <Compile Include="Pages\PlaceOrder.aspx.designer.cs">
+      <DependentUpon>PlaceOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\Reports.aspx.cs">
       <DependentUpon>Reports.aspx</DependentUpon>
