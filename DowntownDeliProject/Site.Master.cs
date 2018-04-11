@@ -69,22 +69,18 @@ namespace DowntownDeliProject
         }
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!Page.IsPostBack)
+            if (System.Web.HttpContext.Current.User != null && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                if (System.Web.HttpContext.Current.User != null && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                using (DowntownDeliEntity dde = new DowntownDeliEntity())
                 {
-                    using (DowntownDeliEntity dde = new DowntownDeliEntity())
-                    {
-                        ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
-                        lvCurrentOrders.DataSource = dde.Orders.Include("Customer").ToList();
-                        lvCurrentOrders.DataBind();
-                    }
+                    ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
+                    lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
+                    lvCurrentOrders.DataBind();
                 }
-                else
-                {
-                    FormsAuthentication.SignOut();
-                }
-
+            }
+            else
+            {
+                FormsAuthentication.SignOut();
             }
         }
 
@@ -123,6 +119,27 @@ namespace DowntownDeliProject
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Home.aspx", false);
+        }
+
+        protected void lvCurrentOrders_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            using (DowntownDeliEntity dde = new DowntownDeliEntity())
+            {
+                switch (e.CommandName)
+                {
+                    case "Complete":
+                        ListViewDataItem item = (ListViewDataItem)e.Item;
+                        Label lblOrderID = (Label)item.FindControl("lblOrderID");
+                        int id = int.Parse(lblOrderID.Text);
+                        Order RealOrder = dde.Orders.Find(id);
+                        RealOrder.Complete = true;
+                        dde.SaveChanges();
+                        ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
+                        lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
+                        lvCurrentOrders.DataBind();
+                        break;
+                }
+            }
         }
     }
 

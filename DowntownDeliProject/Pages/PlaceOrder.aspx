@@ -23,7 +23,6 @@
                         </div>
                         <div class="col-md-8">
                             <asp:TextBox runat="server" CssClass="form-control" OnTextChanged="txtCustomer_TextChanged" AutoPostBack="true" Width="100%" ID="txtCustomer" />
-
                         </div>
                     </div>
                     <div class="row pad-top col-md-offset-5">
@@ -86,7 +85,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </ItemTemplate>
                                 <AlternatingItemTemplate>
                                     <div class="row" style="background-color: white;">

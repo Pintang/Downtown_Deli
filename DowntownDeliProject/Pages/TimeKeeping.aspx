@@ -1,34 +1,73 @@
 ﻿<%@ Page Language="C#" Title="Time Keeping" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="TimeKeeping.aspx.cs" Inherits="DowntownDeliProject.Pages.TimeKeeping" %>
 
-<asp:content id="BodyContent" contentplaceholderid="Body" runat="server">
-  
+<asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
 
-<div class="row pad-top">
-    <div class="col-md-8">
-         <asp:Label runat="server" AssociatedControlID="Username" CssClass="col-md-2 control-label">Username</asp:Label>
-        <asp:TextBox runat="server" ID="Username" CssClass="form-control" />
-          
+
+    <div class="row pad-top">
+        <div class="col-md-8">
+            <asp:Label runat="server" AssociatedControlID="Username" CssClass="col-md-2 control-label">Username</asp:Label>
+            <asp:TextBox runat="server" ID="Username" CssClass="form-control" />
+        </div>
     </div>
-</div>
-     <div class="row pad-top">
-         <div class="col-md-8">
-           <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
-             
-                            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
+    <div class="row pad-top">
+        <div class="col-md-8">
+            <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
+
+            <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
+        </div>
+    </div>
+    <div class="row pad-top">
+        <div class="col-md-3">
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock in" ID="btnClockIn" />
+        </div>
+        <div class="col-md-3">
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock out" ID="btnClockOut" />
+        </div>
+        <div class="col-md-3">
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="View timesheet" ID="btnViewTimesheet" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <asp:ListView runat="server" ID="lvDisplayTimeSheet">
+                <ItemTemplate>
+                    <div class="row" style="background-color: #D3D3D3;">
+                        <div class="col-md-12">
+                            <div class="row pad">
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("Clock_In") %>' />
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:Label runat="server" ID="lblQuantity" Text='<%# Eval("Clock_Out") %>' />
+                                </div>
+                            </div>
                         </div>
-             </div>
-              <div class="row pad-top">
-    <div class="col-md-3">
-        <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock in" ID="btnClockIn" />
+                    </div>
+                </ItemTemplate>
+                <AlternatingItemTemplate>
+                    <div class="row" style="background-color: white;">
+                        <div class="col-md-12">
+                            <div class="row pad">
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("Clock_In") %>' />
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:Label runat="server" ID="lblQuantity" Text='<%# Eval("Clock_Out") %>' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </AlternatingItemTemplate>
+            </asp:ListView>
+        </div>
     </div>
-    <div class="col-md-3">
-        <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock out" ID="btnClockOut" />
-    </div>
-    <div class="col-md-3">
-        <asp:Button runat="server" CssClass="btn btn-primary" Text="View timesheet" ID="btnViewTimesheet" />
-    </div>
-</div>       
 
 
-    
-</asp:content>
+
+</asp:Content>
