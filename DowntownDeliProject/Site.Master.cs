@@ -67,13 +67,18 @@ namespace DowntownDeliProject
                 }
             }
         }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
                 if (System.Web.HttpContext.Current.User != null && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                 {
+                    using (DowntownDeliEntity dde = new DowntownDeliEntity())
+                    {
+                        ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
+                        lvCurrentOrders.DataSource = dde.Orders.Include("Customer").ToList();
+                        lvCurrentOrders.DataBind();
+                    }
                 }
                 else
                 {

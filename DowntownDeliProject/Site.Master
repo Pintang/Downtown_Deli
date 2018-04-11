@@ -9,13 +9,13 @@
     <title><%: Page.Title %></title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/sb-admin-2.css" rel="stylesheet" />
-<%--    <link href="/Content/metisMenu.min.css" rel="stylesheet" />--%>
+    <%--    <link href="/Content/metisMenu.min.css" rel="stylesheet" />--%>
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/fontawesome.css" rel="stylesheet" />
     <meta name="theme-color" content="#D3D3D3" />
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
-<%--    <script src="/Scripts/metisMenu.js"></script>--%>
+    <%--    <script src="/Scripts/metisMenu.js"></script>--%>
     <script src="/Scripts/sb-admin-2.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -65,11 +65,60 @@
                                 </div>
                             </div>
                             <!-- Side Navbar -->
-                            <div class="navbar-default sidebar" role="navigation">
+                            <div class="navbar-default sidebar pad-left" role="navigation">
                                 <div class="sidebar-nav" style="background-color: #D3D3D3;">
-                                    <ul class="nav" id="side-menu" style="background-color: #D3D3D3;">
-                                        <asp:ContentPlaceHolder ID="sideNav" runat="server"></asp:ContentPlaceHolder>
-                                    </ul>
+                                    <div class="nav" id="side-menu" style="background-color: #D3D3D3;">
+                                        <div class="row">
+                                            <div class="col-md-11">
+                                                <asp:ListView runat="server" ID="lvCurrentOrders">
+                                                    <ItemTemplate>
+                                                        <div class="row" style="background-color: #D3D3D3;">
+                                                            <div class="col-md-12">
+                                                                <div class="row pad">
+                                                                    <div class="col-md-4">
+                                                                        <asp:Label runat="server" ID="lblOrderID" Text='<%# Eval("Order_ID") %>' />
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <asp:Label runat="server" ID="lblCustomer" Text='<%# Eval("Customer.F_Name") + " " +  Eval("Customer.L_Name") %>' />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row pad-top">
+                                                                    <div class="col-md-6">
+                                                                        <asp:Label runat="server" ID="lblPrice" Text='<%# String.Format("{0:C}",Eval("Price")) %>' />
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <asp:Label runat="server" ID="lblOrderDate" Text='<%# DateTime.Parse(Eval("Ord_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ItemTemplate>
+                                                    <AlternatingItemTemplate>
+                                                        <div class="row" style="background-color: white;">
+                                                            <div class="col-md-12">
+                                                                <div class="row pad">
+                                                                    <div class="col-md-4">
+                                                                        <asp:Label runat="server" ID="lblOrderID" Text='<%# Eval("Order_ID") %>' />
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <asp:Label runat="server" ID="lblCustomer" Text='<%# Eval("Customer.F_Name") + " " +  Eval("Customer.L_Name") %>' />
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row pad-top">
+                                                                    <div class="col-md-6">
+                                                                        <asp:Label runat="server" ID="lblPrice" Text='<%# String.Format("{0:C}",Eval("Price")) %>' />
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <asp:Label runat="server" ID="lblOrderDate" Text='<%# DateTime.Parse(Eval("Ord_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </AlternatingItemTemplate>
+                                                </asp:ListView>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </nav>
