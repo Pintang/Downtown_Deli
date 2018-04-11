@@ -33,8 +33,8 @@ namespace DowntownDeliProject.Pages
             Employee emp = dde.Employees.Where(t => t.Emp_User_Name.ToUpper().Equals(Username.Text.ToUpper()) && t.Emp_Password.Equals(Password.Text)).FirstOrDefault();
             if (emp != null)
             {
-
-                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In.ToString() != "00:00:00.0000000" && t.Clock_Out.ToString() == "00:00:00.0000000").ToList().FirstOrDefault();
+                TimeSpan span = TimeSpan.Parse("00:00:00.0000000");
+                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In != span && t.Clock_Out == span).ToList().FirstOrDefault();
                 if (EmpChk == null)
                 {
                     Empworktime ClockInTime = new Empworktime();
@@ -43,6 +43,7 @@ namespace DowntownDeliProject.Pages
                     ClockInTime.Work_Date = DateTime.Now;
                     dde.Empworktimes.Add(ClockInTime);
                     dde.SaveChanges();
+                    lblError.Text = "";
                 }
                 else
                 {
@@ -59,16 +60,18 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnClockOut_Click(object sender, EventArgs e)
         {
+            TimeSpan span = TimeSpan.Parse("00:00:00.0000000");
             Employee emp = dde.Employees.Where(t => t.Emp_User_Name.ToUpper().Equals(Username.Text.ToUpper()) && t.Emp_Password.Equals(Password.Text)).FirstOrDefault();
             if (emp != null)
             {
-                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In != null && t.Clock_Out == null).ToList().FirstOrDefault();
+                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In != span && t.Clock_Out == span).ToList().FirstOrDefault();
                 if (EmpChk != null)
                 {
                     EmpChk.Clock_Out = DateTime.Now.TimeOfDay;
                     EmpChk.Emp_ID = emp.Emp_ID;
                     EmpChk.Work_Date = DateTime.Now;
                     dde.SaveChanges();
+                    lblError.Text = "";
                 }
                 else
                 {
@@ -91,6 +94,7 @@ namespace DowntownDeliProject.Pages
                 List<Empworktime> WorkTimes = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID).ToList();
                 lvDisplayTimeSheet.DataSource = WorkTimes;
                 lvDisplayTimeSheet.DataBind();
+                lblError.Text = "";
             }
             else
             {
