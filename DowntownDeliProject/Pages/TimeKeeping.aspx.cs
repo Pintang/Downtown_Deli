@@ -24,8 +24,8 @@ namespace DowntownDeliProject.Pages
                 FormsAuthentication.SignOut();
                 Response.Redirect("~/Login.aspx");
             }
-            
-    }
+
+        }
         protected DowntownDeliEntity dde = new DowntownDeliEntity();
 
         protected void btnClockIn_Click(object sender, EventArgs e)

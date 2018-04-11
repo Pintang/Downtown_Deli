@@ -83,6 +83,7 @@
           <Property Name="Price" Type="money" Nullable="false" />
           <Property Name="Ord_Date" Type="date" Nullable="false" />
           <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="Complete" Type="bit" />
         </EntityType>
         <EntityType Name="Product_Inventory">
           <Key>
@@ -105,7 +106,7 @@
             <PropertyRef Name="Product_ID" />
           </Key>
           <Property Name="Product_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Product_Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Product_Name" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Price" Type="money" Nullable="false" />
         </EntityType>
         <EntityType Name="Promotions">
@@ -487,6 +488,7 @@
           <NavigationProperty Name="Customer" Relationship="DowntownDeli.fk_Customer_ID" FromRole="Order" ToRole="Customer" />
           <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.fk_Order_ID" FromRole="Order" ToRole="Product_Order" />
           <NavigationProperty Name="Promotion" Relationship="DowntownDeli.fk_Promo_ID" FromRole="Order" ToRole="Promotion" />
+          <Property Name="Complete" Type="Boolean" />
         </EntityType>
         <EntityType Name="Product_Inventory">
           <Key>
@@ -513,7 +515,7 @@
             <PropertyRef Name="Product_ID" />
           </Key>
           <Property Name="Product_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Product_Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <NavigationProperty Name="Product_Inventory" Relationship="DowntownDeli.fk_Prod_Inv_Product_ID" FromRole="Product" ToRole="Product_Inventory" />
           <NavigationProperty Name="Product_Order" Relationship="DowntownDeli.fk_Product_ID" FromRole="Product" ToRole="Product_Order" />
@@ -770,6 +772,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="DowntownDeli.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Complete" ColumnName="Complete" />
                 <ScalarProperty Name="Points" ColumnName="Points" />
                 <ScalarProperty Name="Ord_Date" ColumnName="Ord_Date" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
