@@ -28,7 +28,22 @@
         <asp:Button runat="server" CssClass="btn btn-primary" Text="View timesheet" ID="btnViewTimesheet" />
     </div>
 </div>       
-
+      <div class="row pad-top" style="border: thin">
+                        <div class="col-md-12" style="border: thin">
+                            <asp:ListView runat="server" ID="DisplayTimeSheet">
+                                <ItemTemplate>
+                                    <div class="row" style="background-color: #D3D3D3;">
+                                        <div class="col-md-12">
+                                            <div class="row pad">   
+                                                 List<Empworktime>                                   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ItemTemplate>
+                              
+                            </asp:ListView>
+                        </div>
+                    </div>
 
     
 </asp:content>

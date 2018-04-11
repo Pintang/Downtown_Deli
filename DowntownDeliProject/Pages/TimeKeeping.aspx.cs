@@ -51,6 +51,10 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnViewTimesheet_Click(object sender, EventArgs e)
         {
+            Empworktime Timesheet = new Empworktime();
+            Employee emp = dde.Employees.Where(t => t.Emp_User_Name == Username.Text).ToList().FirstOrDefault();
+            List<Empworktime> WorkTimes = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID).ToList();
+
 
         }
     }
