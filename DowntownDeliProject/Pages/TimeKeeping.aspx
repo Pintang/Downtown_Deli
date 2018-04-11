@@ -2,7 +2,9 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
 
-
+    <div class="row">
+        <asp:Label ID="lblError" ForeColor="Red" Visible="false" runat="server" />
+    </div>
     <div class="row pad-top">
         <div class="col-md-8">
             <asp:Label runat="server" AssociatedControlID="Username" CssClass="col-md-2 control-label">Username</asp:Label>
@@ -18,16 +20,16 @@
     </div>
     <div class="row pad-top">
         <div class="col-md-3">
-            <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock in" ID="btnClockIn" />
+            <asp:Button runat="server" CssClass="btn btn-primary" OnClick="btnClockIn_Click" Text="Clock in" ID="btnClockIn" />
         </div>
         <div class="col-md-3">
-            <asp:Button runat="server" CssClass="btn btn-primary" Text="Clock out" ID="btnClockOut" />
+            <asp:Button runat="server" CssClass="btn btn-primary" OnClick="btnClockOut_Click" Text="Clock out" ID="btnClockOut" />
         </div>
         <div class="col-md-3">
-            <asp:Button runat="server" CssClass="btn btn-primary" Text="View timesheet" ID="btnViewTimesheet" />
+            <asp:Button runat="server" CssClass="btn btn-primary" Text="View timesheet" OnClick="btnViewTimesheet_Click" ID="btnViewTimesheet" />
         </div>
     </div>
-    <div class="row">
+    <div class="row pad-top">
         <div class="col-md-12">
             <asp:ListView runat="server" ID="lvDisplayTimeSheet">
                 <ItemTemplate>

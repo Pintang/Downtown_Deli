@@ -30,33 +30,73 @@ namespace DowntownDeliProject.Pages
 
         protected void btnClockIn_Click(object sender, EventArgs e)
         {
-            Empworktime ClockInTime = new Empworktime();
-            ClockInTime.Clock_In = TimeSpan.Parse(DateTime.Now.ToString());
-            Employee emp = dde.Employees.Where(t => t.Emp_User_Name == Username.Text).ToList().FirstOrDefault();
-            Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In != null && t.Clock_Out == null).ToList().FirstOrDefault(); //set error lbl if this returns a value//
-            ClockInTime.Emp_ID = emp.Emp_ID;
-            ClockInTime.Work_Date = DateTime.Now;
-            dde.Empworktimes.Add(ClockInTime);
-            dde.SaveChanges();
+            Employee emp = dde.Employees.Where(t => t.Emp_User_Name.ToUpper().Equals(Username.Text.ToUpper()) && t.Emp_Password.Equals(Password.Text)).FirstOrDefault();
+            if (emp != null)
+            {
+
+                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In.ToString() != "00:00:00.0000000" && t.Clock_Out.ToString() == "00:00:00.0000000").ToList().FirstOrDefault();
+                if (EmpChk == null)
+                {
+                    Empworktime ClockInTime = new Empworktime();
+                    ClockInTime.Clock_In = DateTime.Now.TimeOfDay;
+                    ClockInTime.Emp_ID = emp.Emp_ID;
+                    ClockInTime.Work_Date = DateTime.Now;
+                    dde.Empworktimes.Add(ClockInTime);
+                    dde.SaveChanges();
+                }
+                else
+                {
+                    lblError.Text = "User has already clocked in.";
+                    lblError.Visible = true;
+                }
+            }
+            else
+            {
+                lblError.Text = "Username or Password is incorrect.";
+                lblError.Visible = true;
+            }
+
         }
         protected void btnClockOut_Click(object sender, EventArgs e)
         {
-            Empworktime ClocKOutTime = new Empworktime();
-            ClocKOutTime.Clock_Out = TimeSpan.Parse(DateTime.Now.ToString());
-            Employee emp = dde.Employees.Where(t => t.Emp_User_Name == Username.Text).ToList().FirstOrDefault();
-            ClocKOutTime.Emp_ID = emp.Emp_ID;
-            ClocKOutTime.Work_Date = DateTime.Now;
-            dde.Empworktimes.Add(ClocKOutTime);
-            dde.SaveChanges();
+            Employee emp = dde.Employees.Where(t => t.Emp_User_Name.ToUpper().Equals(Username.Text.ToUpper()) && t.Emp_Password.Equals(Password.Text)).FirstOrDefault();
+            if (emp != null)
+            {
+                Empworktime EmpChk = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID && t.Clock_In != null && t.Clock_Out == null).ToList().FirstOrDefault();
+                if (EmpChk != null)
+                {
+                    EmpChk.Clock_Out = DateTime.Now.TimeOfDay;
+                    EmpChk.Emp_ID = emp.Emp_ID;
+                    EmpChk.Work_Date = DateTime.Now;
+                    dde.SaveChanges();
+                }
+                else
+                {
+                    lblError.Text = "User has not clocked in yet.";
+                    lblError.Visible = true;
+                }
+            }
+            else
+            {
+                lblError.Text = "Username or Password is incorrect.";
+                lblError.Visible = true;
+            }
         }
         protected void btnViewTimesheet_Click(object sender, EventArgs e)
         {
-            Empworktime Timesheet = new Empworktime();
-            Employee emp = dde.Employees.Where(t => t.Emp_User_Name == Username.Text).ToList().FirstOrDefault();
-            List<Empworktime> WorkTimes = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID).ToList();
-            lvDisplayTimeSheet.DataSource = WorkTimes;
-            lvDisplayTimeSheet.DataBind();
-
+            Employee emp = dde.Employees.Where(t => t.Emp_User_Name.ToUpper().Equals(Username.Text.ToUpper()) && t.Emp_Password.Equals(Password.Text)).FirstOrDefault();
+            if (emp != null)
+            {
+                Empworktime Timesheet = new Empworktime();
+                List<Empworktime> WorkTimes = dde.Empworktimes.Where(t => t.Emp_ID == emp.Emp_ID).ToList();
+                lvDisplayTimeSheet.DataSource = WorkTimes;
+                lvDisplayTimeSheet.DataBind();
+            }
+            else
+            {
+                lblError.Text = "Username or Password is incorrect.";
+                lblError.Visible = true;
+            }
         }
 
     }
