@@ -17,7 +17,7 @@ namespace DowntownDeliProject
             string cTheFile = HttpContext.Current.Request.Path;
 
             // Check if I am all ready on login page to avoid crash
-            if (!cTheFile.EndsWith("Login.aspx"))
+            if (!cTheFile.EndsWith("default.aspx"))
             {
                 // Extract the form's authentication cookie
                 string cookieName = FormsAuthentication.FormsCookieName;
@@ -25,7 +25,7 @@ namespace DowntownDeliProject
 
                 if (HttpContext.Current.User == null || HttpContext.Current.User.Identity == null || !HttpContext.Current.User.Identity.IsAuthenticated)
                 {
-                    Response.Redirect("~/Login.aspx", true);
+                    Response.Redirect("~/default.aspx", true);
                     Response.End();
                     return;
                 }

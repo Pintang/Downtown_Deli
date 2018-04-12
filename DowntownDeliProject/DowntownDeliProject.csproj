@@ -185,6 +185,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Images\header.jpg" />
+    <Content Include="default.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -283,6 +285,13 @@
   <ItemGroup>
     <Compile Include="Customer.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
