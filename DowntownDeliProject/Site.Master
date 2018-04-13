@@ -9,13 +9,13 @@
     <title><%: Page.Title %></title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <link href="/Content/sb-admin-2.css" rel="stylesheet" />
-    <%--    <link href="/Content/metisMenu.min.css" rel="stylesheet" />--%>
+    <link href="/Content/metisMenu.min.css" rel="stylesheet" />
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="/Content/fontawesome.css" rel="stylesheet" />
     <meta name="theme-color" content="#D3D3D3" />
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
-    <%--    <script src="/Scripts/metisMenu.js"></script>--%>
+    <script src="/Scripts/metisMenu.js"></script>
     <script src="/Scripts/sb-admin-2.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -70,7 +70,35 @@
                                     <div class="nav" id="side-menu" style="background-color: #D3D3D3;">
                                         <div class="row">
                                             <div class="col-md-11">
-                                                <asp:ListView runat="server" ID="lvCurrentOrders" OnItemCommand="lvCurrentOrders_ItemCommand">
+                                                <asp:ListView runat="server" ID="lvCurrentOrders" OnPagePropertiesChanging="lvCurrentOrders_PagePropertiesChanging" ItemPlaceholderID="lvItemCurrentPlaceHolder" OnItemCommand="lvCurrentOrders_ItemCommand">
+                                                    <LayoutTemplate>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="row">
+                                                                    <div class="col-md-offset-3">
+                                                                        <asp:Label runat="server" ID="lblProdName" Font-Bold="true" Text="Pending Orders" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <asp:PlaceHolder runat="server" ID="lvItemCurrentPlaceHolder" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <asp:DataPager ID="lvCurrentOrdersPager" runat="server" PagedControlID="lvCurrentOrders" PageSize="10">
+                                                                    <Fields>
+                                                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn" FirstPageText="Prev" ShowFirstPageButton="false" ShowPreviousPageButton="true"
+                                                                            ShowNextPageButton="false" />
+                                                                        <asp:NumericPagerField ButtonType="Button"  />
+                                                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn" FirstPageText="Next"  ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" />
+                                                                    </Fields>
+                                                                </asp:DataPager>
+                                                            </div>
+                                                        </div>
+                                                    </LayoutTemplate>
                                                     <ItemTemplate>
                                                         <div class="row" style="background-color: #D3D3D3;">
                                                             <div class="col-md-12">
@@ -92,7 +120,10 @@
                                                                 </div>
                                                                 <div class="row pad">
                                                                     <div class="col-md-6">
-                                                                        <asp:Button CommandName="Complete" runat="server" ID="btnComplete"  value='<%# Eval("Order_ID") %>'  Text="Complete" CssClass="btn btn-success" />
+                                                                        <asp:Button CommandName="Complete" runat="server" ID="btnComplete" value='<%# Eval("Order_ID") %>' Text="Complete" CssClass="btn btn-success" />
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <asp:Button CommandName="Modify" runat="server" value='<%# Eval("Order_ID") %>' ID="btnModify" Text="Modify" CssClass="btn btn-primary" />
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -120,6 +151,9 @@
                                                                 <div class="row pad">
                                                                     <div class="col-md-6">
                                                                         <asp:Button CommandName="Complete" runat="server" value='<%# Eval("Order_ID") %>' ID="btnComplete" Text="Complete" CssClass="btn btn-success" />
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <asp:Button CommandName="Modify" runat="server" value='<%# Eval("Order_ID") %>' ID="btnModify" Text="Modify" CssClass="btn btn-primary" />
                                                                     </div>
                                                                 </div>
                                                             </div>

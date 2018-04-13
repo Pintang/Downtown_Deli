@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" id="submitSide" visible="false" runat="server">
                     <div class="row pad-top">
                         <div class="col-md-4">
                             <asp:Label runat="server" Font-Bold="true" Text="Add a Promo:" />
@@ -78,7 +78,29 @@
                     </div>
                     <div class="row pad-top" style="border: thin">
                         <div class="col-md-12" style="border: thin">
-                            <asp:ListView runat="server" ID="lvOrderItems" OnItemDataBound="lvOrderItems_ItemDataBound">
+                            <asp:ListView runat="server" ID="lvOrderItems" ItemPlaceholderID="lvItemPlaceHolder" OnItemDataBound="lvOrderItems_ItemDataBound">
+                                <LayoutTemplate>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row pad">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" ID="lblProdName" Font-Bold="true" Text='Product' />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" ID="lblPrice" Font-Bold="true" Text='Price' />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblQuantity" Font-Bold="true" Text='Quantity' />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
+                                        </div>
+                                    </div>
+                                </LayoutTemplate>
                                 <ItemTemplate>
                                     <div class="row" style="background-color: #D3D3D3;">
                                         <div class="col-md-12">
@@ -116,18 +138,22 @@
                             </asp:ListView>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <asp:Label runat="server" Text="Subtotal:" />
-                        </div>
-                        <div class="col-md-4">
-                            <asp:Label runat="server" ID="lblSubTotal" Text="" />
-                        </div>
-                        <div class="col-md-2">
-                            <asp:Label runat="server" Text="Total:" />
-                        </div>
-                        <div class="col-md-4">
-                            <asp:Label runat="server" ID="lblTotal" Text="" />
+                    <div class="row pad-top">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <asp:Label runat="server" Text="Subtotal:" />
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" ID="lblSubTotal" Text="" />
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:Label runat="server" Font-Bold="true" Text="Total:" />
+                                </div>
+                                <div class="col-md-4">
+                                    <asp:Label runat="server" Font-Bold="true" ID="lblTotal" Text="" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="row pad-top">
@@ -137,7 +163,21 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="SuccessModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Success!</h5>
+                </div>
+                <div class="modal-body">
+                    <p>The order has been proccessed and is in the pending state. To complete the order, click the complete button in the pending order section on the left.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </asp:Content>

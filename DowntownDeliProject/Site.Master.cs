@@ -141,6 +141,20 @@ namespace DowntownDeliProject
                 }
             }
         }
+
+        protected void lvCurrentOrders_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
+        {
+            using (DowntownDeliEntity dde = new DowntownDeliEntity())
+            {
+
+                ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
+                DataPager lvCurrentOrdersPager = lvCurrentOrders.FindControl("lvCurrentOrdersPager") as DataPager;
+                int CurrentPage = ((lvCurrentOrdersPager.StartRowIndex) / lvCurrentOrdersPager.MaximumRows) + 1;
+                lvCurrentOrdersPager.SetPageProperties(lvCurrentOrdersPager.StartRowIndex, lvCurrentOrdersPager.MaximumRows, false);
+                lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
+                lvCurrentOrders.DataBind();
+            }
+        }
     }
 
 }

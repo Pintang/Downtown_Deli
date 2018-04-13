@@ -133,6 +133,15 @@ namespace DowntownDeliProject.Pages
                         dde.SaveChanges();
                     }
                 }
+                submitSide.Visible = false;
+                ddlProducts.ClearSelection();
+                ddlPromos.ClearSelection();
+                tbQuantity.Text = "";
+                txtCustomer.Text = "";
+                lblCustomer.Text = "";
+                order = new Order();
+                valid = true;
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "OpenModal('SuccessModal')", true);
             }
         }
 
@@ -165,6 +174,7 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnAdd_Click(object sender, EventArgs e)
         {
+            bool valid = false;
             if (ddlProducts.SelectedItem.Value != "0")
             {
                 long prodID = long.Parse(ddlProducts.SelectedItem.Value);
@@ -225,6 +235,7 @@ namespace DowntownDeliProject.Pages
                                     lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
                                     lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                     lvOrderItems.DataBind();
+                                    valid = true;
                                 }
                                 else
                                 {
@@ -274,6 +285,7 @@ namespace DowntownDeliProject.Pages
                                 lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
                                 lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                 lvOrderItems.DataBind();
+                                valid = true;
                             }
                             else
                             {
@@ -292,7 +304,11 @@ namespace DowntownDeliProject.Pages
             {
                 lblError.Text = "Please select a product before trying to add to order.";
             }
-
+            if (valid)
+            {
+                submitSide.Visible = true;
+            }
+                
         }
     }
 }
