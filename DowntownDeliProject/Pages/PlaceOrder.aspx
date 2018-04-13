@@ -28,6 +28,11 @@
                     <div class="row pad-top col-md-offset-5">
                         <asp:Label runat="server" ID="lblCustomer" Font-Bold="true" Text="" />
                     </div>
+                    <div class="row pad-top col-md-offset-4">
+                        <div class="col-md-3">
+                            <asp:CheckBox ID="cbGuest" Text="Continue As Guest" runat="server" CssClass="checkbox-inline" />
+                        </div>
+                    </div>
                     <div class="row pad-top">
                         <div class="col-md-4">
                             <asp:Label runat="server" Font-Bold="true" Text="Product Search:" />
@@ -50,6 +55,11 @@
                             <asp:TextBox ID="tbQuantity" runat="server" CssClass="form-control" Width="100%" />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <asp:Label ID="lblError" ForeColor="Red" runat="server" />
+                        </div>
+                    </div>
                     <div class="row pad-top">
                         <div class="col-md-4">
                             <asp:Button runat="server" CssClass="btn btn-primary" OnClick="btnAdd_Click" Text="Add To Order" ID="btnAdd" />
@@ -62,7 +72,7 @@
                             <asp:Label runat="server" Font-Bold="true" Text="Add a Promo:" />
                         </div>
                         <div class="col-md-8">
-                            <asp:DropDownList runat="server" ToolTip="Select a Promo From the list" DataTextField="Discount_Type" CssClass="form-control" Width="100%" DataValueField="Promo_ID" ID="ddlPromos">
+                            <asp:DropDownList runat="server" ToolTip="Select a Promo From the list" DataTextField="Promo_Description" CssClass="form-control" Width="100%" DataValueField="Promo_ID" ID="ddlPromos">
                             </asp:DropDownList>
                         </div>
                     </div>

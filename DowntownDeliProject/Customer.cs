@@ -27,6 +27,8 @@ namespace DowntownDeliProject
         public int TotalPoints { get; set; }
         public string Zip { get; set; }
         public string Phone { get; set; }
+        public string Cust_Password { get; set; }
+        public string Reward_CardID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

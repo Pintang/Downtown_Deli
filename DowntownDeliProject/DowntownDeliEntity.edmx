@@ -16,6 +16,8 @@
           <Property Name="TotalPoints" Type="int" Nullable="false" />
           <Property Name="Zip" Type="varchar" MaxLength="15" />
           <Property Name="Phone" Type="varchar" MaxLength="15" />
+          <Property Name="Cust_Password" Type="varchar" MaxLength="200" />
+          <Property Name="Reward_CardID" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Employees">
           <Key>
@@ -118,6 +120,7 @@
           <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Begin_Date" Type="date" />
           <Property Name="End_Date" Type="date" />
+          <Property Name="Promo_Description" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -409,6 +412,8 @@
           <Property Name="Zip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Orders" Relationship="DowntownDeli.fk_Customer_ID" FromRole="Customer" ToRole="Order" />
+          <Property Name="Cust_Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Reward_CardID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Employee">
           <Key>
@@ -530,6 +535,7 @@
           <Property Name="Begin_Date" Type="DateTime" Precision="0" />
           <Property Name="End_Date" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Orders" Relationship="DowntownDeli.fk_Promo_ID" FromRole="Promotion" ToRole="Order" />
+          <Property Name="Promo_Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Schedule">
           <Key>
@@ -698,6 +704,8 @@
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="DowntownDeli.Customer">
               <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="Reward_CardID" ColumnName="Reward_CardID" />
+                <ScalarProperty Name="Cust_Password" ColumnName="Cust_Password" />
                 <ScalarProperty Name="Phone" ColumnName="Phone" />
                 <ScalarProperty Name="Zip" ColumnName="Zip" />
                 <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
@@ -812,6 +820,7 @@
           <EntitySetMapping Name="Promotions">
             <EntityTypeMapping TypeName="DowntownDeli.Promotion">
               <MappingFragment StoreEntitySet="Promotions">
+                <ScalarProperty Name="Promo_Description" ColumnName="Promo_Description" />
                 <ScalarProperty Name="End_Date" ColumnName="End_Date" />
                 <ScalarProperty Name="Begin_Date" ColumnName="Begin_Date" />
                 <ScalarProperty Name="Discount" ColumnName="Discount" />

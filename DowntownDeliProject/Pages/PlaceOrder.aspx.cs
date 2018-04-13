@@ -49,6 +49,7 @@ namespace DowntownDeliProject.Pages
 
         protected void txtCustomer_TextChanged(object sender, EventArgs e)
         {
+
             if (txtCustomer.Text != "")
             {
                 long id = long.Parse(txtCustomer.Text.ToString().Trim());
@@ -56,7 +57,8 @@ namespace DowntownDeliProject.Pages
                 if (cust != null)
                 {
                     lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
-                }else
+                }
+                else
                 {
                     lblCustomer.Text = "Customer not Found. Try again.";
                 }
@@ -64,10 +66,74 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnSubmitOrder_Click(object sender, EventArgs e)
         {
-            order.Ord_Date = DateTime.Now;
-            order.Price = (order.Price + (order.Price * 0.0675M));
-            dde.Orders.Add(order);
-            dde.SaveChanges();
+            bool valid = false;
+            if (ddlPromos.SelectedItem.Value != "0")
+            {
+                long PromoID = long.Parse(ddlPromos.SelectedItem.Value);
+                Promotion promo = dde.Promotions.Find(PromoID);
+                if (promo != null)
+                {
+
+                    if (promo.Discount_Type == "Percent Off")
+                    {
+                        if (promo.Discount != null)
+                        {
+                            order.Ord_Date = DateTime.Now;
+                            order.Price = ((order.Price + (order.Price * ((Decimal)promo.Discount / 100))) + (order.Price * 0.0675M));
+                            dde.Orders.Add(order);
+                            dde.SaveChanges();
+                            valid = true;
+                        }
+                    }
+                    else if (promo.Discount_Type == "Cash Off")
+                    {
+                        if (promo.Discount != null)
+                        {
+                            order.Ord_Date = DateTime.Now;
+                            order.Price = ((order.Price + (Decimal)promo.Discount) + (order.Price * 0.0675M));
+                            dde.Orders.Add(order);
+                            dde.SaveChanges();
+                            valid = true;
+
+                        }
+                    }
+                    else
+                    {
+                        Product_Order cheapestProd = order.Product_Order.Where(t => t.Product.Price > 0).OrderBy(t => t.Product.Price).FirstOrDefault();
+                        if (cheapestProd != null)
+                        {
+                            order.Ord_Date = DateTime.Now;
+                            order.Price = ((order.Price - cheapestProd.Product.Price) + (order.Price * 0.0675M));
+                            dde.Orders.Add(order);
+                            dde.SaveChanges();
+                            valid = true;
+
+                        }
+                    }
+                }
+            }
+            else
+            {
+                order.Ord_Date = DateTime.Now;
+                order.Price = (order.Price + (order.Price * 0.0675M));
+                dde.Orders.Add(order);
+                dde.SaveChanges();
+                valid = true;
+
+            }
+            if (valid)
+            {
+                foreach (Product_Order prodOrder in order.Product_Order)
+                {
+                    Product prods = dde.Products.Find(prodOrder.Product_ID);
+                    foreach (Product_Inventory prodInv in prods.Product_Inventory)
+                    {
+                        Inventory inv = dde.Inventories.Find(prodInv.Item_ID);
+                        inv.Quantity -= 1;
+                        dde.SaveChanges();
+                    }
+                }
+            }
         }
 
         protected void lvOrderItems_ItemDataBound(object sender, ListViewItemEventArgs e)
@@ -97,38 +163,135 @@ namespace DowntownDeliProject.Pages
                 lblQuantity.Text = quantity.ToString();
             }
         }
-
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            long prodID = long.Parse(ddlProducts.SelectedItem.Value);
-            Product prod = dde.Products.Find(prodID);
-            long id = long.Parse(txtCustomer.Text.ToString().Trim());
-            Customer cust = dde.Customers.Find(id);
-            order.Customer_ID = id;
-            int quantity = int.Parse(tbQuantity.Text);
-            bool combo = cbCombo.Checked;
-            bool dinein = cbDineIn.Checked;
-            bool carryout = cbCarryOut.Checked;
-            int count = quantity;
-            while (count != 0)
+            if (ddlProducts.SelectedItem.Value != "0")
             {
-                Product_Order pOrder = new Product_Order();
-                pOrder.Product_ID = prod.Product_ID;
-                order.Product_Order.Add(pOrder);
-                count--;
+                long prodID = long.Parse(ddlProducts.SelectedItem.Value);
+                Product prod = dde.Products.Find(prodID);
+                bool Invent = true;
+                foreach (Product_Inventory inv in prod.Product_Inventory)
+                {
+                    Inventory i = dde.Inventories.Find(inv.Item_ID);
+                    if (i.Quantity == 0)
+                    {
+                        Invent = false;
+                    }
+                }
+                if (Invent)
+                {
+                    if (!cbGuest.Checked)
+                    {
+                        Customer cust = new Customer();
+                        if (txtCustomer.Text.ToString().Trim() != "")
+                        {
+                            long id = long.Parse(txtCustomer.Text.ToString().Trim());
+                            cust = dde.Customers.Find(id);
+                            if (cust == null)
+                            {
+                                cust = dde.Customers.Where(t => t.Phone == id.ToString()).FirstOrDefault();
+                                if (cust == null)
+                                {
+                                    cust = dde.Customers.Where(t => t.Reward_CardID == id.ToString()).FirstOrDefault();
+                                }
+                            }
+                            order.Customer_ID = id;
+                            if (tbQuantity.Text != "")
+                            {
+                                lblError.Text = "";
+                                int quantity = int.Parse(tbQuantity.Text);
+                                if (quantity > 0)
+                                {
+                                    bool combo = cbCombo.Checked;
+                                    bool dinein = cbDineIn.Checked;
+                                    bool carryout = cbCarryOut.Checked;
+                                    int count = quantity;
+                                    while (count != 0)
+                                    {
+                                        Product_Order pOrder = new Product_Order();
+                                        pOrder.Product_ID = prod.Product_ID;
+                                        order.Product_Order.Add(pOrder);
+                                        count--;
+                                    }
+                                    if (combo)
+                                    {
+                                        Product fry = dde.Products.Find(45);
+                                        Product drink = dde.Products.Find(47);
+                                        decimal ComboPrice = fry.Price + drink.Price;
+                                        order.Price += ComboPrice;
+                                    }
+                                    order.Price += prod.Price * quantity;
+                                    lblSubTotal.Text = "$" + order.Price;
+                                    lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                                    lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
+                                    lvOrderItems.DataBind();
+                                }
+                                else
+                                {
+                                    lblError.Text = "Quantity must be greater than 0.";
+
+                                }
+                            }
+                            else
+                            {
+                                lblError.Text = "Please select a quantity before trying to add to order.";
+                            }
+                        }
+                        else
+                        {
+                            lblError.Text = "You must enter a customer or select guest.";
+                        }
+
+                    }
+                    else
+                    {
+                        if (tbQuantity.Text != "")
+                        {
+                            lblError.Text = "";
+                            int quantity = int.Parse(tbQuantity.Text);
+                            if (quantity > 0)
+                            {
+                                bool combo = cbCombo.Checked;
+                                bool dinein = cbDineIn.Checked;
+                                bool carryout = cbCarryOut.Checked;
+                                int count = quantity;
+                                while (count != 0)
+                                {
+                                    Product_Order pOrder = new Product_Order();
+                                    pOrder.Product_ID = prod.Product_ID;
+                                    order.Product_Order.Add(pOrder);
+                                    count--;
+                                }
+                                if (combo)
+                                {
+                                    Product fry = dde.Products.Find(45);
+                                    Product drink = dde.Products.Find(47);
+                                    decimal ComboPrice = fry.Price + drink.Price;
+                                    order.Price += ComboPrice;
+                                }
+                                order.Price += prod.Price * quantity;
+                                lblSubTotal.Text = "$" + order.Price;
+                                lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                                lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
+                                lvOrderItems.DataBind();
+                            }
+                            else
+                            {
+                                lblError.Text = "Quantity must be greater than 0.";
+
+                            }
+                        }
+                        else
+                        {
+                            lblError.Text = "Please select a quantity before trying to add to order.";
+                        }
+                    }
+                }
             }
-            if (combo)
+            else
             {
-                Product fry = dde.Products.Find(45);
-                Product drink = dde.Products.Find(47);
-                decimal ComboPrice = fry.Price + drink.Price;
-                order.Price += ComboPrice;
+                lblError.Text = "Please select a product before trying to add to order.";
             }
-            order.Price += prod.Price * quantity;
-            lblSubTotal.Text = "$" + order.Price;
-            lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
-            lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
-            lvOrderItems.DataBind();
 
         }
     }

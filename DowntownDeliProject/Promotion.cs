@@ -25,6 +25,7 @@ namespace DowntownDeliProject
         public Nullable<decimal> Discount { get; set; }
         public Nullable<System.DateTime> Begin_Date { get; set; }
         public Nullable<System.DateTime> End_Date { get; set; }
+        public string Promo_Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }

@@ -79,7 +79,7 @@
                                                                         <asp:Label runat="server" ID="lblOrderID" Text='<%# Eval("Order_ID") %>' />
                                                                     </div>
                                                                     <div class="col-md-8">
-                                                                        <asp:Label runat="server" ID="lblCustomer" Text='<%# Eval("Customer.F_Name") + " " +  Eval("Customer.L_Name") %>' />
+                                                                        <asp:Label runat="server" ID="lblCustomer" Text='<%# Eval("Customer.F_Name") != null ? Eval("Customer.F_Name") + " " +  Eval("Customer.L_Name") : "Guest" %>' />
                                                                     </div>
                                                                 </div>
                                                                 <div class="row pad">
