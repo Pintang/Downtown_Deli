@@ -85,6 +85,7 @@ namespace DowntownDeliProject
                     ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
                     lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
                     lvCurrentOrders.DataBind();
+                    ModifyOrder = false;
                 }
             }
             else

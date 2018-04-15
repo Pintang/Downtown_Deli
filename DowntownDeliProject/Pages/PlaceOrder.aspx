@@ -43,11 +43,6 @@
                         </div>
                     </div>
                     <div class="row pad-top">
-                        <div class="col-md-12 col-md-offset-4">
-                            <asp:CheckBox ID="cbCombo" Text="Make it a Combo?" runat="server" CssClass="checkbox-inline" />
-                        </div>
-                    </div>
-                    <div class="row pad-top">
                         <div class="col-md-4">
                             <asp:Label runat="server" Font-Bold="true" Text="Quantity:" />
                         </div>

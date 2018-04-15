@@ -60,8 +60,8 @@ namespace DowntownDeliProject.Pages
                         {
                             lblCustomer.Text = "Customer not Found. Try again.";
                         }
-                        lblSubTotal.Text = "$" + order.Price;
-                        lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                        lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
+                        lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
                         lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                         lvOrderItems.DataBind();
                         submitSide.Visible = true;
@@ -255,7 +255,6 @@ namespace DowntownDeliProject.Pages
                                 int quantity = int.Parse(tbQuantity.Text);
                                 if (quantity > 0)
                                 {
-                                    bool combo = cbCombo.Checked;
                                     bool dinein = cbDineIn.Checked;
                                     bool carryout = cbCarryOut.Checked;
                                     int count = quantity;
@@ -264,31 +263,11 @@ namespace DowntownDeliProject.Pages
                                         Product_Order pOrder = new Product_Order();
                                         pOrder.Product_ID = prod.Product_ID;
                                         order.Product_Order.Add(pOrder);
-                                        if (combo)
-                                        {
-                                            Product fry = dde.Products.Find(45);
-                                            Product_Order pOrdefryr = new Product_Order();
-                                            Product drink = dde.Products.Find(47);
-                                            Product_Order pOrderdrink = new Product_Order();
-                                            order.Product_Order.Add(pOrdefryr);
-                                            order.Product_Order.Add(pOrderdrink);
-                                        }
                                         count--;
                                     }
-                                    if (combo)
-                                    {
-                                        Product fry = dde.Products.Find(45);
-                                        Product_Order pOrdefryr = new Product_Order();
-                                        Product drink = dde.Products.Find(47);
-                                        Product_Order pOrderdrink = new Product_Order();
-                                        order.Product_Order.Add(pOrdefryr);
-                                        order.Product_Order.Add(pOrderdrink);
-                                        decimal ComboPrice = fry.Price + drink.Price;
-                                        order.Price += ComboPrice;
-                                    }
                                     order.Price += prod.Price * quantity;
-                                    lblSubTotal.Text = "$" + order.Price;
-                                    lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                                    lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
+                                    lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
                                     lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                     lvOrderItems.DataBind();
                                     valid = true;
@@ -318,7 +297,6 @@ namespace DowntownDeliProject.Pages
                             int quantity = int.Parse(tbQuantity.Text);
                             if (quantity > 0)
                             {
-                                bool combo = cbCombo.Checked;
                                 bool dinein = cbDineIn.Checked;
                                 bool carryout = cbCarryOut.Checked;
                                 int count = quantity;
@@ -327,31 +305,11 @@ namespace DowntownDeliProject.Pages
                                     Product_Order pOrder = new Product_Order();
                                     pOrder.Product_ID = prod.Product_ID;
                                     order.Product_Order.Add(pOrder);
-                                    if (combo)
-                                    {
-                                        Product fry = dde.Products.Find(45);
-                                        Product_Order pOrdefryr = new Product_Order();
-                                        Product drink = dde.Products.Find(47);
-                                        Product_Order pOrderdrink = new Product_Order();
-                                        order.Product_Order.Add(pOrdefryr);
-                                        order.Product_Order.Add(pOrderdrink);
-                                    }
                                     count--;
                                 }
-                                if (combo)
-                                {
-                                    Product fry = dde.Products.Find(45);
-                                    Product_Order pOrdefryr = new Product_Order();
-                                    Product drink = dde.Products.Find(47);
-                                    Product_Order pOrderdrink = new Product_Order();
-                                    order.Product_Order.Add(pOrdefryr);
-                                    order.Product_Order.Add(pOrderdrink);
-                                    decimal ComboPrice = fry.Price + drink.Price;
-                                    order.Price += ComboPrice;
-                                }
                                 order.Price += prod.Price * quantity;
-                                lblSubTotal.Text = "$" + order.Price;
-                                lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                                lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
+                                lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
                                 lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                 lvOrderItems.DataBind();
                                 valid = true;
@@ -394,6 +352,14 @@ namespace DowntownDeliProject.Pages
                     {
                         order.Product_Order.Remove(ord);
                     }
+                    order.Price = 0;
+                    foreach (Product_Order ord in order.Product_Order)
+                    {
+                        Product prod2 = dde.Products.Find(ord.Product_ID);
+                        order.Price += prod2.Price;
+                    }
+                    lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
+                    lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
                     lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                     lvOrderItems.DataBind();
                     break;
