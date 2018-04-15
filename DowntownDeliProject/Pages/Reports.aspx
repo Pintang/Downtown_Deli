@@ -26,8 +26,6 @@
                                <asp:ListItem Text="Sales"></asp:ListItem>
                             </asp:DropDownList>
                             <asp:Button runat="server" CssClass="btn btn-primary" Text="Generate Report" ID="btnGenRpt" />
-
-
                         </div>
                      </div>
                     </div>

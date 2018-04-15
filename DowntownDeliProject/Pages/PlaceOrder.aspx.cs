@@ -20,6 +20,11 @@ namespace DowntownDeliProject.Pages
             get { return (Order)Session["order"]; }
             set { Session["order"] = value; }
         }
+        protected bool ModifyOrder
+        {
+            get { return (bool)Session["ModifyOrder"]; }
+            set { Session["ModifyOrder"] = value; }
+        }
         protected DowntownDeliEntity dde = new DowntownDeliEntity();
 
         protected void Page_Load(object sender, EventArgs e)
@@ -32,7 +37,6 @@ namespace DowntownDeliProject.Pages
             }
             if (!Page.IsPostBack)
             {
-                order = new Order();
                 List<Product> prod = dde.Products.OrderBy(t => t.Product_Name).ToList();
                 Product initialItem = new Product();
                 prod.Insert(0, initialItem);
@@ -43,6 +47,26 @@ namespace DowntownDeliProject.Pages
                 promos.Insert(0, initialPromo);
                 ddlPromos.DataSource = promos;
                 ddlPromos.DataBind();
+                if (order != null)
+                {
+                    Customer cust = dde.Customers.Find(order.Customer_ID);
+                    if (cust != null)
+                    {
+                        lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
+                    }
+                    else
+                    {
+                        lblCustomer.Text = "Customer not Found. Try again.";
+                    }
+                    lblSubTotal.Text = "$" + order.Price;
+                    lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                    lvOrderItems.DataSource = dde.Product_Order.Where(t => t.Order_ID == order.Order_ID).GroupBy(t => t.Product_ID).ToList();
+                    lvOrderItems.DataBind();
+                }
+                else
+                {
+                    order = new Order();
+                }
 
             }
         }

@@ -16,6 +16,11 @@ namespace DowntownDeliProject
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+        protected Order order
+        {
+            get { return (Order)Session["order"]; }
+            set { Session["order"] = value; }
+        }
 
         protected void Page_Init(object sender, EventArgs e)
         {
@@ -137,6 +142,14 @@ namespace DowntownDeliProject
                         ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
                         lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
                         lvCurrentOrders.DataBind();
+                        break;
+                    case "Modify":
+                        ListViewDataItem item2 = (ListViewDataItem)e.Item;
+                        Label lblOrderID2 = (Label)item2.FindControl("lblOrderID");
+                        int id2 = int.Parse(lblOrderID2.Text);
+                        Order RealOrder2 = dde.Orders.Find(id2);
+                        order = RealOrder2;
+                        Response.Redirect("~/Pages/PlaceOrder.aspx", false);
                         break;
                 }
             }

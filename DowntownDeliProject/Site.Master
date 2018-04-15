@@ -88,12 +88,12 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-md-12">
-                                                                <asp:DataPager ID="lvCurrentOrdersPager" runat="server" PagedControlID="lvCurrentOrders" PageSize="10">
+                                                                <asp:DataPager ID="lvCurrentOrdersPager" runat="server" PagedControlID="lvCurrentOrders" PageSize="7">
                                                                     <Fields>
                                                                         <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn" FirstPageText="Prev" ShowFirstPageButton="false" ShowPreviousPageButton="true"
                                                                             ShowNextPageButton="false" />
-                                                                        <asp:NumericPagerField ButtonType="Button"  />
-                                                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn" FirstPageText="Next"  ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" />
+                                                                        <asp:NumericPagerField ButtonType="Button" />
+                                                                        <asp:NextPreviousPagerField ButtonType="Button" ButtonCssClass="btn" FirstPageText="Next" ShowNextPageButton="true" ShowLastPageButton="false" ShowPreviousPageButton="false" />
                                                                     </Fields>
                                                                 </asp:DataPager>
                                                             </div>
@@ -188,9 +188,7 @@
                 <div class="panel-footer text-center" style="background-color: #D3D3D3;">
                     &copy; <%: DateTime.Now.Year %> - Downtown Deli
                 </div>
-
             </div>
-
         </div>
     </form>
 </body>
