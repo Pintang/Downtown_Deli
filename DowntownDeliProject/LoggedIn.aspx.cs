@@ -29,6 +29,8 @@ namespace DowntownDeliProject
             {
                 rewardCard.Text = "<div class='alert alert-info' role='alert'>You have a reward card linked to your account.  If you would like to update to a new card, click <a href='UpdateReward.aspx'>here</a>.</div>";
             }
+
+            rewardBalance.Text = "<h3>You have <b>" + customer.TotalPoints + "</b> reward points collected!</h3>";
         }
     }
 }
