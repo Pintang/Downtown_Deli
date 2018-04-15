@@ -30,10 +30,16 @@ namespace DowntownDeliProject.Pages
 
         protected void ddlProducts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlProducts.SelectedItem.Text == "Sales") {
-                DivDatePicker.Visible = true;
+            if (ddlProducts.SelectedItem.Text == "Sales" || ddlProducts.SelectedItem.Text == "Timekeeping") {
+                DivDatePicker1.Visible = true;
             }
-         
+            else DivDatePicker1.Visible = false;
+
+            if (ddlProducts.SelectedItem.Text == "Sales" || ddlProducts.SelectedItem.Text == "Timekeeping")
+            {
+                DivDatePicker2.Visible = true;
+            }
+            else DivDatePicker2.Visible = false;
         }
     }
 }

@@ -33,18 +33,43 @@
         <div class="col-md-12">
             <asp:ListView runat="server" ID="lvDisplayTimeSheet">
                 <ItemTemplate>
+
                     <div class="row" style="background-color: #D3D3D3;">
                         <div class="col-md-12">
                             <div class="row pad">
+                                <LayoutTemplate>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row pad">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" ID="Label1" Font-Bold="true" Text='Date' />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" ID="lblPrice" Font-Bold="true" Text='Clock In' />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <asp:Label runat="server" ID="lblQuantity" Font-Bold="true" Text='Clock Out' />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
+                                        </div>
+                                    </div>
+                                </LayoutTemplate>
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                    <asp:Label runat="server"  ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
                                 </div>
+                               
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("Clock_In") %>' />
+                                    <asp:Label runat="server" ID="ClockIn" Text='<%# Eval("Clock_In") %>' />
                                 </div>
                                 <div class="col-md-2">
-                                    <asp:Label runat="server" ID="lblQuantity" Text='<%# Eval("Clock_Out") %>' />
+                                    <asp:Label runat="server" ID="ClockOut" Text='<%# Eval("Clock_Out") %>' />
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -52,15 +77,16 @@
                 <AlternatingItemTemplate>
                     <div class="row" style="background-color: white;">
                         <div class="col-md-12">
+                            <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
                             <div class="row pad">
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
+                                    <asp:Label runat="server" ID="WorkDate" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
                                 </div>
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="lblPrice" Text='<%# Eval("Clock_In") %>' />
+                                    <asp:Label runat="server" ID="ClockIn" Text='<%# Eval("Clock_In") %>' />
                                 </div>
                                 <div class="col-md-2">
-                                    <asp:Label runat="server" ID="lblQuantity" Text='<%# Eval("Clock_Out") %>' />
+                                    <asp:Label runat="server" ID="ClockOut" Text='<%# Eval("Clock_Out") %>' />
                                 </div>
                             </div>
                         </div>
