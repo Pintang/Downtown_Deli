@@ -78,7 +78,7 @@
                     </div>
                     <div class="row pad-top" style="border: thin">
                         <div class="col-md-12" style="border: thin">
-                            <asp:ListView runat="server" ID="lvOrderItems" ItemPlaceholderID="lvItemPlaceHolder" OnItemDataBound="lvOrderItems_ItemDataBound">
+                            <asp:ListView runat="server" ID="lvOrderItems" ItemPlaceholderID="lvItemPlaceHolder" OnItemCommand="lvOrderItems_ItemCommand" OnItemDataBound="lvOrderItems_ItemDataBound">
                                 <LayoutTemplate>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -105,14 +105,18 @@
                                     <div class="row" style="background-color: #D3D3D3;">
                                         <div class="col-md-12">
                                             <div class="row pad">
+                                                <asp:Label runat="server" ID="lblProductID" Visible="false" />
                                                 <div class="col-md-4">
                                                     <asp:Label runat="server" ID="lblProdName" Text='' />
                                                 </div>
                                                 <div class="col-md-4">
                                                     <asp:Label runat="server" ID="lblPrice" Text='' />
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-1">
                                                     <asp:Label runat="server" ID="lblQuantity" Text='' />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,14 +126,18 @@
                                     <div class="row" style="background-color: white;">
                                         <div class="col-md-12">
                                             <div class="row pad">
+                                                <asp:Label runat="server" ID="lblProductID" Visible="false" />
                                                 <div class="col-md-4">
                                                     <asp:Label runat="server" ID="lblProdName" Text='' />
                                                 </div>
                                                 <div class="col-md-4">
                                                     <asp:Label runat="server" ID="lblPrice" Text='' />
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-1">
                                                     <asp:Label runat="server" ID="lblQuantity" Text='' />
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
                                                 </div>
                                             </div>
                                         </div>

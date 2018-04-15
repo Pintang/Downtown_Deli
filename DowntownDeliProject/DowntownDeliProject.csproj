@@ -222,6 +222,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="LoggedIn.aspx" />
     <Content Include="Pages\Admin.aspx" />
+    <Content Include="Pages\InventoryManagement.aspx" />
     <Content Include="Pages\PlaceOrder.aspx" />
     <Content Include="Pages\Reports.aspx" />
     <Content Include="Pages\TimeKeeping.aspx" />
@@ -357,6 +358,13 @@
     </Compile>
     <Compile Include="Pages\Admin.aspx.designer.cs">
       <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\InventoryManagement.aspx.cs">
+      <DependentUpon>InventoryManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\InventoryManagement.aspx.designer.cs">
+      <DependentUpon>InventoryManagement.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\PlaceOrder.aspx.cs">
       <DependentUpon>PlaceOrder.aspx</DependentUpon>

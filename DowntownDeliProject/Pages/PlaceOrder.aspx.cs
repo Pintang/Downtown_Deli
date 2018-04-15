@@ -49,19 +49,23 @@ namespace DowntownDeliProject.Pages
                 ddlPromos.DataBind();
                 if (order != null)
                 {
-                    Customer cust = dde.Customers.Find(order.Customer_ID);
-                    if (cust != null)
+                    if (ModifyOrder)
                     {
-                        lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
+                        Customer cust = dde.Customers.Find(order.Customer_ID);
+                        if (cust != null)
+                        {
+                            lblCustomer.Text = "ID: " + cust.Customer_ID + " Name: " + cust.F_Name + " " + cust.L_Name;
+                        }
+                        else
+                        {
+                            lblCustomer.Text = "Customer not Found. Try again.";
+                        }
+                        lblSubTotal.Text = "$" + order.Price;
+                        lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
+                        lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
+                        lvOrderItems.DataBind();
+                        submitSide.Visible = true;
                     }
-                    else
-                    {
-                        lblCustomer.Text = "Customer not Found. Try again.";
-                    }
-                    lblSubTotal.Text = "$" + order.Price;
-                    lblTotal.Text = "$" + (order.Price + (order.Price * 0.0675M)).ToString();
-                    lvOrderItems.DataSource = dde.Product_Order.Where(t => t.Order_ID == order.Order_ID).GroupBy(t => t.Product_ID).ToList();
-                    lvOrderItems.DataBind();
                 }
                 else
                 {
@@ -104,7 +108,10 @@ namespace DowntownDeliProject.Pages
                         {
                             order.Ord_Date = DateTime.Now;
                             order.Price = ((order.Price + (order.Price * ((Decimal)promo.Discount / 100))) + (order.Price * 0.0675M));
-                            dde.Orders.Add(order);
+                            if (!ModifyOrder)
+                            {
+                                dde.Orders.Add(order);
+                            }
                             dde.SaveChanges();
                             valid = true;
                         }
@@ -115,7 +122,10 @@ namespace DowntownDeliProject.Pages
                         {
                             order.Ord_Date = DateTime.Now;
                             order.Price = ((order.Price + (Decimal)promo.Discount) + (order.Price * 0.0675M));
-                            dde.Orders.Add(order);
+                            if (!ModifyOrder)
+                            {
+                                dde.Orders.Add(order);
+                            }
                             dde.SaveChanges();
                             valid = true;
 
@@ -128,7 +138,10 @@ namespace DowntownDeliProject.Pages
                         {
                             order.Ord_Date = DateTime.Now;
                             order.Price = ((order.Price - cheapestProd.Product.Price) + (order.Price * 0.0675M));
-                            dde.Orders.Add(order);
+                            if (!ModifyOrder)
+                            {
+                                dde.Orders.Add(order);
+                            }
                             dde.SaveChanges();
                             valid = true;
 
@@ -140,7 +153,10 @@ namespace DowntownDeliProject.Pages
             {
                 order.Ord_Date = DateTime.Now;
                 order.Price = (order.Price + (order.Price * 0.0675M));
-                dde.Orders.Add(order);
+                if (!ModifyOrder)
+                {
+                    dde.Orders.Add(order);
+                }
                 dde.SaveChanges();
                 valid = true;
 
@@ -194,6 +210,9 @@ namespace DowntownDeliProject.Pages
                 lblPrice.Text = "$" + prod.Price.ToString();
                 Label lblQuantity = e.Item.FindControl("lblQuantity") as Label;
                 lblQuantity.Text = quantity.ToString();
+                Label lblProductID = (Label)e.Item.FindControl("lblProductID");
+                lblProductID.Text = prod.Product_ID.ToString();
+
             }
         }
         protected void btnAdd_Click(object sender, EventArgs e)
@@ -245,12 +264,25 @@ namespace DowntownDeliProject.Pages
                                         Product_Order pOrder = new Product_Order();
                                         pOrder.Product_ID = prod.Product_ID;
                                         order.Product_Order.Add(pOrder);
+                                        if (combo)
+                                        {
+                                            Product fry = dde.Products.Find(45);
+                                            Product_Order pOrdefryr = new Product_Order();
+                                            Product drink = dde.Products.Find(47);
+                                            Product_Order pOrderdrink = new Product_Order();
+                                            order.Product_Order.Add(pOrdefryr);
+                                            order.Product_Order.Add(pOrderdrink);
+                                        }
                                         count--;
                                     }
                                     if (combo)
                                     {
                                         Product fry = dde.Products.Find(45);
+                                        Product_Order pOrdefryr = new Product_Order();
                                         Product drink = dde.Products.Find(47);
+                                        Product_Order pOrderdrink = new Product_Order();
+                                        order.Product_Order.Add(pOrdefryr);
+                                        order.Product_Order.Add(pOrderdrink);
                                         decimal ComboPrice = fry.Price + drink.Price;
                                         order.Price += ComboPrice;
                                     }
@@ -295,12 +327,25 @@ namespace DowntownDeliProject.Pages
                                     Product_Order pOrder = new Product_Order();
                                     pOrder.Product_ID = prod.Product_ID;
                                     order.Product_Order.Add(pOrder);
+                                    if (combo)
+                                    {
+                                        Product fry = dde.Products.Find(45);
+                                        Product_Order pOrdefryr = new Product_Order();
+                                        Product drink = dde.Products.Find(47);
+                                        Product_Order pOrderdrink = new Product_Order();
+                                        order.Product_Order.Add(pOrdefryr);
+                                        order.Product_Order.Add(pOrderdrink);
+                                    }
                                     count--;
                                 }
                                 if (combo)
                                 {
                                     Product fry = dde.Products.Find(45);
+                                    Product_Order pOrdefryr = new Product_Order();
                                     Product drink = dde.Products.Find(47);
+                                    Product_Order pOrderdrink = new Product_Order();
+                                    order.Product_Order.Add(pOrdefryr);
+                                    order.Product_Order.Add(pOrderdrink);
                                     decimal ComboPrice = fry.Price + drink.Price;
                                     order.Price += ComboPrice;
                                 }
@@ -332,7 +377,27 @@ namespace DowntownDeliProject.Pages
             {
                 submitSide.Visible = true;
             }
-                
+
+        }
+
+        protected void lvOrderItems_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "DeleteCommand":
+                    ListViewDataItem item = (ListViewDataItem)e.Item;
+                    Label lblProductID = (Label)item.FindControl("lblProductID");
+                    int id = int.Parse(lblProductID.Text);
+                    Product prod = dde.Products.Find(id);
+                    List<Product_Order> prodOrders = order.Product_Order.Where(t => t.Order_ID == order.Order_ID && t.Product_ID == prod.Product_ID).ToList();
+                    foreach (Product_Order ord in prodOrders)
+                    {
+                        order.Product_Order.Remove(ord);
+                    }
+                    lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
+                    lvOrderItems.DataBind();
+                    break;
+            }
         }
     }
 }
