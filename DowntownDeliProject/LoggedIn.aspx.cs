@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace DowntownDeliProject
 {
@@ -17,7 +18,17 @@ namespace DowntownDeliProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (customer == null) Response.Redirect("default.aspx");
+
             Name.Text = customer.F_Name + " " + customer.L_Name;
+            if (customer.Reward_CardID == null)
+            {
+                rewardCard.Text = "<div class='alert alert-danger' role='alert'>You do not have a reward card linked to your account!  Click <a href='UpdateReward.aspx'>here</a> to add one!</div>";
+            }
+            else
+            {
+                rewardCard.Text = "<div class='alert alert-info' role='alert'>You have a reward card linked to your account.  If you would like to update to a new card, click <a href='UpdateReward.aspx'>here</a>.</div>";
+            }
         }
     }
 }

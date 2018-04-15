@@ -20,7 +20,7 @@
           <div class="row">
             <div class="col-sm-3" style="background-color:burlywood; padding-top: 10px; padding-bottom: 10px; height: 500px">
                 <h3>Welcome, <asp:Literal ID="Name" runat="server"></asp:Literal></h3>
-
+                <asp:Literal ID="rewardCard" runat="server"></asp:Literal>
             </div>
             <div class="col-sm-7">
             </div>
