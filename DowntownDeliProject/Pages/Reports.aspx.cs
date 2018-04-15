@@ -27,5 +27,13 @@ namespace DowntownDeliProject.Pages
                 }
             }
         }
+
+        protected void ddlProducts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlProducts.SelectedItem.Text == "Sales") {
+                DatePicker.Visible = true;
+            }
+         
+        }
     }
 }
