@@ -17,7 +17,6 @@
                         </div>
                     </div>
                     <div class="row pad-top">
-
                         <div class="col-md-8">
                             <asp:DropDownList OnSelectedIndexChanged="ddlProducts_SelectedIndexChanged" runat="server" AutoPostBack="true" ToolTip="Select a Report From the list" CssClass="form-control" Width="100%" ID="ddlProducts">
                                 <asp:ListItem Text=""></asp:ListItem>

@@ -21,7 +21,11 @@ namespace DowntownDeliProject
             get { return (Order)Session["order"]; }
             set { Session["order"] = value; }
         }
-
+        protected bool ModifyOrder
+        {
+            get { return (bool)Session["ModifyOrder"]; }
+            set { Session["ModifyOrder"] = value; }
+        }
         protected void Page_Init(object sender, EventArgs e)
         {
             // The code below helps to protect against XSRF attacks
@@ -114,6 +118,11 @@ namespace DowntownDeliProject
             Response.Redirect("~/Pages/Admin.aspx", false);
         }
 
+        protected void btnInventory_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Pages/Admin.aspx", false);
+
+        }
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             Response.Clear();
@@ -147,8 +156,9 @@ namespace DowntownDeliProject
                         ListViewDataItem item2 = (ListViewDataItem)e.Item;
                         Label lblOrderID2 = (Label)item2.FindControl("lblOrderID");
                         int id2 = int.Parse(lblOrderID2.Text);
-                        Order RealOrder2 = dde.Orders.Find(id2);
+                        Order RealOrder2 = dde.Orders.Include("Product_Order").Where(t => t.Order_ID == id2).ToList().FirstOrDefault();
                         order = RealOrder2;
+                        ModifyOrder = true;
                         Response.Redirect("~/Pages/PlaceOrder.aspx", false);
                         break;
                 }
@@ -168,6 +178,7 @@ namespace DowntownDeliProject
                 lvCurrentOrders.DataBind();
             }
         }
+
     }
 
 }
