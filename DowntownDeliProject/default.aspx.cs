@@ -40,7 +40,7 @@ namespace DowntownDeliProject
                         FormsAuthentication.RedirectFromLoginPage(Username.Text, true);
                         return;
                     }
-                    Customer cust = dd.Customers.Where(t => t.Email.ToUpper().Equals(Username.Text.ToUpper())).FirstOrDefault();
+                    Customer cust = dd.Customers.Where(t => t.Email.ToUpper().Equals(Username.Text.ToUpper()) && t.Cust_Password == Password.Text).FirstOrDefault();
                     if (cust != null)
                     {
                         customer = cust;
@@ -52,6 +52,11 @@ namespace DowntownDeliProject
                     ErrorMessage.Visible = true;
                 }
             }
+        }
+
+        protected void Register(object sender, EventArgs e)
+        {
+            Server.Transfer("Register.aspx");
         }
 
     }

@@ -17,7 +17,7 @@ namespace DowntownDeliProject
             string cTheFile = HttpContext.Current.Request.Path;
 
             // Check if I am all ready on login page to avoid crash
-            if (!cTheFile.EndsWith("default.aspx"))
+            if (!cTheFile.EndsWith("default.aspx") && !cTheFile.EndsWith("Register.aspx"))
             {
                 // Extract the form's authentication cookie
                 string cookieName = FormsAuthentication.FormsCookieName;
