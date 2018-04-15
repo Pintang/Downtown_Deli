@@ -27,6 +27,9 @@ namespace DowntownDeliProject.Pages
                 }
             }
         }
+        protected void Generate_Report(object sender, EventArgs e)
+        {
+        }
 
         protected void ddlProducts_SelectedIndexChanged(object sender, EventArgs e)
         {

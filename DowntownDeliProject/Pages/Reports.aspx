@@ -16,6 +16,7 @@
                             <asp:Label runat="server" Font-Bold="true" Text="Please select a report option from the dropdown menu" />
                         </div>
                     </div>
+
                     <div class="row pad-top">
                         <div class="col-md-8">
                             <asp:DropDownList OnSelectedIndexChanged="ddlProducts_SelectedIndexChanged" runat="server" AutoPostBack="true" ToolTip="Select a Report From the list" CssClass="form-control" Width="100%" ID="ddlProducts">
@@ -23,6 +24,7 @@
                                 <asp:ListItem Text="Timekeeping"></asp:ListItem>
                                 <asp:ListItem Text="Sales"></asp:ListItem>
                             </asp:DropDownList>
+                            
                         </div>
                     </div>
                     <div class="row pad-top" runat="server" id="DivDatePicker1" visible="false"> <%-- Start Date --%>
@@ -51,11 +53,16 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row pad-top">
+        <div class="col-md-3">
+            <asp:Button runat="server" CssClass="btn btn-primary" OnClick="Generate_Report" Text="Generate Report" ID="GenReport" />
+        
                 </div>
             </div>
            
                 </div>
     </div>
-
+            </div>
+          </div>
 </asp:Content>
 

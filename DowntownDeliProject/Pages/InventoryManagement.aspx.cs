@@ -25,5 +25,9 @@ namespace DowntownDeliProject.Pages
                 Response.Redirect("~/Login.aspx");
             }
         }
+       
+              protected void Generate_Report(object sender, EventArgs e)
+        {
+        }
     }
 }
