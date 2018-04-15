@@ -45,6 +45,7 @@ namespace DowntownDeliProject
                     {
                         customer = cust;
                         FormsAuthentication.RedirectFromLoginPage(Username.Text, true);
+                        Response.Redirect("LoggedIn.aspx");
                         return;
                     }
 

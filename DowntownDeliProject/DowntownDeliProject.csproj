@@ -220,6 +220,7 @@
       <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="LoggedIn.aspx" />
     <Content Include="Pages\Admin.aspx" />
     <Content Include="Pages\PlaceOrder.aspx" />
     <Content Include="Pages\Reports.aspx" />
@@ -337,6 +338,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="LoggedIn.aspx.cs">
+      <DependentUpon>LoggedIn.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoggedIn.aspx.designer.cs">
+      <DependentUpon>LoggedIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Order.cs">
