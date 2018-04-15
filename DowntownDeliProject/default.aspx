@@ -39,7 +39,8 @@
                     <asp:Button runat="server" OnClick="Register" Text="Register" CssClass="btn btn-primary" /> 
                 </form>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-7" style="padding-top: 10px;">
+                <asp:Literal ID="Promotions" runat="server"></asp:Literal>
                 <h1>About Us</h1>
                 <h3>Having lunch at the Downtown Deli & Cafe, is like having lunch with friends!</h3>
                 <p>The owners of Downtown Deli, Lee Charleville and Scott Nifong, have been friends since little league and are veterans in the restaurant business.  They have been in downtown Winston Salem for over 20 years and remain the most popular restaurant on 4th street!</p>

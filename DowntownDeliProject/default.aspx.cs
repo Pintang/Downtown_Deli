@@ -12,7 +12,13 @@ namespace DowntownDeliProject
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            using (DowntownDeliEntity dd = new DowntownDeliEntity())
+            {
+                foreach (Promotion promo in dd.Promotions.Where(a => a.Begin_Date <= DateTime.Now && a.End_Date >= DateTime.Now))
+                {
+                    Promotions.Text = Promotions.Text + "<div class='alert alert-success' role='alert'>" + promo.Promo_Description + "</div>";
+                }
+            }
         }
 
         protected Employee user
