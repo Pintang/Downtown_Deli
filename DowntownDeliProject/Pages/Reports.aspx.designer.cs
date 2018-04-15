@@ -22,12 +22,21 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.DropDownList ddlProducts;
         
         /// <summary>
-        /// btnGenRpt control.
+        /// DatePicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGenRpt;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DatePicker;
+        
+        /// <summary>
+        /// Button1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Button1;
     }
 }
