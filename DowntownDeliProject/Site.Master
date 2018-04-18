@@ -16,6 +16,7 @@
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
     <script src="/Scripts/metisMenu.js"></script>
+    <script src="/Scripts/mdb.min.js"></script>
     <script src="/Scripts/sb-admin-2.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>
@@ -46,13 +47,13 @@
                                                 <asp:Button runat="server" ID="btnOrder" OnClick="btnOrder_Click" Width="100%" Text="Order" CssClass="btn btn-success" />
                                             </div>
                                             <div class="col-md-2">
-                                                <asp:Button runat="server" ID="btnReports" OnClick="btnReports_Click" Width="100%" Text="Reports" CssClass="btn btn-warning" />
+                                                <asp:Button runat="server" ID="btnReports" OnClick="btnReports_Click" Width="100%" Text="Reports" CssClass="btn btn-info" />
                                             </div>
                                             <div class="col-md-2">
                                                 <asp:Button runat="server" ID="btnInventory" OnClick="btnInventory_Click" Width="100%" Text="Inventory" CssClass="btn btn-default" />
                                             </div>
                                             <div class="col-md-2">
-                                                <asp:Button runat="server" ID="btnTimeKeeping" OnClick="btnTimeKeeping_Click" Width="100%" Text="Time Keeping" CssClass="btn btn-info" />
+                                                <asp:Button runat="server" ID="btnTimeKeeping" OnClick="btnTimeKeeping_Click" Width="100%" Text="Time Keeping" CssClass="btn btn-warning" />
                                             </div>
                                             <div class="col-md-2">
                                                 <asp:Button runat="server" ID="btnAdmin" Width="100%" OnClick="btnAdmin_Click" Text="Admin" CssClass="btn btn-primary" />

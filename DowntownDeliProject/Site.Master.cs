@@ -121,7 +121,7 @@ namespace DowntownDeliProject
 
         protected void btnInventory_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Pages/Admin.aspx", false);
+            Response.Redirect("~/Pages/InventoryManagement.aspx", false);
 
         }
         protected void btnLogout_Click(object sender, EventArgs e)

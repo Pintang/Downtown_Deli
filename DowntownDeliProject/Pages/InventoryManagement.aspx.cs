@@ -15,9 +15,17 @@ namespace DowntownDeliProject.Pages
             get { return (Employee)Session["user"]; }
             set { Session["user"] = value; }
         }
+        DowntownDeliEntity dde = new DowntownDeliEntity();
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                lvInventoryItems.DataBind();
+                ddlInventory.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                ddlInventory.DataBind();
+            }
             if (System.Web.HttpContext.Current.User == null || !System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 Response.Clear();
@@ -28,6 +36,16 @@ namespace DowntownDeliProject.Pages
        
               protected void Generate_Report(object sender, EventArgs e)
         {
+        }
+
+        protected void btnAddNew_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnUpdate_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

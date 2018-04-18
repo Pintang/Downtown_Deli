@@ -1,35 +1,52 @@
-﻿<%@ Page Title="Downtown Deli" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="DowntownDeliProject._Default" %>
+﻿<%@ Page Title="Downtown Deli Home" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="DowntownDeliProject._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
 
     <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <asp:Label runat="server" ID="WelcomeUser" Font-Bold="true" Text="" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-center">Today's Sales</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas id="myChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h3 class="text-center">Today's Promo Sales</h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <canvas height="150" id="pieChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row pad-top text-center">
+                <div class="col-md-12">
+                    <h2>Remember!
+                    </h2>
+                </div>
+            </div>
+            <div class="row pad-top">
+                <div class="col-md-12">
+                    <asp:Literal ID="Promotions" runat="server"></asp:Literal>
+                </div>
+            </div>
         </div>
     </div>
 
