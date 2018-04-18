@@ -27,6 +27,7 @@ namespace DowntownDeliProject
         public System.DateTime Ord_Date { get; set; }
         public int Points { get; set; }
         public Nullable<bool> Complete { get; set; }
+        public string Order_Type { get; set; }
     
         public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

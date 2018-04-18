@@ -85,7 +85,7 @@ namespace DowntownDeliProject
                     ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
                     lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
                     lvCurrentOrders.DataBind();
-                    ModifyOrder = false;
+                    
                 }
             }
             else
@@ -157,7 +157,7 @@ namespace DowntownDeliProject
                         ListViewDataItem item2 = (ListViewDataItem)e.Item;
                         Label lblOrderID2 = (Label)item2.FindControl("lblOrderID");
                         int id2 = int.Parse(lblOrderID2.Text);
-                        Order RealOrder2 = dde.Orders.Include("Product_Order").Where(t => t.Order_ID == id2).ToList().FirstOrDefault();
+                        Order RealOrder2 = dde.Orders.Include("Product_Order").Where(t => t.Order_ID == id2).ToList().Single();
                         order = RealOrder2;
                         ModifyOrder = true;
                         Response.Redirect("~/Pages/PlaceOrder.aspx", false);

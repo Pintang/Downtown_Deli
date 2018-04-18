@@ -20,6 +20,11 @@ namespace DowntownDeliProject.Pages
             get { return (Order)Session["order"]; }
             set { Session["order"] = value; }
         }
+        protected List<Product_Order> deletedProducts
+        {
+            get { return (List<Product_Order>)Session["deletedProducts"]; }
+            set { Session["deletedProducts"] = value; }
+        }
         protected bool ModifyOrder
         {
             get { return (bool)Session["ModifyOrder"]; }
@@ -37,6 +42,7 @@ namespace DowntownDeliProject.Pages
             }
             if (!Page.IsPostBack)
             {
+                deletedProducts = new List<Product_Order>();
                 List<Product> prod = dde.Products.OrderBy(t => t.Product_Name).ToList();
                 Product initialItem = new Product();
                 prod.Insert(0, initialItem);
@@ -60,6 +66,7 @@ namespace DowntownDeliProject.Pages
                         {
                             lblCustomer.Text = "Customer not Found. Try again.";
                         }
+                        order = dde.Orders.Find(order.Order_ID);
                         lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
                         lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
                         lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
@@ -94,6 +101,7 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnSubmitOrder_Click(object sender, EventArgs e)
         {
+            order = dde.Orders.Find(order.Order_ID);
             bool valid = false;
             if (ddlPromos.SelectedItem.Value != "0")
             {
@@ -159,18 +167,33 @@ namespace DowntownDeliProject.Pages
                 }
                 dde.SaveChanges();
                 valid = true;
-
             }
             if (valid)
             {
-                foreach (Product_Order prodOrder in order.Product_Order)
+                if (!ModifyOrder)
                 {
-                    Product prods = dde.Products.Find(prodOrder.Product_ID);
-                    foreach (Product_Inventory prodInv in prods.Product_Inventory)
+                    foreach (Product_Order prodOrder in order.Product_Order)
                     {
-                        Inventory inv = dde.Inventories.Find(prodInv.Item_ID);
-                        inv.Quantity -= 1;
-                        dde.SaveChanges();
+                        Product prods = dde.Products.Find(prodOrder.Product_ID);
+                        foreach (Product_Inventory prodInv in prods.Product_Inventory)
+                        {
+                            Inventory inv = dde.Inventories.Find(prodInv.Item_ID);
+                            inv.Quantity -= 1;
+                            dde.SaveChanges();
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (Product_Order prodOrder in deletedProducts)
+                    {
+                        Product prods = dde.Products.Find(prodOrder.Product_ID);
+                        foreach (Product_Inventory prodInv in prods.Product_Inventory)
+                        {
+                            Inventory inv = dde.Inventories.Where(t => t.Item_ID == prodInv.Item_ID).Single();
+                            inv.Quantity += 1;
+                            //dde.SaveChanges();
+                        }
                     }
                 }
                 submitSide.Visible = false;
@@ -350,6 +373,7 @@ namespace DowntownDeliProject.Pages
                     List<Product_Order> prodOrders = order.Product_Order.Where(t => t.Order_ID == order.Order_ID && t.Product_ID == prod.Product_ID).ToList();
                     foreach (Product_Order ord in prodOrders)
                     {
+                        deletedProducts.Add(ord);
                         order.Product_Order.Remove(ord);
                     }
                     order.Price = 0;
