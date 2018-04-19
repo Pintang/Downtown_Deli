@@ -18,12 +18,39 @@
               <img src="Content/Images/header.jpg" />
           </div>
           <div class="row">
-            <div class="col-sm-3" style="background-color:burlywood; padding-top: 10px; padding-bottom: 10px; height: 500px">
+            <div class="col-sm-3" style="background-color:burlywood; padding-top: 10px; padding-bottom: 10px; height: 100%">
                 <h3>Welcome, <asp:Literal ID="Name" runat="server"></asp:Literal></h3>
                 <asp:Literal ID="rewardCard" runat="server"></asp:Literal>
-                <asp:Literal ID="rewardBalance" runat="server"></asp:Literal>
+                <h3>Reward Balance</h3>
+                <p><asp:Literal ID="rewardBalance" runat="server"></asp:Literal></p>
+                <h3>Shopping Cart</h3>
+                <p><asp:Literal ID="shoppingCart" runat="server"></asp:Literal></p>
+                <table class="table">
+                    <thead>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </thead>
+                    <tbody>
+                        <asp:Panel ID="shoppingCartContents" runat="server"></asp:Panel>
+                    </tbody>
+                </table>
+
             </div>
             <div class="col-sm-7">
+                <h2>Choose item(s) you'd like to add to your cart</h2>
+                <table class="table">
+                    <thead>
+                        <th scope="col"></th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                    </thead>
+                    <tbody>
+                        <asp:Panel ID="Menu" runat="server"></asp:Panel>
+                    </tbody>
+                </table>
+                <asp:Button ID="Add" runat="server" Text="Add to Cart" OnClick="Add_Click" />
+                <br />
             </div>
           </div>
 
