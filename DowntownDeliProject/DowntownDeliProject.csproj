@@ -185,13 +185,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\header.jpg" />
+    <Content Include="Checkout.aspx" />
+    <Content Include="CheckoutComplete.aspx" />
+    <Content Include="Content\demo.css" />
+    <Content Include="Content\images\header.jpg" />
     <Content Include="Content\jquery.datetimepicker.min.css" />
+    <Content Include="Content\skeuocard.css" />
+    <Content Include="Content\skeuocard.reset.css" />
     <Content Include="default.aspx" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fontawesome.css" />
-    <Content Include="Content\Images\Downtown_LOGO.png" />
+    <Content Include="Content\images\Downtown_LOGO.png" />
     <Content Include="Content\metisMenu.min.css" />
     <Content Include="Content\sb-admin-2.css" />
     <Content Include="Content\sb-admin-2.min.css" />
@@ -221,6 +226,36 @@
       <DependentUpon>DowntownDeliEntity.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="images\card-flip-arrow.png" />
+    <Content Include="images\card-front-background.png" />
+    <Content Include="images\card-invalid-indicator.png" />
+    <Content Include="images\card-valid-anim.gif" />
+    <Content Include="images\card-valid-indicator.png" />
+    <Content Include="images\error-pointer.png" />
+    <Content Include="images\issuers\visa-chase-sapphire.png" />
+    <Content Include="images\issuers\visa-simple-front.png" />
+    <Content Include="images\products\amex-front.png" />
+    <Content Include="images\products\dinersclubintl-front.png" />
+    <Content Include="images\products\discover-front.png" />
+    <Content Include="images\products\generic-back.png" />
+    <Content Include="images\products\generic-front.png" />
+    <Content Include="images\products\jcb-front.png" />
+    <Content Include="images\products\maestro-front.png" />
+    <Content Include="images\products\mastercard-front.png" />
+    <Content Include="images\products\unionpay-front.png" />
+    <Content Include="images\products\visa-back.png" />
+    <Content Include="images\products\visa-front.png" />
+    <Content Include="images\src\card-front-background.fw.png" />
+    <Content Include="images\src\error-pointer.png" />
+    <Content Include="images\src\product-amex-front.fw.png" />
+    <Content Include="images\src\product-dinersclub-front.fw.png" />
+    <Content Include="images\src\product-discover-front.fw.png" />
+    <Content Include="images\src\product-generic-front.fw.png" />
+    <Content Include="images\src\product-jcb-front.fw.png" />
+    <Content Include="images\src\product-maestro-front.fw.png" />
+    <Content Include="images\src\product-mastercard-front.fw.png" />
+    <Content Include="images\src\product-unionpay-front.fw.png" />
+    <Content Include="images\src\product-visa-front.fw.png" />
     <Content Include="LoggedIn.aspx" />
     <Content Include="Pages\Admin.aspx" />
     <Content Include="Pages\InventoryManagement.aspx" />
@@ -254,6 +289,7 @@
     <Content Include="Scripts\sb-admin-datatables.min.js" />
     <Content Include="Scripts\sb-admin.js" />
     <Content Include="Scripts\sb-admin.min.js" />
+    <Content Include="Scripts\skeuocard.min.js" />
     <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\WebForms\DetailsView.js" />
     <Content Include="Scripts\WebForms\Focus.js" />
@@ -296,6 +332,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CheckoutComplete.aspx.cs">
+      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CheckoutComplete.aspx.designer.cs">
+      <DependentUpon>CheckoutComplete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Customer.cs">
       <DependentUpon>DowntownDeliEntity.tt</DependentUpon>
     </Compile>

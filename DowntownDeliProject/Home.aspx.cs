@@ -22,7 +22,8 @@ namespace DowntownDeliProject
             {
                 using (DowntownDeliEntity dd = new DowntownDeliEntity())
                 {
-                    foreach (Promotion promo in dd.Promotions.Where(a => a.Begin_Date <= DateTime.Now && a.End_Date >= DateTime.Now))
+                    DateTime now = DateTime.Now.Date;
+                    foreach (Promotion promo in dd.Promotions.Where(a => a.Begin_Date <= now && a.End_Date >= now && (a.Discount_Type == "Cash Off" || a.Discount_Type == "Percent Off")))
                     {
                         Promotions.Text = Promotions.Text + "<div class='alert alert-success' role='alert'>" + promo.Promo_Description + "</div>";
                     }

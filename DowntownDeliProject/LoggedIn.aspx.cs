@@ -79,6 +79,8 @@ namespace DowntownDeliProject
                 shoppingCartContents.Controls.Add(new LiteralControl("</td></tr>"));
                 index++;
             }
+            shoppingCartContents.Controls.Add(new LiteralControl("<tfoot><td>Total</td><td>" + cart.Sum(a => a.Price).ToString("C") + "</td><td></td></tfoot>"));
+            CheckOut.Visible = cart.Any();
         }
 
         protected void Remove_Click(object sender, EventArgs e)
@@ -104,6 +106,11 @@ namespace DowntownDeliProject
             }
             shoppingCart.Text = "<b>" + cart.Count + "</b> items in your cart";
             buildCart();
+        }
+
+        protected void CheckOut_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Checkout.aspx");
         }
     }
 }

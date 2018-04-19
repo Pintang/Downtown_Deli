@@ -10,7 +10,7 @@
 namespace DowntownDeliProject {
     
     
-    public partial class LoggedIn {
+    public partial class CheckoutComplete {
         
         /// <summary>
         /// form1 control.
@@ -67,30 +67,12 @@ namespace DowntownDeliProject {
         protected global::System.Web.UI.WebControls.Panel shoppingCartContents;
         
         /// <summary>
-        /// CheckOut control.
+        /// Return control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CheckOut;
-        
-        /// <summary>
-        /// Menu control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Menu;
-        
-        /// <summary>
-        /// Add control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Add;
+        protected global::System.Web.UI.WebControls.Button Return;
     }
 }

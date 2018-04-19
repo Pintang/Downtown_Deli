@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="LoggedIn.aspx.cs" Inherits="DowntownDeliProject.LoggedIn" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CheckoutComplete.aspx.cs" Inherits="DowntownDeliProject.CheckoutComplete" %>
 
 <!DOCTYPE html>
 
@@ -25,32 +25,20 @@
                 <p><asp:Literal ID="rewardBalance" runat="server"></asp:Literal></p>
                 <h3>Shopping Cart</h3>
                 <p><asp:Literal ID="shoppingCart" runat="server"></asp:Literal></p>
+            </div>
+            <div class="col-sm-7">
+                <h2>Your order has been placed!</h2>
                 <table class="table">
                     <thead>
                         <th scope="col">Item</th>
                         <th scope="col">Price</th>
-                        <th scope="col"></th>
                     </thead>
                     <tbody>
                         <asp:Panel ID="shoppingCartContents" runat="server"></asp:Panel>
                     </tbody>
                 </table>
-                <asp:Button ID="CheckOut" runat="server" Text="Check Out" OnClick="CheckOut_Click" />
-            </div>
-            <div class="col-sm-7">
-                <h2>Choose item(s) you'd like to add to your cart</h2>
-                <table class="table">
-                    <thead>
-                        <th scope="col"></th>
-                        <th scope="col">Item</th>
-                        <th scope="col">Price</th>
-                    </thead>
-                    <tbody>
-                        <asp:Panel ID="Menu" runat="server"></asp:Panel>
-                    </tbody>
-                </table>
-                <asp:Button ID="Add" runat="server" Text="Add to Cart" OnClick="Add_Click" />
                 <br />
+                <asp:Button ID="Return" runat="server" Text="Return to menu" OnClick="Return_Click" />
             </div>
           </div>
 
