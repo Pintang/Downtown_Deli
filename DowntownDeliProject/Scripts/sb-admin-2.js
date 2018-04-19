@@ -44,27 +44,9 @@ $(function() {
             break;
         }
     }
-});
-
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('lblTime').innerHTML =
-        h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) { i = "0" + i };
-    return i;
-}
-function OpenModal(ModalID) {
-    $('#' + ModalID).modal('toggle');
-}
-$(function () {
+    $('#ExpDateTimePicker').datetimepicker();
+    $('#StartTimePicker').datetimepicker();
+    $('#StopDateTimePicker').datetimepicker();
     var ctx = document.getElementById("myChart");
     if (ctx != null) {
         ctx = document.getElementById("myChart").getContext('2d');
@@ -125,4 +107,58 @@ $(function () {
         });
     }
 });
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('lblTime').innerHTML =
+        h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+function checkTime(i) {
+    if (i < 10) { i = "0" + i };
+    return i;
+}
+function OpenModal(ModalID) {
+    $('#' + ModalID).modal('toggle');
+}
+function ValidateNewInventory() {
+    var tbItemName = document.getElementById('Body_tbItemName');
+    var tbNewQuantity = document.getElementById('Body_tbNewQuantity');
+    var tbdate = document.getElementById('Body_tbdate');
+    var btnAddNew = document.getElementById('Body_btnAddNew');
+    var lblErrorAddNewModal = document.getElementById('Body_lblErrorAddNewModal');
+    if (tbItemName.value != '') {
+        if (tbNewQuantity.value != '') {
+            if (tbdate.value != '') {
+                btnAddNew.click();
+            } else {
+                lblErrorAddNewModal.innerHTML = 'Expiration Date is required';
+            }
+        } else {
+            lblErrorAddNewModal.innerHTML = 'Quantity is required';
+        }
+    } else {
+        lblErrorAddNewModal.innerHTML = 'Item name is required.';
+    }
+}
+function isNumberKey(evt) {
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57))
+        return false;
+    return true;
+}
+function ValidateModifyInventory() {
+    var tbQuantity = document.getElementById('Body_tbQuantity');
+    var btnUpdate = document.getElementById('Body_btnUpdate');
+    if (tbQuantity.value != '') {
+        btnUpdate.click();
+    } else {
+        lblErrorModify.innerhtml = 'Quantity is required';
+    }
+}
 

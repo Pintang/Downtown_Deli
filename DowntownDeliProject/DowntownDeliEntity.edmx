@@ -346,7 +346,6 @@
           <EntitySet Name="Customers" EntityType="DowntownDeli.Customer" />
           <EntitySet Name="Employees" EntityType="DowntownDeli.Employee" />
           <EntitySet Name="Empworktimes" EntityType="DowntownDeli.Empworktime" />
-          <EntitySet Name="Inventories" EntityType="DowntownDeli.Inventory" />
           <EntitySet Name="Inventory_Order" EntityType="DowntownDeli.Inventory_Order" />
           <EntitySet Name="Jobs" EntityType="DowntownDeli.Job" />
           <EntitySet Name="Orders" EntityType="DowntownDeli.Order" />
@@ -372,14 +371,6 @@
             <End Role="Schedule" EntitySet="Schedules" />
             <End Role="Employee" EntitySet="Employees" />
           </AssociationSet>
-          <AssociationSet Name="fk_Inv_Ord_Item_ID" Association="DowntownDeli.fk_Inv_Ord_Item_ID">
-            <End Role="Inventory" EntitySet="Inventories" />
-            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
-          </AssociationSet>
-          <AssociationSet Name="fk_Item_ID" Association="DowntownDeli.fk_Item_ID">
-            <End Role="Inventory" EntitySet="Inventories" />
-            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
-          </AssociationSet>
           <AssociationSet Name="fk_Vendor_ID" Association="DowntownDeli.fk_Vendor_ID">
             <End Role="Vendor" EntitySet="Vendors" />
             <End Role="Inventory_Order" EntitySet="Inventory_Order" />
@@ -399,6 +390,15 @@
           <AssociationSet Name="fk_Product_ID" Association="DowntownDeli.fk_Product_ID">
             <End Role="Product" EntitySet="Products" />
             <End Role="Product_Order" EntitySet="Product_Order" />
+          </AssociationSet>
+          <EntitySet Name="Inventories" EntityType="DowntownDeli.Inventory" />
+          <AssociationSet Name="fk_Inv_Ord_Item_ID" Association="DowntownDeli.fk_Inv_Ord_Item_ID">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="Inventory_Order" EntitySet="Inventory_Order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Item_ID" Association="DowntownDeli.fk_Item_ID">
+            <End Role="Inventory" EntitySet="Inventories" />
+            <End Role="Product_Inventory" EntitySet="Product_Inventory" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Customer">
@@ -446,18 +446,6 @@
           <Property Name="Work_Date" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Employee" Relationship="DowntownDeli.fk_Emp_ID" FromRole="Empworktime" ToRole="Employee" />
         </EntityType>
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="Item_ID" />
-          </Key>
-          <Property Name="Item_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="Experation_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory" ToRole="Inventory_Order" />
-          <NavigationProperty Name="Product_Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory" ToRole="Product_Inventory" />
-        </EntityType>
         <EntityType Name="Inventory_Order">
           <Key>
             <PropertyRef Name="Inv_Ord_ID" />
@@ -469,8 +457,8 @@
           <Property Name="Total_Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
           <Property Name="Delivery_Date" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Purchase_Date" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory_Order" ToRole="Inventory" />
           <NavigationProperty Name="Vendor" Relationship="DowntownDeli.fk_Vendor_ID" FromRole="Inventory_Order" ToRole="Vendor" />
+          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory_Order" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
@@ -504,8 +492,8 @@
           <Property Name="Prod_Inv_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Item_ID" Type="Int64" />
           <Property Name="Product_ID" Type="Int64" />
-          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Product_Inventory" ToRole="Inventory" />
           <NavigationProperty Name="Product" Relationship="DowntownDeli.fk_Prod_Inv_Product_ID" FromRole="Product_Inventory" ToRole="Product" />
+          <NavigationProperty Name="Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Product_Inventory" ToRole="Inventory" />
         </EntityType>
         <EntityType Name="Product_Order">
           <Key>
@@ -613,30 +601,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Inv_Ord_Item_ID">
-          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
-          <End Type="DowntownDeli.Inventory_Order" Role="Inventory_Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Principal>
-            <Dependent Role="Inventory_Order">
-              <PropertyRef Name="Item_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_Item_ID">
-          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
-          <End Type="DowntownDeli.Product_Inventory" Role="Product_Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Principal>
-            <Dependent Role="Product_Inventory">
-              <PropertyRef Name="Item_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_Vendor_ID">
           <End Type="DowntownDeli.Vendor" Role="Vendor" Multiplicity="0..1" />
           <End Type="DowntownDeli.Inventory_Order" Role="Inventory_Order" Multiplicity="*" />
@@ -697,6 +661,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="Item_ID" />
+          </Key>
+          <Property Name="Item_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Item_Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Experation_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Inventory_Order" Relationship="DowntownDeli.fk_Inv_Ord_Item_ID" FromRole="Inventory" ToRole="Inventory_Order" />
+          <NavigationProperty Name="Product_Inventory" Relationship="DowntownDeli.fk_Item_ID" FromRole="Inventory" ToRole="Product_Inventory" />
+        </EntityType>
+        <Association Name="fk_Inv_Ord_Item_ID">
+          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <End Type="DowntownDeli.Inventory_Order" Role="Inventory_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Inventory_Order">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Item_ID">
+          <End Type="DowntownDeli.Inventory" Role="Inventory" Multiplicity="0..1" />
+          <End Type="DowntownDeli.Product_Inventory" Role="Product_Inventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Principal>
+            <Dependent Role="Product_Inventory">
+              <PropertyRef Name="Item_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -743,17 +743,6 @@
                 <ScalarProperty Name="Clock_In" ColumnName="Clock_In" />
                 <ScalarProperty Name="Emp_ID" ColumnName="Emp_ID" />
                 <ScalarProperty Name="Worktime_ID" ColumnName="Worktime_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Inventories">
-            <EntityTypeMapping TypeName="DowntownDeli.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
-                <ScalarProperty Name="Experation_Date" ColumnName="Experation_Date" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
-                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -855,6 +844,17 @@
                 <ScalarProperty Name="Discount" ColumnName="Discount" />
                 <ScalarProperty Name="Vendor_Name" ColumnName="Vendor_Name" />
                 <ScalarProperty Name="Vendor_ID" ColumnName="Vendor_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="DowntownDeli.Inventory">
+              <MappingFragment StoreEntitySet="Inventory">
+                <ScalarProperty Name="Experation_Date" ColumnName="Experation_Date" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Item_Name" ColumnName="Item_Name" />
+                <ScalarProperty Name="Item_ID" ColumnName="Item_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

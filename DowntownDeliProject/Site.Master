@@ -11,12 +11,18 @@
     <link href="/Content/sb-admin-2.css" rel="stylesheet" />
     <link href="/Content/metisMenu.min.css" rel="stylesheet" />
     <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/jquery.datetimepicker.min.css" rel="stylesheet">
     <link href="/Content/fontawesome.css" rel="stylesheet" />
     <meta name="theme-color" content="#D3D3D3" />
+    <script src="/Scripts/moment.min.js"></script>
     <script src="/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="/Scripts/jquery-ui.min.js"></script>
     <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/collapse.js"></script>
+    <script src="/Scripts/transition.js"></script>
+    <script src="/Scripts/mdb.js"></script>
     <script src="/Scripts/metisMenu.js"></script>
-    <script src="/Scripts/mdb.min.js"></script>
+    <script src="/Scripts/jquery.datetimepicker.full.min.js"></script>
     <script src="/Scripts/sb-admin-2.js"></script>
     <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 </head>

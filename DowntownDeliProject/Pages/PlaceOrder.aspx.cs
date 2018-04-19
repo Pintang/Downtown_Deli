@@ -77,6 +77,7 @@ namespace DowntownDeliProject.Pages
                 else
                 {
                     order = new Order();
+                    ModifyOrder = false;
                 }
 
             }
@@ -101,7 +102,9 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnSubmitOrder_Click(object sender, EventArgs e)
         {
-            order = dde.Orders.Find(order.Order_ID);
+            if (ModifyOrder) {
+                order = dde.Orders.Find(order.Order_ID);
+            }
             bool valid = false;
             if (ddlPromos.SelectedItem.Value != "0")
             {
@@ -179,7 +182,7 @@ namespace DowntownDeliProject.Pages
                         {
                             Inventory inv = dde.Inventories.Find(prodInv.Item_ID);
                             inv.Quantity -= 1;
-                            dde.SaveChanges();
+                            //dde.SaveChanges();
                         }
                     }
                 }
@@ -203,6 +206,7 @@ namespace DowntownDeliProject.Pages
                 txtCustomer.Text = "";
                 lblCustomer.Text = "";
                 order = new Order();
+                ModifyOrder = false;
                 valid = true;
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "OpenModal('SuccessModal')", true);
             }

@@ -22,6 +22,15 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.ListView lvInventoryItems;
         
         /// <summary>
+        /// lblErrorModify control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorModify;
+        
+        /// <summary>
         /// ddlInventory control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnUpdate;
         
         /// <summary>
+        /// lblErrorAddNewModal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorAddNewModal;
+        
+        /// <summary>
         /// tbItemName control.
         /// </summary>
         /// <remarks>
@@ -58,22 +76,22 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.TextBox tbItemName;
         
         /// <summary>
-        /// TextBox1 control.
+        /// tbNewQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tbNewQuantity;
         
         /// <summary>
-        /// TextBox2 control.
+        /// tbCost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox tbCost;
         
         /// <summary>
         /// btnAddNew control.

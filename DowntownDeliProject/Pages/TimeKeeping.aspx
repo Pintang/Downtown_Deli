@@ -14,7 +14,6 @@
     <div class="row pad-top">
         <div class="col-md-8">
             <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
-
             <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />
         </div>
     </div>
@@ -33,7 +32,6 @@
         <div class="col-md-12">
             <asp:ListView runat="server" ID="lvDisplayTimeSheet">
                 <ItemTemplate>
-
                     <div class="row" style="background-color: #D3D3D3;">
                         <div class="col-md-12">
                             <div class="row pad">
@@ -62,7 +60,6 @@
                                 <div class="col-md-4">
                                     <asp:Label runat="server"  ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
                                 </div>
-                               
                                 <div class="col-md-4">
                                     <asp:Label runat="server" ID="ClockIn" Text='<%# Eval("Clock_In") %>' />
                                 </div>

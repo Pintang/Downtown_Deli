@@ -28,7 +28,6 @@ namespace DowntownDeliProject
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<Empworktime> Empworktimes { get; set; }
-        public virtual DbSet<Inventory> Inventories { get; set; }
         public virtual DbSet<Inventory_Order> Inventory_Order { get; set; }
         public virtual DbSet<Job> Jobs { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -38,5 +37,6 @@ namespace DowntownDeliProject
         public virtual DbSet<Promotion> Promotions { get; set; }
         public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<Vendor> Vendors { get; set; }
+        public virtual DbSet<Inventory> Inventories { get; set; }
     }
 }

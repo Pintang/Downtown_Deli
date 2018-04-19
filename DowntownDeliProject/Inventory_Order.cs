@@ -22,7 +22,7 @@ namespace DowntownDeliProject
         public System.DateTime Delivery_Date { get; set; }
         public System.DateTime Purchase_Date { get; set; }
     
-        public virtual Inventory Inventory { get; set; }
         public virtual Vendor Vendor { get; set; }
+        public virtual Inventory Inventory { get; set; }
     }
 }

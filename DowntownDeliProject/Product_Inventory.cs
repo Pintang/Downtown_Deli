@@ -18,7 +18,7 @@ namespace DowntownDeliProject
         public Nullable<long> Item_ID { get; set; }
         public Nullable<long> Product_ID { get; set; }
     
-        public virtual Inventory Inventory { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Inventory Inventory { get; set; }
     }
 }
