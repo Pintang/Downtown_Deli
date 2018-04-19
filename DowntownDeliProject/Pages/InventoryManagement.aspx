@@ -6,7 +6,7 @@
             <button class="btn btn-primary" onclick="OpenModal('AddNewModal'); return false;">Add New Inventory Item</button>
         </div>
         <div class="col-md-2">
-            <button class="btn btn-info" onclick="OpenModal('UpdateModal'); return false;">Add/Delete From Inventory</button>
+            <button class="btn btn-info" onclick="OpenModal('UpdateModal'); return false;">Modify Quantity</button>
         </div>
     </div>
     <div class="row pad-top" style="border: thin">
@@ -98,7 +98,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add/Delete From Inventory</h5>
+                    <h5 class="modal-title">Update Quantity</h5>
                 </div>
                 <div class="modal-body">
                     <div class="row">

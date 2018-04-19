@@ -15,16 +15,17 @@ namespace DowntownDeliProject.Pages
             get { return (Employee)Session["user"]; }
             set { Session["user"] = value; }
         }
-        DowntownDeliEntity dde = new DowntownDeliEntity();
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
-                lvInventoryItems.DataBind();
-                ddlInventory.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
-                ddlInventory.DataBind();
+                using (DowntownDeliEntity dde = new DowntownDeliEntity())
+                {
+                    lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                    lvInventoryItems.DataBind();
+                    ddlInventory.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                    ddlInventory.DataBind();
+                }
             }
             if (System.Web.HttpContext.Current.User == null || !System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
@@ -47,22 +48,40 @@ namespace DowntownDeliProject.Pages
         }
         protected void btnAddNew_Click(object sender, EventArgs e)
         {
-            Inventory invItem = new Inventory();
-            invItem.Item_Name = tbItemName.Text;
-            invItem.Quantity = int.Parse(tbQuantity.Text);
-            //invItem.Experation_Date = DateTime.Parse(tbDateTimePicker.Value);
-            dde.Inventories.Add(invItem);
-            dde.SaveChanges();
+            using (DowntownDeliEntity dde = new DowntownDeliEntity())
+            {
+                Inventory invItem = new Inventory();
+                invItem.Item_Name = tbItemName.Text;
+                invItem.Quantity = int.Parse(tbQuantity.Text);
+                //invItem.Experation_Date = DateTime.Parse(tbDateTimePicker.Value);
+                dde.Inventories.Add(invItem);
+                dde.SaveChanges();
+                lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                lvInventoryItems.DataBind();
+                ddlInventory.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                ddlInventory.DataBind();
+            }
         }
 
         protected void btnUpdate_Click(object sender, EventArgs e)
         {
-            Inventory invItem = dde.Inventories.Find(int.Parse(ddlInventory.SelectedValue));
-            if (invItem != null)
+            using (DowntownDeliEntity dde = new DowntownDeliEntity())
             {
-                invItem.Quantity = invItem.Quantity +  int.Parse(tbQuantity.Text);
-                dde.SaveChanges();
+                int item = int.Parse(ddlInventory.SelectedValue);
+                int quantity = int.Parse(tbQuantity.Text);
+                Inventory invItem = dde.Inventories.FirstOrDefault(a => a.Item_ID == item);
+                if (invItem != null)
+                {
+                    invItem.Quantity = quantity;
+                    dde.SaveChanges();
+                }
+                lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                lvInventoryItems.DataBind();
+                ddlInventory.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                ddlInventory.DataBind();
+
             }
+
         }
     }
 }
