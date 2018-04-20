@@ -239,6 +239,9 @@
                                         <div class="col-md-12">
                                             <div class="row pad">
                                                 <div class="col-md-3">
+                                                    <asp:Label runat="server" ID="Label2" Font-Bold="true" Text='Include in Order' />
+                                                </div>
+                                                <div class="col-md-3">
                                                     <asp:Label runat="server" ID="lblName" Font-Bold="true" Text='Item Name' />
                                                 </div>
                                             </div>
@@ -295,6 +298,15 @@
                             </asp:ListView>
                         </div>
                     </div>
+                    <div class="row pad-top">
+                        <div class="col-md-4">
+                            <asp:Label runat="server" Font-Bold="true" Text="Select a Vendor:" />
+                        </div>
+                        <div class="col-md-8">
+                            <asp:DropDownList runat="server" ToolTip="Select a Vendor From the list" DataTextField="Vendor_Name" CssClass="form-control" Width="100%" DataValueField="Vendor_ID" ID="ddlVendors">
+                            </asp:DropDownList>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="row">
@@ -302,7 +314,7 @@
                             <asp:Button runat="server" CssClass="btn btn-success" Text="Order" OnClick="btnOrder_Click" ID="btnOrder" />
                         </div>
                         <div class="col-md-3">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>

@@ -27,6 +27,8 @@ namespace DowntownDeliProject.Pages
                     ddlInventory.DataBind();
                     lvOrderInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).Where(t => t.Quantity <= 25).ToList();
                     lvOrderInventoryItems.DataBind();
+                    ddlVendors.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+                    ddlVendors.DataBind();
                 }
             }
             if (System.Web.HttpContext.Current.User == null || !System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
@@ -146,6 +148,25 @@ namespace DowntownDeliProject.Pages
                 }
                 if (listofItems.Count > 0)
                 {
+                    foreach (Inventory inv in listofItems)
+                    {
+                        Inventory_Order invOrder = new Inventory_Order();
+                        invOrder.Item_ID = inv.Item_ID;
+                        invOrder.Vendor_ID = int.Parse(ddlVendors.SelectedValue);
+                        invOrder.Quantity = 50;
+                        invOrder.Total_Cost = (inv.Cost * 50) + ((inv.Cost * 50) * .0675M);
+                        invOrder.Purchase_Date = DateTime.Now;
+                        invOrder.Delivery_Date = DateTime.Now.AddDays(5);
+                        dde.Inventory_Order.Add(invOrder);
+                        Inventory invItem = dde.Inventories.Find(inv.Item_ID);
+                        invItem.Quantity += 50;
+                        dde.SaveChanges();
+                        lvInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).ToList();
+                        lvInventoryItems.DataBind();
+                        lvOrderInventoryItems.DataSource = dde.Inventories.OrderBy(t => t.Item_Name).Where(t => t.Quantity <= 25).ToList();
+                        lvOrderInventoryItems.DataBind();
+
+                    }
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "CallMyFunction", "OpenModal('SuccessModal')", true);
                 }
                 else
