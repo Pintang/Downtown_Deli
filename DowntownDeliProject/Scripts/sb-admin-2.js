@@ -44,7 +44,7 @@ $(function() {
             break;
         }
     }
-    $('#ExpDateTimePicker').datetimepicker();
+    $('#ExpDateTimePicker').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
     $('#StartTimePicker').datetimepicker();
     $('#StopDateTimePicker').datetimepicker();
     var ctx = document.getElementById("myChart");
@@ -129,15 +129,20 @@ function OpenModal(ModalID) {
 function ValidateNewInventory() {
     var tbItemName = document.getElementById('Body_tbItemName');
     var tbNewQuantity = document.getElementById('Body_tbNewQuantity');
-    var tbdate = document.getElementById('Body_tbdate');
+    var tbdate = document.getElementById('Body_ExpDateTimePickerInput');
+    var tbCost = document.getElementById('Body_tbCost');
     var btnAddNew = document.getElementById('Body_btnAddNew');
     var lblErrorAddNewModal = document.getElementById('Body_lblErrorAddNewModal');
     if (tbItemName.value != '') {
         if (tbNewQuantity.value != '') {
-            if (tbdate.value != '') {
-                btnAddNew.click();
+            if (tbCost.value != '') {
+                if (tbdate.value != '') {
+                    btnAddNew.click();
+                } else {
+                    lblErrorAddNewModal.innerHTML = 'Expiration Date is required';
+                }
             } else {
-                lblErrorAddNewModal.innerHTML = 'Expiration Date is required';
+                lblErrorAddNewModal.innerHTML = 'Cost is required';
             }
         } else {
             lblErrorAddNewModal.innerHTML = 'Quantity is required';
@@ -161,4 +166,14 @@ function ValidateModifyInventory() {
         lblErrorModify.innerhtml = 'Quantity is required';
     }
 }
+$(document).ready(function () {
+
+    var dp = $("#ExpDateTimePicker");
+
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_ExpDateTimePickerInput');
+        nodes.value = ev.target.value;
+    });
+
+});
 

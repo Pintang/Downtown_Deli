@@ -182,7 +182,7 @@ namespace DowntownDeliProject.Pages
                         {
                             Inventory inv = dde.Inventories.Find(prodInv.Item_ID);
                             inv.Quantity -= 1;
-                            //dde.SaveChanges();
+                            dde.SaveChanges();
                         }
                     }
                 }
@@ -195,13 +195,15 @@ namespace DowntownDeliProject.Pages
                         {
                             Inventory inv = dde.Inventories.Where(t => t.Item_ID == prodInv.Item_ID).Single();
                             inv.Quantity += 1;
-                            //dde.SaveChanges();
+                            dde.SaveChanges();
                         }
                     }
                 }
                 submitSide.Visible = false;
                 ddlProducts.ClearSelection();
                 ddlPromos.ClearSelection();
+                lvOrderItems.DataSource = null;
+                lvOrderItems.DataBind();
                 tbQuantity.Text = "";
                 txtCustomer.Text = "";
                 lblCustomer.Text = "";
