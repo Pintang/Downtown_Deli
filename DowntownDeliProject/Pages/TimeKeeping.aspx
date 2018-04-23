@@ -61,10 +61,10 @@
                                     <asp:Label runat="server" ID="lblProdName" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
                                 </div>
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="ClockIn" Text='<%# Eval("Clock_In") %>' />
+                                    <asp:Label runat="server" ID="ClockIn" Text='<%# TimeSpan.Parse (Eval("Clock_In").ToString()).ToString(@"hh\:mm") %>' />
                                 </div>
                                 <div class="col-md-2">
-                                    <asp:Label runat="server" ID="ClockOut" Text='<%# Eval("Clock_Out") %>' />
+                                    <asp:Label runat="server" ID="ClockOut" Text='<%# TimeSpan.Parse (Eval("Clock_Out").ToString()).ToString(@"hh\:mm") %>' />
                                 </div>
 
                             </div>
@@ -80,10 +80,10 @@
                                     <asp:Label runat="server" ID="WorkDate" Text='<%# DateTime.Parse(Eval("Work_Date").ToString()).ToString("MM/dd/yyyy") %>' />
                                 </div>
                                 <div class="col-md-4">
-                                    <asp:Label runat="server" ID="ClockIn" Text='<%# Eval("Clock_In") %>' />
+                                    <asp:Label runat="server" ID="ClockIn" Text='<%# TimeSpan.Parse (Eval("Clock_In").ToString()).ToString(@"hh\:mm") %>' /> 
                                 </div>
                                 <div class="col-md-2">
-                                    <asp:Label runat="server" ID="ClockOut" Text='<%# Eval("Clock_Out") %>' />
+                                    <asp:Label runat="server" ID="ClockOut" Text='<%# TimeSpan.Parse (Eval("Clock_Out").ToString()).ToString(@"hh\:mm") %>' />
                                 </div>
                             </div>
                         </div>

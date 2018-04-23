@@ -67,8 +67,8 @@ namespace DowntownDeliProject.Pages
                             lblCustomer.Text = "Customer not Found. Try again.";
                         }
                         order = dde.Orders.Find(order.Order_ID);
-                        lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
-                        lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
+                        lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString("0.00"));
+                        lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString("0.00"));
                         lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                         lvOrderItems.DataBind();
                         submitSide.Visible = true;
@@ -236,7 +236,7 @@ namespace DowntownDeliProject.Pages
                 Label lblProdName = e.Item.FindControl("lblProdName") as Label;
                 lblProdName.Text = prod.Product_Name;
                 Label lblPrice = e.Item.FindControl("lblPrice") as Label;
-                lblPrice.Text = "$" + prod.Price.ToString();
+                lblPrice.Text = String.Format("{0:C}", prod.Price);
                 Label lblQuantity = e.Item.FindControl("lblQuantity") as Label;
                 lblQuantity.Text = quantity.ToString();
                 Label lblProductID = (Label)e.Item.FindControl("lblProductID");
@@ -295,8 +295,8 @@ namespace DowntownDeliProject.Pages
                                         count--;
                                     }
                                     order.Price += prod.Price * quantity;
-                                    lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
-                                    lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
+                                    lblSubTotal.Text = String.Format("{0:C}", order.Price);
+                                    lblTotal.Text = String.Format("{0:C}", order.Price + (order.Price * 0.0675M));
                                     lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                     lvOrderItems.DataBind();
                                     valid = true;
@@ -337,8 +337,8 @@ namespace DowntownDeliProject.Pages
                                     count--;
                                 }
                                 order.Price += prod.Price * quantity;
-                                lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
-                                lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
+                                lblSubTotal.Text = String.Format("{0:C}", order.Price);
+                                lblTotal.Text = String.Format("{0:C}", order.Price + (order.Price * 0.0675M));
                                 lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                                 lvOrderItems.DataBind();
                                 valid = true;
@@ -388,8 +388,8 @@ namespace DowntownDeliProject.Pages
                         Product prod2 = dde.Products.Find(ord.Product_ID);
                         order.Price += prod2.Price;
                     }
-                    lblSubTotal.Text = string.Format("{0:C}", order.Price.ToString());
-                    lblTotal.Text = string.Format("{0:C}", (order.Price + (order.Price * 0.0675M)).ToString());
+                    lblSubTotal.Text = String.Format("{0:C}", order.Price);
+                    lblTotal.Text = String.Format("{0:C}", order.Price + (order.Price * 0.0675M));
                     lvOrderItems.DataSource = order.Product_Order.GroupBy(t => t.Product_ID).ToList();
                     lvOrderItems.DataBind();
                     break;

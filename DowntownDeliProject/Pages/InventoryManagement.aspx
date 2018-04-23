@@ -64,7 +64,7 @@
                                     <asp:Label runat="server" Text='<%# Eval("Quantity") %>' />
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label runat="server" Text='<%# Eval("Cost") %>' />
+                                    <asp:Label runat="server" Text='<%# String.Format("{0:C}", Eval("Cost")) %>' />
                                 </div>
                                 <div class="col-md-2">
                                     <asp:Label runat="server" Text='<%# DateTime.Parse(Eval("Experation_Date").ToString()).ToString("MM/dd/yyyy") %>' />
@@ -88,7 +88,7 @@
                                     <asp:Label runat="server" Text='<%# Eval("Quantity") %>' />
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Label runat="server" Text='<%# Eval("Cost") %>' />
+                                    <asp:Label runat="server" Text='<%# String.Format("{0:C}", Eval("Cost")) %>' />
                                 </div>
                                 <div class="col-md-2">
                                     <asp:Label runat="server" Text='<%# DateTime.Parse(Eval("Experation_Date").ToString()).ToString("MM/dd/yyyy") %>' />
