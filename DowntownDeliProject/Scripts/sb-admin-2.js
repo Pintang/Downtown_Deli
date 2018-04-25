@@ -45,6 +45,11 @@ $(function() {
         }
     }
     $('#ExpDateTimePicker').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpBeginDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpBeginDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpEndDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpEndDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+
     $('#StartTimePicker').datetimepicker();
     $('#StopDateTimePicker').datetimepicker();
     var ctx = document.getElementById("myChart");
@@ -169,9 +174,32 @@ function ValidateModifyInventory() {
 $(document).ready(function () {
 
     var dp = $("#ExpDateTimePicker");
-
     dp.on('change', function (ev) {
         var nodes = document.getElementById('Body_ExpDateTimePickerInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#dpBeginDatePickerNew");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_dpBeginDatePickerNewInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#dpBeginDatePickerModify");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_dpBeginDatePickerModifyInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#dpEndDatePickerModify");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_dpEndDatePickerModifyInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#dpEndDatePickerNew");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_dpEndDatePickerNewInput');
         nodes.value = ev.target.value;
     });
 

@@ -137,6 +137,7 @@
           <Property Name="Friday" Type="bit" Nullable="false" />
           <Property Name="Saturday" Type="bit" Nullable="false" />
           <Property Name="Sunday" Type="bit" Nullable="false" />
+          <Property Name="Schedule_Description" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="Vendors">
           <Key>
@@ -542,6 +543,7 @@
           <Property Name="Saturday" Type="Boolean" Nullable="false" />
           <Property Name="Sunday" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employees" Relationship="DowntownDeli.fk_Schedule_ID" FromRole="Schedule" ToRole="Employee" />
+          <Property Name="Schedule_Description" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Vendor">
           <Key>
@@ -824,6 +826,7 @@
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="DowntownDeli.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="Schedule_Description" ColumnName="Schedule_Description" />
                 <ScalarProperty Name="Sunday" ColumnName="Sunday" />
                 <ScalarProperty Name="Saturday" ColumnName="Saturday" />
                 <ScalarProperty Name="Friday" ColumnName="Friday" />
