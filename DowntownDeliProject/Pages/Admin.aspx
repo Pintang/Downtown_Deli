@@ -75,7 +75,7 @@
                                                 <asp:Label runat="server" Text='<%# Eval("Product_Name") %>' />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:Label runat="server" Text='<%# Eval("Price") %>' />
+                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />  
                                             </div>
                                             <div class="col-md-1">
                                                 <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
@@ -93,7 +93,7 @@
                                                 <asp:Label runat="server" Text='<%# Eval("Product_Name") %>' />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:Label runat="server" Text='<%# Eval("Price") %>' />
+                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />  
                                             </div>
                                             <div class="col-md-1">
                                                 <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
