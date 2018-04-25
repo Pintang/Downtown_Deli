@@ -50,6 +50,11 @@ $(function() {
     $('#dpEndDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
     $('#dpEndDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
 
+
+    $('#StartDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#StopDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    
+
     $('#StartTimePicker').datetimepicker();
     $('#StopDateTimePicker').datetimepicker();
     var ctx = document.getElementById("myChart");
@@ -200,6 +205,18 @@ $(document).ready(function () {
     var dp = $("#dpEndDatePickerNew");
     dp.on('change', function (ev) {
         var nodes = document.getElementById('Body_dpEndDatePickerNewInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#StartDateDatePickerReports");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_StartDateDatePickerReportsInput');
+        nodes.value = ev.target.value;
+    });
+
+    var dp = $("#StopDateDatePickerReports");
+    dp.on('change', function (ev) {
+        var nodes = document.getElementById('Body_StopDateDatePickerReportsInput');
         nodes.value = ev.target.value;
     });
 

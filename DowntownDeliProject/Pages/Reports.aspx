@@ -30,8 +30,8 @@
                         <div class="col-md-8">
                             <asp:Label runat="server" Font-Bold="true" Text="Please select a Start Date" />
                             <div class="form-group">
-                                <div class='input-group date' id='StartTimePicker'>
-                                    <input type='text' class="form-control" />
+                                <div class='input-group date' id='StartDateDatePickerReports'>
+                                    <input type='text' runat="server" id="StartDateDatePickerReportsInput" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -44,8 +44,8 @@
                         <div class="col-md-8">
                             <asp:Label runat="server" Font-Bold="true" Text="Please select an End Date" />
                             <div class="form-group">
-                                <div class='input-group date' id='StopDateTimePicker'>
-                                    <input type='text' class="form-control" />
+                                <div class='input-group date' id='StopDateDatePickerReports'>
+                                    <input type='text' runat="server" id="StopDateDatePickerReportsInput" class="form-control" />
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>

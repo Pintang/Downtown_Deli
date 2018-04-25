@@ -31,6 +31,15 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivDatePicker1;
         
         /// <summary>
+        /// StartDateDatePickerReportsInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText StartDateDatePickerReportsInput;
+        
+        /// <summary>
         /// DivDatePicker2 control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace DowntownDeliProject.Pages {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivDatePicker2;
+        
+        /// <summary>
+        /// StopDateDatePickerReportsInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText StopDateDatePickerReportsInput;
         
         /// <summary>
         /// GenReport control.
