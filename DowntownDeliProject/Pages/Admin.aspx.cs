@@ -181,7 +181,7 @@ namespace DowntownDeliProject.Pages
             MenuItemUpdateDiv.Visible = true;
             lvInventoryItems.DataSource = dde.Inventories.ToList();
             lvInventoryItems.DataBind();
-            txtMenuItemPrice.Text = prod.Price.ToString();
+            txtMenuItemPrice.Text = prod.Price.ToString("0.00");
         }
 
         protected void lvInventoryItems_ItemDataBound(object sender, ListViewItemEventArgs e)
