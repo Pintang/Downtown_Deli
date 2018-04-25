@@ -100,6 +100,10 @@ namespace DowntownDeliProject.Pages
             VendorDiv.Visible = true;
             JobsDiv.Visible = false;
             ScheduleDiv.Visible = false;
+            lvVendors.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+            lvVendors.DataBind();
+            ddlVendorModify.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+            ddlVendorModify.DataBind();
         }
 
         protected void btnJobs_Click(object sender, EventArgs e)
@@ -111,6 +115,10 @@ namespace DowntownDeliProject.Pages
             VendorDiv.Visible = false;
             JobsDiv.Visible = true;
             ScheduleDiv.Visible = false;
+            lvJobs.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            lvJobs.DataBind();
+            ddlJobsModify.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            ddlJobsModify.DataBind();
         }
 
         protected void btnSchedule_Click(object sender, EventArgs e)
@@ -122,6 +130,10 @@ namespace DowntownDeliProject.Pages
             VendorDiv.Visible = false;
             JobsDiv.Visible = false;
             ScheduleDiv.Visible = true;
+            lvSchedule.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            lvSchedule.DataBind();
+            ddlScheduleModify.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            ddlScheduleModify.DataBind();
         }
         #endregion
 
@@ -269,19 +281,6 @@ namespace DowntownDeliProject.Pages
         #endregion
 
         #region Employees
-        #endregion
-
-        #region Promotions
-        #endregion
-
-        #region Vendors
-        #endregion
-
-        #region Jobs
-        #endregion
-
-        #region Schedule
-        #endregion
 
         protected void lvEmployees_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
@@ -359,6 +358,10 @@ namespace DowntownDeliProject.Pages
             lvEmployees.DataSource = dde.Employees.OrderBy(t => t.L_Name).ToList();
             lvEmployees.DataBind();
         }
+        #endregion
+
+        #region Promotions
+
 
         protected void lvPromos_ItemCommand(object sender, ListViewCommandEventArgs e)
         {
@@ -376,7 +379,23 @@ namespace DowntownDeliProject.Pages
                     break;
             }
         }
-
+        protected void lvPromos_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item is ListViewDataItem)
+            {
+                ListViewDataItem item = (ListViewDataItem)e.Item;
+                Promotion vend = (Promotion)item.DataItem;
+                if (vend != null)
+                {
+                    List<Order> prodInv = dde.Orders.Where(t => t.Promo_ID == vend.Promo_ID).ToList();
+                    if (prodInv.Count > 0)
+                    {
+                        Button btnDelete = (Button)item.FindControl("btnDelete");
+                        btnDelete.Visible = false;
+                    }
+                }
+            }
+        }
         protected void ddlPromoModify_SelectedIndexChanged(object sender, EventArgs e)
         {
             divPromoModify.Visible = true;
@@ -415,5 +434,266 @@ namespace DowntownDeliProject.Pages
             lvPromos.DataSource = dde.Promotions.OrderBy(t => t.Promo_Description).Where(t => t.Discount_Type != "Reward Claim").ToList();
             lvPromos.DataBind();
         }
+        #endregion
+
+        #region Vendors
+
+        protected void lvVendors_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "DeleteCommand":
+                    ListViewDataItem item = (ListViewDataItem)e.Item;
+                    Label lblPromo_ID = (Label)item.FindControl("lblPromo_ID");
+                    int id = int.Parse(lblPromo_ID.Text);
+                    Vendor emp = dde.Vendors.Find(id);
+                    dde.Vendors.Remove(emp);
+                    dde.SaveChanges();
+                    lvVendors.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+                    lvVendors.DataBind();
+                    break;
+            }
+        }
+
+        protected void btnUpdateVendor_Click(object sender, EventArgs e)
+        {
+            long id = long.Parse(ddlPromoModify.SelectedValue);
+            Vendor vendor = dde.Vendors.Find(id);
+            vendor.Vendor_Name = txtVendorNameModify.Text;
+            if (txtDiscountVendorModify.Text != "")
+            {
+                vendor.Discount = decimal.Parse(txtDiscountVendorModify.Text);
+            }
+            vendor.Vend_Address = txtVendorAddress.Text;
+            dde.SaveChanges();
+            lvVendors.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+            lvVendors.DataBind();
+        }
+
+        protected void btnAddVendor_Click(object sender, EventArgs e)
+        {
+            Vendor vendor = new Vendor();
+            vendor.Vendor_Name = txtVendorNameNew.Text;
+            if (txtVendorDiscountNew.Text != "")
+            {
+                vendor.Discount = decimal.Parse(txtVendorDiscountNew.Text);
+            }
+            vendor.Vend_Address = txtVendorAddressNew.Text;
+            dde.Vendors.Add(vendor);
+            dde.SaveChanges();
+            lvVendors.DataSource = dde.Vendors.OrderBy(t => t.Vendor_Name).ToList();
+            lvVendors.DataBind();
+        }
+
+        protected void ddlVendorModify_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divVendorModify.Visible = true;
+            long id = long.Parse(ddlPromoModify.SelectedValue);
+            Vendor vendor = dde.Vendors.Find(id);
+            txtVendorNameModify.Text = vendor.Vendor_Name;
+            txtDiscountVendorModify.Text = vendor.Discount.ToString();
+            txtVendorAddress.Text = vendor.Vend_Address;
+        }
+
+        protected void lvVendors_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item is ListViewDataItem)
+            {
+                ListViewDataItem item = (ListViewDataItem)e.Item;
+                Vendor vend = (Vendor)item.DataItem;
+                if (vend != null)
+                {
+                    List<Inventory_Order> prodInv = dde.Inventory_Order.Where(t => t.Vendor_ID == vend.Vendor_ID).ToList();
+                    if (prodInv.Count > 0)
+                    {
+                        Button btnDelete = (Button)item.FindControl("btnDelete");
+                        btnDelete.Visible = false;
+                    }
+                }
+            }
+        }
+
+
+
+
+        #endregion
+
+        #region Jobs
+
+        protected void lvJobs_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "DeleteCommand":
+                    ListViewDataItem item = (ListViewDataItem)e.Item;
+                    Label lblPromo_ID = (Label)item.FindControl("lblPromo_ID");
+                    int id = int.Parse(lblPromo_ID.Text);
+                    Job emp = dde.Jobs.Find(id);
+                    dde.Jobs.Remove(emp);
+                    dde.SaveChanges();
+                    lvJobs.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+                    lvJobs.DataBind();
+                    ddlJobsModify.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+                    ddlJobsModify.DataBind();
+                    break;
+            }
+        }
+
+        protected void lvJobs_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item is ListViewDataItem)
+            {
+                ListViewDataItem item = (ListViewDataItem)e.Item;
+                Job vend = (Job)item.DataItem;
+                if (vend != null)
+                {
+                    List<Employee> prodInv = dde.Employees.Where(t => t.Job_ID == vend.Job_ID).ToList();
+                    if (prodInv.Count > 0)
+                    {
+                        Button btnDelete = (Button)item.FindControl("btnDelete");
+                        btnDelete.Visible = false;
+                    }
+                }
+            }
+        }
+
+        protected void btnAddNewJob_Click(object sender, EventArgs e)
+        {
+            Job vendor = new Job();
+            vendor.Job_Name = tbJobNameNew.Text;
+            vendor.Duties = txtJobDutiesNew.Text;
+            dde.Jobs.Add(vendor);
+            dde.SaveChanges();
+            lvJobs.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            lvJobs.DataBind();
+            ddlJobsModify.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            ddlJobsModify.DataBind();
+
+        }
+
+        protected void ddlJobsModify_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divJobModify.Visible = true;
+            long id = long.Parse(ddlJobsModify.SelectedValue);
+            Job vendor = dde.Jobs.Find(id);
+            txtJobNameModify.Text = vendor.Job_Name;
+            txtJobDutiesModify.Text = vendor.Duties;
+        }
+
+        protected void btnJobpdate_Click(object sender, EventArgs e)
+        {
+            long id = long.Parse(ddlJobsModify.SelectedValue);
+            Job vendor = dde.Jobs.Find(id);
+            vendor.Job_Name = txtJobNameModify.Text;
+            vendor.Duties = txtJobDutiesModify.Text;
+            dde.SaveChanges();
+            lvJobs.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            lvJobs.DataBind();
+            ddlJobsModify.DataSource = dde.Jobs.OrderBy(t => t.Job_Name).ToList();
+            ddlJobsModify.DataBind();
+        }
+
+        #endregion
+
+        #region Schedule
+        protected void lvSchedule_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            switch (e.CommandName)
+            {
+                case "DeleteCommand":
+                    ListViewDataItem item = (ListViewDataItem)e.Item;
+                    Label lblPromo_ID = (Label)item.FindControl("lblPromo_ID");
+                    int id = int.Parse(lblPromo_ID.Text);
+                    Schedule emp = dde.Schedules.Find(id);
+                    dde.Schedules.Remove(emp);
+                    dde.SaveChanges();
+                    lvSchedule.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+                    lvSchedule.DataBind();
+                    ddlScheduleModify.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+                    ddlScheduleModify.DataBind();
+                    break;
+            }
+        }
+
+        protected void lvSchedule_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item is ListViewDataItem)
+            {
+                ListViewDataItem item = (ListViewDataItem)e.Item;
+                Schedule vend = (Schedule)item.DataItem;
+                if (vend != null)
+                {
+                    List<Employee> prodInv = dde.Employees.Where(t => t.Schedule_ID == vend.Schedule_ID).ToList();
+                    if (prodInv.Count > 0)
+                    {
+                        Button btnDelete = (Button)item.FindControl("btnDelete");
+                        btnDelete.Visible = false;
+                    }
+                }
+            }
+        }
+
+        protected void btnAddNewSchedule_Click(object sender, EventArgs e)
+        {
+            Schedule sched = new Schedule();
+            sched.Shift_Start = TimeSpan.Parse(txtShiftStartNew.Text);
+            sched.Shift_End = TimeSpan.Parse(txtShiftEndNew.Text);
+            sched.Monday = cbMondayNew.Checked;
+            sched.Tuesday = cbTuesdayNew.Checked;
+            sched.Wednesday = cbWednesdayNew.Checked;
+            sched.Thursday = cbThursdayNew.Checked;
+            sched.Friday = cbFridayNew.Checked;
+            sched.Saturday = cbSaturdayNew.Checked;
+            sched.Sunday = cbSundayNew.Checked;
+            sched.Schedule_Description = txtDescriptionNew.Text;
+            dde.Schedules.Add(sched);
+            dde.SaveChanges();
+            lvSchedule.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            lvSchedule.DataBind();
+            ddlScheduleModify.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            ddlScheduleModify.DataBind();
+        }
+
+        protected void btnUpdateSchedule_Click(object sender, EventArgs e)
+        {
+            long id = long.Parse(ddlScheduleModify.SelectedValue);
+            Schedule sched = dde.Schedules.Find(id);
+            sched.Shift_Start = TimeSpan.Parse(txtShiftStartModify.Text);
+            sched.Shift_End = TimeSpan.Parse(txtShiftEndModify.Text);
+            sched.Monday = cbMondayModify.Checked;
+            sched.Tuesday = cbTuesdayModify.Checked;
+            sched.Wednesday = cbWednesdayModify.Checked;
+            sched.Thursday = cbThursdayModify.Checked;
+            sched.Friday = cbFridayModify.Checked;
+            sched.Saturday = cbSaturdayModify.Checked;
+            sched.Sunday = cbSundayModify.Checked;
+            sched.Schedule_Description = txtDescriptionModify.Text;
+            dde.SaveChanges();
+            lvSchedule.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            lvSchedule.DataBind();
+            ddlScheduleModify.DataSource = dde.Schedules.OrderBy(t => t.Schedule_Description).ToList();
+            ddlScheduleModify.DataBind();
+        }
+
+        protected void ddlScheduleModify_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            divScheduleModify.Visible = true;
+            long id = long.Parse(ddlScheduleModify.SelectedValue);
+            Schedule sched = dde.Schedules.Find(id);
+            txtShiftStartModify.Text = sched.Shift_Start.ToString();
+            txtShiftEndModify.Text = sched.Shift_End.ToString();
+            cbMondayModify.Checked = sched.Monday;
+            cbTuesdayModify.Checked = sched.Tuesday;
+            cbWednesdayModify.Checked = sched.Wednesday;
+            cbThursdayModify.Checked = sched.Thursday;
+            cbFridayModify.Checked = sched.Friday;
+            cbSaturdayModify.Checked = sched.Saturday;
+            cbSundayModify.Checked = sched.Sunday;
+            txtDescriptionModify.Text = sched.Schedule_Description;
+        }
+
+        #endregion
+
+
     }
 }

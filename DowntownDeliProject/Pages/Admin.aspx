@@ -195,7 +195,7 @@
                 </div>
                 <div class="row pad-top" style="border: thin">
                     <div class="col-md-12" style="border: thin">
-                        <asp:ListView runat="server" ID="lvPromos" OnItemCommand="lvPromos_ItemCommand" ItemPlaceholderID="lvItemPlaceHolder">
+                        <asp:ListView runat="server" ID="lvPromos" OnItemCommand="lvPromos_ItemCommand" OnItemDataBound="lvPromos_ItemDataBound" ItemPlaceholderID="lvItemPlaceHolder">
                             <LayoutTemplate>
                                 <div class="row">
                                     <div class="col-md-12">
@@ -255,10 +255,217 @@
                 </div>
             </div>
             <div runat="server" visible="false" id="VendorDiv" class="row pad-top">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" onclick="OpenModal('AddNewVendorModal'); return false;">Add New Vendor</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" onclick="OpenModal('UpdateVendorModal'); return false;">Modify Vendor</button>
+                    </div>
+                </div>
+                <div class="row pad-top" style="border: thin">
+                    <div class="col-md-12" style="border: thin">
+                        <asp:ListView runat="server" ID="lvVendors" OnItemCommand="lvVendors_ItemCommand" OnItemDataBound="lvVendors_ItemDataBound" ItemPlaceholderID="lvItemPlaceHolder">
+                            <LayoutTemplate>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="Label3" Font-Bold="true" Text='Vendor' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblName" Font-Bold="true" Text='Address' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
+                                    </div>
+                                </div>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <div class="row" style="background-color: #D3D3D3;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Vendor_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Vendor_Name") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Vend_Address") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <div class="row" style="background-color: white;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Vendor_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Vendor_Name") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Vend_Address") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </AlternatingItemTemplate>
+                        </asp:ListView>
+                    </div>
+                </div>
             </div>
             <div runat="server" visible="false" id="JobsDiv" class="row pad-top">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" onclick="OpenModal('AddNewJobModal'); return false;">Add New Job</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" onclick="OpenModal('UpdateJobModal'); return false;">Modify Job</button>
+                    </div>
+                </div>
+                <div class="row pad-top" style="border: thin">
+                    <div class="col-md-12" style="border: thin">
+                        <asp:ListView runat="server" ID="lvJobs" OnItemCommand="lvJobs_ItemCommand" OnItemDataBound="lvJobs_ItemDataBound" ItemPlaceholderID="lvItemPlaceHolder">
+                            <LayoutTemplate>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="Label3" Font-Bold="true" Text='Job' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblName" Font-Bold="true" Text='Duties' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
+                                    </div>
+                                </div>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <div class="row" style="background-color: #D3D3D3;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Job_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Job_Name") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Duties") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <div class="row" style="background-color: white;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Job_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Job_Name") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Duties") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </AlternatingItemTemplate>
+                        </asp:ListView>
+                    </div>
+                </div>
             </div>
             <div runat="server" visible="false" id="ScheduleDiv" class="row pad-top">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="btn btn-primary" onclick="OpenModal('AddNewScheduleModal'); return false;">Add New Schedule</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-info" onclick="OpenModal('UpdateScheduleModal'); return false;">Modify Schedule</button>
+                    </div>
+                </div>
+                <div class="row pad-top" style="border: thin">
+                    <div class="col-md-12" style="border: thin">
+                        <asp:ListView runat="server" ID="lvSchedule" OnItemCommand="lvSchedule_ItemCommand" OnItemDataBound="lvSchedule_ItemDataBound" ItemPlaceholderID="lvItemPlaceHolder">
+                            <LayoutTemplate>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="Label3" Font-Bold="true" Text='Schedule Id' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblName" Font-Bold="true" Text='Description' />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <asp:PlaceHolder runat="server" ID="lvItemPlaceHolder" />
+                                    </div>
+                                </div>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <div class="row" style="background-color: #D3D3D3;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Schedule_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Schedule_ID") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Schedule_Description") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ItemTemplate>
+                            <AlternatingItemTemplate>
+                                <div class="row" style="background-color: white;">
+                                    <div class="col-md-12">
+                                        <div class="row pad">
+                                            <asp:Label runat="server" ID="lblPromo_ID" Visible="false" Text='<%# Eval("Schedule_ID") %>' />
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" ID="lblEmpID" Text='<%# Eval("Schedule_ID") %>' />
+                                            </div>
+                                            <div class="col-md-3">
+                                                <asp:Label runat="server" Text='<%# Eval("Schedule_Description") %>' />
+                                            </div>
+                                            <div class="col-md-1">
+                                                <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </AlternatingItemTemplate>
+                        </asp:ListView>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -921,6 +1128,443 @@
                     <div class="row">
                         <div class="col-md-3">
                             <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdatePromo_Click" ID="btnUpdatePromo" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <%-- Vendors Modals --%>
+    <div class="modal" tabindex="-1" id="AddNewVendorModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Vendor</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <asp:Label ID="Label8" ForeColor="Red" runat="server" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Vendor Name:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtVendorNameNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Discount:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtVendorDiscountNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Vendor Address" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtVendorAddressNew" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddVendor_Click" ID="btnAddVendor" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="UpdateVendorModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Vendor</h5>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="updatePanel4" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <asp:Label ID="Label9" ForeColor="Red" runat="server" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Vendor:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:DropDownList runat="server" ToolTip="Select an Promo From the list" OnSelectedIndexChanged="ddlVendorModify_SelectedIndexChanged" AutoPostBack="true" DataTextField="Vendor_Name" CssClass="form-control" Width="100%" DataValueField="Vendor_ID" ID="ddlVendorModify">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div runat="server" id="divVendorModify" visible="false" class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Vendor Name:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtVendorNameModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Discount:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtDiscountVendorModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Vendor Address" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtVendorAddress" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateVendor_Click" ID="btnUpdateVendor" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- Jobs Modals --%>
+    <div class="modal" tabindex="-1" id="AddNewJobModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Job</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <asp:Label ID="Label10" ForeColor="Red" runat="server" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Job Name:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="tbJobNameNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Duties:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtJobDutiesNew" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddNewJob_Click" ID="btnAddNewJob" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="UpdateJobModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Job</h5>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="updatePanel5" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <asp:Label ID="Label11" ForeColor="Red" runat="server" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Job:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:DropDownList runat="server" ToolTip="Select an Promo From the list" OnSelectedIndexChanged="ddlJobsModify_SelectedIndexChanged" AutoPostBack="true" DataTextField="Job_Name" CssClass="form-control" Width="100%" DataValueField="Job_ID" ID="ddlJobsModify">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div runat="server" id="divJobModify" visible="false" class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Job Name:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtJobNameModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Duties:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtJobDutiesModify" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnJobpdate_Click" ID="btnJobpdate" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%-- Schedule Modals --%>
+    <div class="modal" tabindex="-1" id="AddNewScheduleModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Schedule</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <asp:Label ID="Label12" ForeColor="Red" runat="server" />
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Shift Start:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtShiftStartNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Shift End:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtShiftEndNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Description:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtDescriptionNew" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbMondayNew" Text="Monday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbTuesdayNew" Text="Tuesday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbWednesdayNew" Text="Wednesday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbThursdayNew" Text="Thursday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbFridayNew" Text="Friday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbSaturdayNew" Text="Saturday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <asp:CheckBox ID="cbSundayNew" Text="Sunday" runat="server" CssClass="checkbox-inline" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddNewSchedule_Click" ID="btnAddNewSchedule" />
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" id="UpdateScheduleModal" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Schedule</h5>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="updatePanel6" runat="server">
+                        <ContentTemplate>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <asp:Label ID="Label13" ForeColor="Red" runat="server" />
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <asp:Label runat="server" Font-Bold="true" Text="Schedule:" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:DropDownList runat="server" ToolTip="Select an Schedule From the list" OnSelectedIndexChanged="ddlScheduleModify_SelectedIndexChanged" AutoPostBack="true" DataTextField="Schedule_Description" CssClass="form-control" Width="100%" DataValueField="Schedule_ID" ID="ddlScheduleModify">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                    <div runat="server" id="divScheduleModify" visible="false" class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Shift Start:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtShiftStartModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Shift End:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtShiftEndModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <asp:Label runat="server" Font-Bold="true" Text="Description:" />
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="txtDescriptionModify" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbMondayModify" Text="Monday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbTuesdayModify" Text="Tuesday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbWednesdayModify" Text="Wednesday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbThursdayModify" Text="Thursday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbFridayModify" Text="Friday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbSaturdayModify" Text="Saturday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <asp:CheckBox ID="cbSundayModify" Text="Sunday" runat="server" CssClass="checkbox-inline" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateSchedule_Click" ID="btnUpdateSchedule" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
