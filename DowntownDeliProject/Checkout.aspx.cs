@@ -178,6 +178,12 @@ namespace DowntownDeliProject
                     newitem.Order_ID = Order.Order_ID;
                     newitem.Product_ID = item.Product_ID;
                     dd.Product_Order.Add(newitem);
+                    Product prods = dd.Products.Find(item.Product_ID);
+                    foreach (Product_Inventory prodInv in prods.Product_Inventory)
+                    {
+                        Inventory inv = dd.Inventories.Find(prodInv.Item_ID);
+                        inv.Quantity -= 1;
+                    }
                 }
                 dd.SaveChanges();
 

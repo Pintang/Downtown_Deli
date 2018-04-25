@@ -112,5 +112,12 @@ namespace DowntownDeliProject
         {
             Response.Redirect("Checkout.aspx");
         }
+
+        protected void linkLogout_Click(object sender, EventArgs e)
+        {
+            customer = null;
+            cart = null;
+            Response.Redirect("default.aspx");
+        }
     }
 }

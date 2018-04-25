@@ -20,6 +20,7 @@
           <div class="row">
             <div class="col-sm-3" style="background-color:burlywood; padding-top: 10px; padding-bottom: 10px; height: 100%">
                 <h3>Welcome, <asp:Literal ID="Name" runat="server"></asp:Literal></h3>
+                <p><asp:LinkButton ID="linkLogout" runat="server" OnClick="linkLogout_Click">Log Out</asp:LinkButton></p>
                 <asp:Literal ID="rewardCard" runat="server"></asp:Literal>
                 <h3>Reward Balance</h3>
                 <p><asp:Literal ID="rewardBalance" runat="server"></asp:Literal></p>

@@ -20,6 +20,7 @@ namespace DowntownDeliProject
                     foreach (Promotion promo in dd.Promotions.Where(a => a.Begin_Date <= now && a.End_Date >= now && (a.Discount_Type == "Cash Off" || a.Discount_Type == "Percent Off")))
                     {
                         Promotions.Text = Promotions.Text + "<div class='alert alert-success' role='alert'>" + promo.Promo_Description + "</div>";
+                        return;
                     }
                 }
             }
