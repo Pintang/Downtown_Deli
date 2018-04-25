@@ -13,6 +13,15 @@ namespace DowntownDeliProject.Pages {
     public partial class Admin {
         
         /// <summary>
+        /// ScriptManager1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager1;
+        
+        /// <summary>
         /// btnMenuItems control.
         /// </summary>
         /// <remarks>
@@ -184,13 +193,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel1;
         
         /// <summary>
-        /// Label1 control.
+        /// lblNewMenuItemError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label lblNewMenuItemError;
         
         /// <summary>
         /// tbMenuItemNameNew control.
@@ -247,13 +256,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel;
         
         /// <summary>
-        /// lblErrorOrderInv control.
+        /// lblErrorMenuItemModify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorOrderInv;
+        protected global::System.Web.UI.WebControls.Label lblErrorMenuItemModify;
         
         /// <summary>
         /// ddlMenuItemProducts control.
@@ -301,13 +310,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnUpdateMenuItem;
         
         /// <summary>
-        /// Label4 control.
+        /// lblerrorNewEMployee control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label lblerrorNewEMployee;
         
         /// <summary>
         /// Div2 control.
@@ -427,13 +436,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel3;
         
         /// <summary>
-        /// Label5 control.
+        /// lblErrorEmployeeModify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label5;
+        protected global::System.Web.UI.WebControls.Label lblErrorEmployeeModify;
         
         /// <summary>
         /// ddlEmployeeModify control.
@@ -553,13 +562,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnUpdateEmployee;
         
         /// <summary>
-        /// Label6 control.
+        /// lblErrorPromoNew control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label6;
+        protected global::System.Web.UI.WebControls.Label lblErrorPromoNew;
         
         /// <summary>
         /// ddlDiscountTypeNew control.
@@ -625,13 +634,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel2;
         
         /// <summary>
-        /// Label7 control.
+        /// lblErrorModifyPromo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label7;
+        protected global::System.Web.UI.WebControls.Label lblErrorModifyPromo;
         
         /// <summary>
         /// ddlPromoModify control.
@@ -706,13 +715,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnUpdatePromo;
         
         /// <summary>
-        /// Label8 control.
+        /// lblVendorNewError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label lblVendorNewError;
         
         /// <summary>
         /// txtVendorNameNew control.
@@ -760,13 +769,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel4;
         
         /// <summary>
-        /// Label9 control.
+        /// lblVendorModifyError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label lblVendorModifyError;
         
         /// <summary>
         /// ddlVendorModify control.
@@ -823,13 +832,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnUpdateVendor;
         
         /// <summary>
-        /// Label10 control.
+        /// lblErrorNewJob control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label10;
+        protected global::System.Web.UI.WebControls.Label lblErrorNewJob;
         
         /// <summary>
         /// tbJobNameNew control.
@@ -868,13 +877,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel5;
         
         /// <summary>
-        /// Label11 control.
+        /// lblErrorJobModify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label11;
+        protected global::System.Web.UI.WebControls.Label lblErrorJobModify;
         
         /// <summary>
         /// ddlJobsModify control.
@@ -922,13 +931,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.WebControls.Button btnJobpdate;
         
         /// <summary>
-        /// Label12 control.
+        /// lblErrorSchModify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
+        protected global::System.Web.UI.WebControls.Label lblErrorSchModify;
         
         /// <summary>
         /// txtShiftStartNew control.
@@ -1039,13 +1048,13 @@ namespace DowntownDeliProject.Pages {
         protected global::System.Web.UI.UpdatePanel updatePanel6;
         
         /// <summary>
-        /// Label13 control.
+        /// lblErrorScheduleModify control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label13;
+        protected global::System.Web.UI.WebControls.Label lblErrorScheduleModify;
         
         /// <summary>
         /// ddlScheduleModify control.

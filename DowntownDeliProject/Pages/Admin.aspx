@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" Title="System Admin" AutoEventWireup="true" MasterPageFile="~/Site.Master" CodeBehind="Admin.aspx.cs" Inherits="DowntownDeliProject.Pages.Admin" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="Body" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div class="row">
         <div class="col-md-12">
             <div class="row">
@@ -75,7 +76,7 @@
                                                 <asp:Label runat="server" Text='<%# Eval("Product_Name") %>' />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />  
+                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />
                                             </div>
                                             <div class="col-md-1">
                                                 <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
@@ -93,7 +94,7 @@
                                                 <asp:Label runat="server" Text='<%# Eval("Product_Name") %>' />
                                             </div>
                                             <div class="col-md-3">
-                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />  
+                                                <asp:Label runat="server" Text='<%# decimal.Parse(Eval("Price").ToString()).ToString("0.00") %>' />
                                             </div>
                                             <div class="col-md-1">
                                                 <asp:Button ID="btnDelete" CommandName="DeleteCommand" CssClass="btn btn-danger" Text="Delete" runat="server"></asp:Button>
@@ -482,7 +483,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label1" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblNewMenuItemError" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -499,7 +500,7 @@
                                                     <asp:Label runat="server" Font-Bold="true" Text="Price:" />
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <asp:TextBox runat="server" CssClass="form-control" Width="100%" ID="tbNewMenuPrice" />
+                                                    <asp:TextBox runat="server" CssClass="form-control" TextMode="Number" Width="100%" ID="tbNewMenuPrice" />
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -567,7 +568,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddNewMenuItem_Click" ID="btnAddNewMenuItem" />
+                            <button onclick="ValidateNewMenuItem(); return false;" class="btn btn-success">Add</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnAddNewMenuItem_Click" ID="btnAddNewMenuItem" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -589,7 +591,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="lblErrorOrderInv" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblErrorMenuItemModify" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -675,7 +677,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateMenuItem_Click" ID="btnUpdateMenuItem" />
+                            <button onclick="ValidateModifyMenuItem(); return false;" class="btn btn-success">Update</button>
+                            <asp:Button runat="server" CssClass="hidden" OnClick="btnUpdateMenuItem_Click" ID="btnUpdateMenuItem" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -697,7 +700,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <asp:Label ID="Label4" ForeColor="Red" runat="server" />
+                                <asp:Label ID="lblerrorNewEMployee" ForeColor="Red" runat="server" />
                             </div>
                             <div runat="server" id="Div2" class="row">
                                 <div class="col-md-12">
@@ -791,7 +794,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnNewEmployee_Click" ID="btnNewEmployee" />
+                            <button onclick="ValidateNewEmployee(); return false;" class="btn btn-success">Add</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnNewEmployee_Click" ID="btnNewEmployee" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -813,7 +817,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label5" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblErrorEmployeeModify" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -918,7 +922,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateEmployee_Click" ID="btnUpdateEmployee" />
+                            <button onclick="ValidateModifyEmployee(); return false;" class="btn btn-success">Update</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Update" OnClick="btnUpdateEmployee_Click" ID="btnUpdateEmployee" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -940,7 +945,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <asp:Label ID="Label6" ForeColor="Red" runat="server" />
+                                <asp:Label ID="lblErrorPromoNew" ForeColor="Red" runat="server" />
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -1017,7 +1022,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnNewPromo_Click" ID="btnNewPromo" />
+                            <button onclick="ValidateNewPromo(); return false;" class="btn btn-success">Add</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnNewPromo_Click" ID="btnNewPromo" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1039,7 +1045,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label7" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblErrorModifyPromo" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -1127,7 +1133,9 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdatePromo_Click" ID="btnUpdatePromo" />
+                            <button onclick="ValidateModifyPromo(); return false;" class="btn btn-success">Update</button>
+
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Update" OnClick="btnUpdatePromo_Click" ID="btnUpdatePromo" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1151,7 +1159,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <asp:Label ID="Label8" ForeColor="Red" runat="server" />
+                                <asp:Label ID="lblVendorNewError" ForeColor="Red" runat="server" />
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -1187,7 +1195,9 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddVendor_Click" ID="btnAddVendor" />
+                            <button onclick="ValidateNewVendor(); return false;" class="btn btn-success">Add</button>
+
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnAddVendor_Click" ID="btnAddVendor" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1209,7 +1219,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label9" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblVendorModifyError" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -1256,7 +1266,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateVendor_Click" ID="btnUpdateVendor" />
+                            <button onclick="ValidateModifyVendor(); return false;" class="btn btn-success">Update</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Update" OnClick="btnUpdateVendor_Click" ID="btnUpdateVendor" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1278,7 +1289,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <asp:Label ID="Label10" ForeColor="Red" runat="server" />
+                                <asp:Label ID="lblErrorNewJob" ForeColor="Red" runat="server" />
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -1306,7 +1317,9 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddNewJob_Click" ID="btnAddNewJob" />
+                            <button onclick="ValidateNewJob(); return false;" class="btn btn-success">Add</button>
+
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnAddNewJob_Click" ID="btnAddNewJob" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1328,7 +1341,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label11" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblErrorJobModify" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -1367,7 +1380,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnJobpdate_Click" ID="btnJobpdate" />
+                            <button onclick="ValidateModifyJob(); return false;" class="btn btn-success">Update</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Update" OnClick="btnJobpdate_Click" ID="btnJobpdate" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1389,7 +1403,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row">
-                                <asp:Label ID="Label12" ForeColor="Red" runat="server" />
+                                <asp:Label ID="lblErrorSchModify" ForeColor="Red" runat="server" />
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -1460,7 +1474,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Add" OnClick="btnAddNewSchedule_Click" ID="btnAddNewSchedule" />
+                            <button onclick="ValidateNewSchedule(); return false;" class="btn btn-success">Add</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Add" OnClick="btnAddNewSchedule_Click" ID="btnAddNewSchedule" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -1482,7 +1497,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <asp:Label ID="Label13" ForeColor="Red" runat="server" />
+                                        <asp:Label ID="lblErrorScheduleModify" ForeColor="Red" runat="server" />
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -1564,7 +1579,8 @@
                 <div class="modal-footer">
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Button runat="server" CssClass="btn btn-success" Text="Update" OnClick="btnUpdateSchedule_Click" ID="btnUpdateSchedule" />
+                            <button onclick="ValidateModifySchedule(); return false;" class="btn btn-success">Update</button>
+                            <asp:Button runat="server" CssClass="btn btn-success hidden" Text="Update" OnClick="btnUpdateSchedule_Click" ID="btnUpdateSchedule" />
                         </div>
                         <div class="col-md-3">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

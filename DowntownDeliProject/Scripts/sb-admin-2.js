@@ -3,15 +3,15 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
-$(function() {
+$(function () {
     $('#side-menu').metisMenu();
 });
 
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size
-$(function() {
-    $(window).bind("load resize", function() {
+$(function () {
+    $(window).bind("load resize", function () {
         var topOffset = 50;
         var width = (this.window.innerWidth > 0) ? this.window.innerWidth : this.screen.width;
         if (width < 768) {
@@ -33,7 +33,7 @@ $(function() {
     // var element = $('ul.nav a').filter(function() {
     //     return this.href == url;
     // }).addClass('active').parent().parent().addClass('in').parent();
-    var element = $('ul.nav a').filter(function() {
+    var element = $('ul.nav a').filter(function () {
         return this.href == url;
     }).addClass('active').parent();
 
@@ -44,19 +44,7 @@ $(function() {
             break;
         }
     }
-    $('#ExpDateTimePicker').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    $('#dpBeginDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    $('#dpBeginDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    $('#dpEndDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    $('#dpEndDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-
-
-    $('#StartDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    $('#StopDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
-    
-
-    $('#StartTimePicker').datetimepicker();
-    $('#StopDateTimePicker').datetimepicker();
+    SetupDatePickers();
     var ctx = document.getElementById("myChart");
     if (ctx != null) {
         ctx = document.getElementById("myChart").getContext('2d');
@@ -176,8 +164,287 @@ function ValidateModifyInventory() {
         lblErrorModify.innerhtml = 'Quantity is required';
     }
 }
-$(document).ready(function () {
 
+
+function ValidateModifyMenuItem() {
+    var tbPrice = document.getElementById('Body_txtMenuItemPrice');
+    var btnUpdate = document.getElementById('Body_btnUpdateMenuItem');
+    var lblErrorMenuItemModify = document.getElementById('Body_lblErrorMenuItemModify');
+    if (tbPrice.value != '') {
+        btnUpdate.click();
+    } else {
+        lblErrorMenuItemModify.innerHTML = 'Price is required';
+    }
+}
+function ValidateNewMenuItem() {
+    var tbPrice = document.getElementById('Body_tbNewMenuPrice');
+    var tbName = document.getElementById('Body_tbMenuItemNameNew');
+    var btnUpdate = document.getElementById('Body_btnAddNewMenuItem');
+    var lblNewMenuItemError = document.getElementById('Body_lblNewMenuItemError');
+    if (tbPrice.value != '') {
+        if (tbName.value != '') {
+            btnUpdate.click();
+        } else {
+            lblNewMenuItemError.innerHTML = 'Name is required';
+        }
+    } else {
+        lblNewMenuItemError.innerHTML = 'Price is required';
+    }
+}
+
+function ValidateModifyEmployee() {
+    var txtFirstnameModify = document.getElementById('Body_txtFirstnameModify');
+    var txtLastnameModify = document.getElementById('Body_txtLastnameModify');
+    var txtPayModify = document.getElementById('Body_txtPayModify');
+    var txtPhoneModify = document.getElementById('Body_txtPhoneModify');
+    var txtEmailModify = document.getElementById('Body_txtEmailModify');
+    var txtAddressModify = document.getElementById('Body_txtAddressModify');
+    var txtUsername = document.getElementById('Body_txtUsername');
+    var lblErrorEmployeeModify = document.getElementById('Body_lblErrorEmployeeModify');
+    var btnUpdate = document.getElementById('Body_btnUpdateEmployee');
+    if (txtFirstnameModify.value != '') {
+        if (txtLastnameModify.value != '') {
+            if (txtPayModify.value != '') {
+                if (txtPhoneModify.value != '') {
+                    if (txtEmailModify.value != '') {
+                        if (txtAddressModify.value != '') {
+                            if (txtUsername.value != '') {
+                                btnUpdate.click();
+                            } else {
+                                lblErrorEmployeeModify.innerHTML = 'Username is required';
+                            }
+                        } else {
+                            lblErrorEmployeeModify.innerHTML = 'Address is required';
+                        }
+                    } else {
+                        lblErrorEmployeeModify.innerHTML = 'Email is required';
+                    }
+                } else {
+                    lblErrorEmployeeModify.innerHTML = 'Phone number is required';
+                }
+            } else {
+                lblErrorEmployeeModify.innerHTML = 'Pay rate is required';
+            }
+        } else {
+            lblErrorEmployeeModify.innerHTML = 'Last name is required';
+        }
+    } else {
+        lblErrorEmployeeModify.innerHTML = 'First name is required';
+    }
+}
+
+function ValidateNewEmployee() {
+    var txtFirstnameModify = document.getElementById('Body_txtFirstNameNew');
+    var txtLastnameModify = document.getElementById('Body_txtlastNameNew');
+    var txtPayModify = document.getElementById('Body_txtPayNew');
+    var txtPhoneModify = document.getElementById('Body_txtPhoneNew');
+    var txtEmailModify = document.getElementById('Body_txtEmailNew');
+    var txtAddressModify = document.getElementById('Body_txtAddressNew');
+    var txtUsername = document.getElementById('Body_txtUsernameNew');
+    var txtPassword = document.getElementById('Body_txtPasswordNew');
+    var lblErrorEmployeeModify = document.getElementById('Body_lblerrorNewEMployee');
+    var btnUpdate = document.getElementById('Body_btnNewEmployee');
+    if (txtFirstnameModify.value != '') {
+        if (txtLastnameModify.value != '') {
+            if (txtPayModify.value != '') {
+                if (txtPhoneModify.value != '') {
+                    if (txtEmailModify.value != '') {
+                        if (txtAddressModify.value != '') {
+                            if (txtUsername.value != '') {
+                                if (txtPassword.value != '') {
+                                    btnUpdate.click();
+                                } else {
+                                    lblErrorEmployeeModify.innerHTML = 'Password is required';
+                                }
+                            } else {
+                                lblErrorEmployeeModify.innerHTML = 'Username is required';
+                            }
+                        } else {
+                            lblErrorEmployeeModify.innerHTML = 'Address is required';
+                        }
+                    } else {
+                        lblErrorEmployeeModify.innerHTML = 'Email is required';
+                    }
+                } else {
+                    lblErrorEmployeeModify.innerHTML = 'Phone number is required';
+                }
+            } else {
+                lblErrorEmployeeModify.innerHTML = 'Pay rate is required';
+            }
+        } else {
+            lblErrorEmployeeModify.innerHTML = 'Last name is required';
+        }
+    } else {
+        lblErrorEmployeeModify.innerHTML = 'First name is required';
+    }
+}
+
+function ValidateModifyPromo() {
+    var tbDicountNew = document.getElementById('Body_tbDicountNew');
+    var dpBeginDatePickerNewInput = document.getElementById('Body_dpBeginDatePickerNewInput');
+    var dpEndDatePickerNewInput = document.getElementById('Body_dpEndDatePickerNewInput');
+    var tbPromDescModify = document.getElementById('Body_tbPromoDescNew');
+    var lblErrorPromoNew = document.getElementById('Body_lblErrorPromoNew');
+    var btnUpdate = document.getElementById('Body_btnNewPromo');
+    if (tbDicountNew.value != '') {
+        if (dpBeginDatePickerNewInput.value != '') {
+            if (dpEndDatePickerNewInput.value != '') {
+                if (tbPromDescModify.value != '') {
+                    btnUpdate.click();
+                } else {
+                    lblErrorModifyPromo.innerHTML = 'Description is required';
+                }
+            } else {
+                lblErrorPromoNew.innerHTML = 'End Date is required';
+            }
+        } else {
+            lblErrorPromoNew.innerHTML = 'Begin Date is required';
+        }
+    } else {
+        lblErrorPromoNew.innerHTML = 'Discount is required';
+    }
+}
+function ValidateModifyPromo() {
+    var tbDicountNew = document.getElementById('Body_tbDiscountModify');
+    var dpBeginDatePickerNewInput = document.getElementById('Body_dpBeginDatePickerModifyInput');
+    var dpEndDatePickerNewInput = document.getElementById('Body_dpEndDatePickerModifyInput');
+    var tbPromDescModify = document.getElementById('Body_tbPromDescModify');
+    var lblErrorModifyPromo = document.getElementById('Body_lblErrorModifyPromo');
+    var btnUpdate = document.getElementById('Body_btnUpdatePromo');
+    if (tbDicountNew.value != '') {
+        if (dpBeginDatePickerNewInput.value != '') {
+            if (dpEndDatePickerNewInput.value != '') {
+                if (tbPromDescModify.value != '') {
+                    btnUpdate.click();
+                } else {
+                    lblErrorModifyPromo.innerHTML = 'Description is required';
+                }
+            } else {
+                lblErrorModifyPromo.innerHTML = 'End Date is required';
+            }
+        } else {
+            lblErrorModifyPromo.innerHTML = 'Begin Date is required';
+        }
+    } else {
+        lblErrorModifyPromo.innerHTML = 'Discount is required';
+    }
+}
+
+function ValidateNewVendor() {
+    var txtVendorNameNew = document.getElementById('Body_txtVendorNameNew');
+    var txtVendorDiscountNew = document.getElementById('Body_txtVendorDiscountNew');
+    var txtVendorAddressNew = document.getElementById('Body_txtVendorAddressNew');
+    var lblVendorNewError = document.getElementById('Body_lblVendorNewError');
+    var btnUpdate = document.getElementById('Body_btnAddVendor');
+    if (txtVendorNameNew.value != '') {
+        if (txtVendorDiscountNew.value != '') {
+            if (txtVendorAddressNew.value != '') {
+                btnUpdate.click();
+            } else {
+                lblVendorNewError.innerHTML = 'Address is required';
+            }
+        } else {
+            lblVendorNewError.innerHTML = 'Discount is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Name is required';
+    }
+}
+function ValidateModifyVendor() {
+    var txtVendorNameNew = document.getElementById('Body_txtVendorNameModify');
+    var txtVendorDiscountNew = document.getElementById('Body_txtDiscountVendorModify');
+    var txtVendorAddressNew = document.getElementById('Body_txtVendorAddress');
+    var lblVendorNewError = document.getElementById('Body_lblVendorModifyError');
+    var btnUpdate = document.getElementById('Body_btnUpdateVendor');
+    if (txtVendorNameNew.value != '') {
+        if (txtVendorDiscountNew.value != '') {
+            if (txtVendorAddressNew.value != '') {
+                btnUpdate.click();
+            } else {
+                lblVendorNewError.innerHTML = 'Address is required';
+            }
+        } else {
+            lblVendorNewError.innerHTML = 'Discount is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Name is required';
+    }
+}
+
+
+function ValidateNewJob() {
+    var tbJobNameNew = document.getElementById('Body_tbJobNameNew');
+    var txtJobDutiesNew = document.getElementById('Body_txtJobDutiesNew');
+    var lblVendorNewError = document.getElementById('Body_lblErrorNewJob');
+    var btnUpdate = document.getElementById('Body_btnAddNewJob');
+    if (tbJobNameNew.value != '') {
+        if (txtJobDutiesNew.value != '') {
+            btnUpdate.click();
+        } else {
+            lblVendorNewError.innerHTML = 'Duties is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Name is required';
+    }
+}
+function ValidateModifyJob() {
+    var tbJobNameNew = document.getElementById('Body_txtJobNameModify');
+    var txtJobDutiesNew = document.getElementById('Body_txtJobDutiesModify');
+    var lblVendorNewError = document.getElementById('Body_lblErrorJobModify');
+    var btnUpdate = document.getElementById('Body_btnJobpdate');
+    if (tbJobNameNew.value != '') {
+        if (txtJobDutiesNew.value != '') {
+            btnUpdate.click();
+        } else {
+            lblVendorNewError.innerHTML = 'Duties is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Name is required';
+    }
+}
+
+function ValidateNewSchedule() {
+    var txtShiftStartNew = document.getElementById('Body_txtShiftStartNew');
+    var txtShiftEndNew = document.getElementById('Body_txtShiftEndNew');
+    var txtDescriptionNew = document.getElementById('Body_txtDescriptionNew');
+    var lblVendorNewError = document.getElementById('Body_lblErrorSchModify');
+    var btnUpdate = document.getElementById('Body_btnAddNewSchedule');
+    if (txtShiftStartNew.value != '') {
+        if (txtShiftEndNew.value != '') {
+            if (txtDescriptionNew.value != '') {
+                btnUpdate.click();
+            } else {
+                lblVendorNewError.innerHTML = 'Description is required';
+            }
+        } else {
+            lblVendorNewError.innerHTML = 'End Shift is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Start Shift is required';
+    }
+}
+
+function ValidateModifySchedule() {
+    var txtShiftStartNew = document.getElementById('Body_txtShiftStartModify');
+    var txtShiftEndNew = document.getElementById('Body_txtShiftEndModify');
+    var txtDescriptionNew = document.getElementById('Body_txtDescriptionModify');
+    var lblVendorNewError = document.getElementById('Body_lblErrorScheduleModify');
+    var btnUpdate = document.getElementById('Body_btnUpdateSchedule');
+    if (txtShiftStartNew.value != '') {
+        if (txtShiftEndNew.value != '') {
+            if (txtDescriptionNew.value != '') {
+                btnUpdate.click();
+            } else {
+                lblVendorNewError.innerHTML = 'Description is required';
+            }
+        } else {
+            lblVendorNewError.innerHTML = 'End Shift is required';
+        }
+    } else {
+        lblVendorNewError.innerHTML = 'Start Shift is required';
+    }
+}
+function SetupDatePickers() {
     var dp = $("#ExpDateTimePicker");
     dp.on('change', function (ev) {
         var nodes = document.getElementById('Body_ExpDateTimePickerInput');
@@ -219,6 +486,17 @@ $(document).ready(function () {
         var nodes = document.getElementById('Body_StopDateDatePickerReportsInput');
         nodes.value = ev.target.value;
     });
+    $('#ExpDateTimePicker').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpBeginDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpBeginDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpEndDatePickerNew').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#dpEndDatePickerModify').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
 
-});
 
+    $('#StartDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+    $('#StopDateDatePickerReports').datetimepicker({ dateFormat: 'mm/dd/yyyy' });
+
+
+    $('#StartTimePicker').datetimepicker();
+    $('#StopDateTimePicker').datetimepicker();
+}

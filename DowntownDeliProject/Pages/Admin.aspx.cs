@@ -405,6 +405,8 @@ namespace DowntownDeliProject.Pages
             dpBeginDatePickerModifyInput.Value = promo.Begin_Date.ToString();
             dpEndDatePickerModifyInput.Value = promo.End_Date.ToString();
             tbPromDescModify.Text = promo.Promo_Description;
+            ScriptManager.RegisterStartupScript(this,this.GetType(), "CallMyFunction", "SetupDatePickers();", true);
+
 
         }
 
@@ -488,7 +490,7 @@ namespace DowntownDeliProject.Pages
         protected void ddlVendorModify_SelectedIndexChanged(object sender, EventArgs e)
         {
             divVendorModify.Visible = true;
-            long id = long.Parse(ddlPromoModify.SelectedValue);
+            long id = long.Parse(ddlVendorModify.SelectedValue);
             Vendor vendor = dde.Vendors.Find(id);
             txtVendorNameModify.Text = vendor.Vendor_Name;
             txtDiscountVendorModify.Text = vendor.Discount.ToString();
