@@ -17,6 +17,13 @@ namespace DowntownDeliProject.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (user != null)
+            {
+                if (user.Job_ID != 1 && user.Job_ID != 4)
+                {
+                    Response.Redirect("~/Home.aspx");
+                }
+            }
             if (!Page.IsPostBack)
             {
                 if (System.Web.HttpContext.Current.User == null || !System.Web.HttpContext.Current.User.Identity.IsAuthenticated)

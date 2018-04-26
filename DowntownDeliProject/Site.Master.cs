@@ -16,6 +16,11 @@ namespace DowntownDeliProject
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
         private const string AntiXsrfUserNameKey = "__AntiXsrfUserName";
         private string _antiXsrfTokenValue;
+        protected Employee user
+        {
+            get { return (Employee)Session["user"]; }
+            set { Session["user"] = value; }
+        }
         protected Order order
         {
             get { return (Order)Session["order"]; }
@@ -80,12 +85,64 @@ namespace DowntownDeliProject
         {
             if (System.Web.HttpContext.Current.User != null && System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
             {
+                if (user != null)
+                {
+                    Button btnAdmin = (Button)HeadLoginView.FindControl("btnAdmin");
+                    Button btnOrder = (Button)HeadLoginView.FindControl("btnOrder");
+                    Button btnReports = (Button)HeadLoginView.FindControl("btnReports");
+                    Button btnInventory = (Button)HeadLoginView.FindControl("btnInventory");
+                    Button btnTimeKeeping = (Button)HeadLoginView.FindControl("btnTimeKeeping");
+                    if (user.Job_ID == 2)//cook
+                    {
+                        btnAdmin.Visible = false;
+                        btnOrder.Visible = false;
+                        btnReports.Visible = false;
+                        btnInventory.Visible = false;
+                        btnTimeKeeping.Visible = true;
+                    }
+                    else if (user.Job_ID == 3)
+                    {//cashier
+                        btnAdmin.Visible = false;
+                        btnOrder.Visible = true;
+                        btnReports.Visible = false;
+                        btnInventory.Visible = false;
+                        btnTimeKeeping.Visible = true;
+                    }
+                    else if (user.Job_ID == 4)//manager
+                    {
+                        btnAdmin.Visible = false;
+                        btnOrder.Visible = true;
+                        btnReports.Visible = true;
+                        btnInventory.Visible = true;
+                        btnTimeKeeping.Visible = true;
+                    }
+                    else if (user.Job_ID == 5)// customer.. should never happen but just in case.
+                    {
+                        btnAdmin.Visible = false;
+                        btnOrder.Visible = false;
+                        btnReports.Visible = false;
+                        btnInventory.Visible = false;
+                        btnTimeKeeping.Visible = false;
+                    }
+                    else
+                    {
+                        btnAdmin.Visible = true;
+                        btnOrder.Visible = true;
+                        btnReports.Visible = true;
+                        btnInventory.Visible = true;
+                        btnTimeKeeping.Visible = true;
+                    }
+
+
+                }
+
+
                 using (DowntownDeliEntity dde = new DowntownDeliEntity())
                 {
                     ListView lvCurrentOrders = (ListView)HeadLoginView.FindControl("lvCurrentOrders");
                     lvCurrentOrders.DataSource = dde.Orders.Include("Customer").Where(t => t.Complete == false || t.Complete == null).ToList();
                     lvCurrentOrders.DataBind();
-                    
+
                 }
             }
             else
@@ -180,6 +237,24 @@ namespace DowntownDeliProject
             }
         }
 
+        protected void lvCurrentOrders_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            if (e.Item is ListViewDataItem)
+            {
+                if (user != null)
+                {
+                    if (user.Job_ID != 1 && user.Job_ID != 4 && user.Job_ID != 3)
+                    {
+                        ListViewDataItem item = (ListViewDataItem)e.Item;
+                        Button btnComplete = (Button)item.FindControl("btnComplete");
+                        Button btnModify = (Button)item.FindControl("btnModify");
+                        btnModify.Visible = false;
+                        btnComplete.Visible = false;
+                    }
+                }
+
+            }
+        }
     }
 
 }

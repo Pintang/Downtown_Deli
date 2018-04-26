@@ -29,6 +29,13 @@ namespace DowntownDeliProject.Pages
                 FormsAuthentication.SignOut();
                 Response.Redirect("~/Login.aspx");
             }
+            if (user != null)
+            {
+                if (user.Job_ID != 1)
+                {
+                    Response.Redirect("~/Home.aspx");
+                }
+            }
         }
         #region btn
 
