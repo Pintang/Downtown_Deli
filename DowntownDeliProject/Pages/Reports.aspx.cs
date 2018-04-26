@@ -43,9 +43,19 @@ namespace DowntownDeliProject.Pages
                 }
                 Data.Text = Data.Text + "</table>";
             }
-            else
+            if (ddlProducts.SelectedItem.Text == "Sales")
             {
-                Data.Text = "No report";
+                Data.Text = "<table class='table'><thead><th>Date</th><th>Total Sales</th></thead>";
+                using (DowntownDeliEntity dd = new DowntownDeliEntity())
+                {
+                    
+                    foreach (DateTime date in dd.Orders.Where(a => a.Ord_Date >= start && a.Ord_Date <= end).Select(a => a.Ord_Date).Distinct())
+                    {
+                        Decimal profit = dd.Orders.Where(a => a.Ord_Date == date).Sum(a => a.Price);
+                        Data.Text = Data.Text + "<tr><td>" + date.ToShortDateString() + "</td><td>" + profit.ToString("C") + "</td></tr>";
+                    }
+                }
+                Data.Text = Data.Text + "</table>";
             }
         }
 
