@@ -149,6 +149,7 @@ namespace DowntownDeliProject
                 {
                     dd.Customers.First(a => a.Customer_ID == customer.Customer_ID).TotalPoints = dd.Customers.First(a => a.Customer_ID == customer.Customer_ID).TotalPoints + 1;
                     dd.SaveChanges();
+                    customer.TotalPoints++;
                 }
                 DateTime now = DateTime.Now.Date;
                 Promotion promo = dd.Promotions.FirstOrDefault(a => a.Begin_Date <= now && a.End_Date >= now && (a.Discount_Type == "Cash Off" || a.Discount_Type == "Percent Off"));

@@ -17,6 +17,16 @@
     <script>
         $(document).ready(function () {
             card = new Skeuocard($("#skeuocard"));
+            card.bind('change.skeuocard', function (e, _card) {
+                if (card.isValid())
+                {
+                    $("#CheckOut").prop("disabled", false);
+                }
+                else
+                {
+                    $("#CheckOut").prop("disabled", true);
+                }
+            });
         });
     </script>
 </head>
@@ -78,7 +88,7 @@
                       <label for="cc_cvc">Card Validation Code</label>
                       <input type="text" name="cc_cvc" id="cc_cvc" placeholder="123" maxlength="3" size="3">
                     </div>
-                    <asp:Button ID="CheckOut" runat="server" Text="Check Out" OnClick="CheckOut_Click" />
+                    <asp:Button ID="CheckOut" runat="server" Text="Check Out" OnClick="CheckOut_Click" Enabled="False" />
                     <asp:Button ID="Return" runat="server" Text="Return to Menu" OnClick="Return_Click" />
                 </p>
             </div>
