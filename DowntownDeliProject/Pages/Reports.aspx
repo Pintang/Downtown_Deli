@@ -22,6 +22,7 @@
                                 <asp:ListItem Text=""></asp:ListItem>
                                 <asp:ListItem Text="Timekeeping"></asp:ListItem>
                                 <asp:ListItem Text="Sales"></asp:ListItem>
+                                <asp:ListItem Text="Top Selling Item"></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>

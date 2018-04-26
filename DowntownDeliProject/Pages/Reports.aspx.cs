@@ -48,7 +48,7 @@ namespace DowntownDeliProject.Pages
                 Data.Text = "<table class='table'><thead><th>Date</th><th>Total Sales</th></thead>";
                 using (DowntownDeliEntity dd = new DowntownDeliEntity())
                 {
-                    
+
                     foreach (DateTime date in dd.Orders.Where(a => a.Ord_Date >= start && a.Ord_Date <= end).Select(a => a.Ord_Date).Distinct())
                     {
                         Decimal profit = dd.Orders.Where(a => a.Ord_Date == date).Sum(a => a.Price);
@@ -57,6 +57,34 @@ namespace DowntownDeliProject.Pages
                 }
                 Data.Text = Data.Text + "</table>";
             }
+            if (ddlProducts.SelectedItem.Text == "Top Selling Item")
+            {
+                Data.Text = "<table class='table'><thead><th>Date</th><th>Total Sales</th></thead>";
+                using (DowntownDeliEntity dd = new DowntownDeliEntity())
+                {
+
+                    foreach (DateTime date in dd.Orders.Where(a => a.Ord_Date >= start && a.Ord_Date <= end).Select(a => a.Ord_Date).Distinct())
+                    {
+                        Dictionary<long, int> prod = new Dictionary<long, int>();
+                        foreach (Order ord in dd.Orders.Where(a => a.Ord_Date == date))
+                        {
+                            foreach (Product_Order pord in ord.Product_Order)
+                            {
+                                if (!prod.ContainsKey((long)pord.Product_ID))
+                                { prod[(long)pord.Product_ID] = 1; }
+                                else
+                                { prod[(long)pord.Product_ID]++; }
+                            }
+                        }
+                        if (!prod.Any()) break;
+                        long id = prod.OrderByDescending(x => x.Value).ToDictionary(a => a.Key, a => a.Value).First().Key;
+                        Product product = dd.Products.FirstOrDefault(a => a.Product_ID == id);
+                        Data.Text = Data.Text + "<tr><td>" + date.ToShortDateString() + "</td><td>" + product.Product_Name + "</td></tr>";
+                    }
+                }
+                Data.Text = Data.Text + "</table>";
+            }
+            
         }
 
         protected void ddlProducts_SelectedIndexChanged(object sender, EventArgs e)
